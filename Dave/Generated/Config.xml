@@ -1,0 +1,548 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project MotherSystem_Version="" Name="WheelECU" Path="C:\Users\Jack\Projects\Wolley\Firmware\WheelECU">
+    <COMPILER>
+        <Name>ARM_GCC_HOME</Name>
+        <Version/>
+        <Memory_Model/>
+    </COMPILER>
+    <DEVICE>
+        <Sales_Code>XMC1404-F064x0200</Sales_Code>
+        <Description/>
+    </DEVICE>
+    <Generated_Files>
+        <Source_Files>
+            <Source_File>
+                <File_Name>can_node.c</File_Name>
+                <Path>\Dave\Generated\CAN_NODE\can_node.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>can_node_conf.c</File_Name>
+                <Path>\Dave\Generated\CAN_NODE\can_node_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>clock_xmc1.c</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC1\clock_xmc1.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>clock_xmc1_conf.c</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC1\clock_xmc1_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>counter.c</File_Name>
+                <Path>\Dave\Generated\COUNTER\counter.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>counter_conf.c</File_Name>
+                <Path>\Dave\Generated\COUNTER\counter_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>cpu_ctrl_xmc1.c</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC1\cpu_ctrl_xmc1.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>cpu_ctrl_xmc1_conf.c</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC1\cpu_ctrl_xmc1_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>crc_sw.c</File_Name>
+                <Path>\Dave\Generated\CRC_SW\crc_sw.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>crc_sw_conf.c</File_Name>
+                <Path>\Dave\Generated\CRC_SW\crc_sw_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>DAVE.c</File_Name>
+                <Path>\Dave\Generated\DAVE.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>digital_io.c</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>digital_io_conf.c</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>croutine.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\croutine.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>event_groups.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\event_groups.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>freertos.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\freertos.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>heap.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\heap.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>list.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\list.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>mpu_wrappers.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\mpu_wrappers.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>port.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\portable\GCC\port.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>port.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\portable\IAR\port.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>port.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\portable\Keil\port.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>queue.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\queue.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>stream_buffer.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\stream_buffer.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>tasks.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\tasks.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>timers.c</File_Name>
+                <Path>\Dave\Generated\FREERTOS\timers.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_can.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CAN\global_can.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_can_conf.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CAN\global_can_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_ccu4.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_ccu4_conf.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_scu_xmc1.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_SCU_XMC1\global_scu_xmc1.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_scu_xmc1_conf.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_SCU_XMC1\global_scu_xmc1_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>interrupt.c</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>interrupt_conf.c</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>pwm.c</File_Name>
+                <Path>\Dave\Generated\PWM\pwm.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>pwm_conf.c</File_Name>
+                <Path>\Dave\Generated\PWM\pwm_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>rtc.c</File_Name>
+                <Path>\Dave\Generated\RTC\rtc.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>rtc_conf.c</File_Name>
+                <Path>\Dave\Generated\RTC\rtc_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+        </Source_Files>
+        <Header_Files>
+            <Header_File>
+                <File_Name>can_node.h</File_Name>
+                <Path>\Dave\Generated\CAN_NODE\can_node.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>can_node_conf.h</File_Name>
+                <Path>\Dave\Generated\CAN_NODE\can_node_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>can_node_extern.h</File_Name>
+                <Path>\Dave\Generated\CAN_NODE\can_node_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>clock_xmc1.h</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC1\clock_xmc1.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>clock_xmc1_conf.h</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC1\clock_xmc1_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>clock_xmc1_extern.h</File_Name>
+                <Path>\Dave\Generated\CLOCK_XMC1\clock_xmc1_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>counter.h</File_Name>
+                <Path>\Dave\Generated\COUNTER\counter.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>counter_conf.h</File_Name>
+                <Path>\Dave\Generated\COUNTER\counter_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>counter_extern.h</File_Name>
+                <Path>\Dave\Generated\COUNTER\counter_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>cpu_ctrl_xmc1.h</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC1\cpu_ctrl_xmc1.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>cpu_ctrl_xmc1_conf.h</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC1\cpu_ctrl_xmc1_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>cpu_ctrl_xmc1_extern.h</File_Name>
+                <Path>\Dave\Generated\CPU_CTRL_XMC1\cpu_ctrl_xmc1_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>crc_sw.h</File_Name>
+                <Path>\Dave\Generated\CRC_SW\crc_sw.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>crc_sw_conf.h</File_Name>
+                <Path>\Dave\Generated\CRC_SW\crc_sw_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>crc_sw_extern.h</File_Name>
+                <Path>\Dave\Generated\CRC_SW\crc_sw_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>DAVE.h</File_Name>
+                <Path>\Dave\Generated\DAVE.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>DAVE_Common.h</File_Name>
+                <Path>\Dave\Generated\DAVE_Common.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>digital_io.h</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>digital_io_conf.h</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>digital_io_extern.h</File_Name>
+                <Path>\Dave\Generated\DIGITAL_IO\digital_io_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>croutine.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\croutine.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>deprecated_definitions.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\deprecated_definitions.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>event_groups.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\event_groups.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>FreeRTOS.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\FreeRTOS.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>FreeRTOSConfig.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\FreeRTOSConfig.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>freertos_conf.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\freertos_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>heap_1.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\heap_1.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>heap_2.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\heap_2.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>heap_3.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\heap_3.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>heap_4.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\heap_4.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>heap_5.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\heap_5.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>list.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\list.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>message_buffer.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\message_buffer.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>mpu_prototypes.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\mpu_prototypes.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>mpu_wrappers.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\mpu_wrappers.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>portmacro.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\portable\GCC\portmacro.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>portmacro.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\portable\IAR\portmacro.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>portmacro.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\portable\Keil\portmacro.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>portable.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\portable.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>projdefs.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\projdefs.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>queue.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\queue.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>semphr.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\semphr.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>stack_macros.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\stack_macros.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>stream_buffer.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\stream_buffer.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>task.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\task.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>timers.h</File_Name>
+                <Path>\Dave\Generated\FREERTOS\timers.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_can.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CAN\global_can.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_can_conf.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CAN\global_can_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_can_extern.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CAN\global_can_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu4.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu4_conf.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_ccu4_extern.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_CCU4\global_ccu4_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_scu_xmc1.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_SCU_XMC1\global_scu_xmc1.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_scu_xmc1_conf.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_SCU_XMC1\global_scu_xmc1_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_scu_xmc1_extern.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_SCU_XMC1\global_scu_xmc1_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>interrupt.h</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>interrupt_conf.h</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>interrupt_extern.h</File_Name>
+                <Path>\Dave\Generated\INTERRUPT\interrupt_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>pwm.h</File_Name>
+                <Path>\Dave\Generated\PWM\pwm.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>pwm_conf.h</File_Name>
+                <Path>\Dave\Generated\PWM\pwm_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>pwm_extern.h</File_Name>
+                <Path>\Dave\Generated\PWM\pwm_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>rtc.h</File_Name>
+                <Path>\Dave\Generated\RTC\rtc.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>rtc_conf.h</File_Name>
+                <Path>\Dave\Generated\RTC\rtc_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>rtc_extern.h</File_Name>
+                <Path>\Dave\Generated\RTC\rtc_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+        </Header_Files>
+        <Library_Files/>
+        <Assembly_Files>
+            <Assembly_File>
+                <File_Name>portasm.s</File_Name>
+                <Path>\Dave\Generated\FREERTOS\portable\IAR\portasm.s</Path>
+                <Type>Assembly File</Type>
+            </Assembly_File>
+        </Assembly_Files>
+    </Generated_Files>
+    <Include_Path>
+        <Path>\Libraries\XMCLib\inc</Path>
+        <Path>\Libraries\CMSIS\Include</Path>
+        <Path>\Libraries\CMSIS\Infineon\XMC1400_series\Include</Path>
+        <Path/>
+        <Path>\Dave\Generated</Path>
+        <Path>\Libraries</Path>
+    </Include_Path>
+    <Preprocessor_Symbols>
+        <Assembler_Symbol>XMC1404_F064x0200=</Assembler_Symbol>
+        <Compiler_Symbol>XMC1404_F064x0200=</Compiler_Symbol>
+    </Preprocessor_Symbols>
+</Project>

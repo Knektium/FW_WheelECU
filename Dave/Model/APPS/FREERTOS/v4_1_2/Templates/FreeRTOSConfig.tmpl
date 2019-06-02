@@ -1,0 +1,175 @@
+package Model.APPS.FREERTOS.v4_1_2.Templates;
+
+import Model.APPS.FREERTOS.v4_1_2.FREERTOS
+
+out.print("""
+/*
+ * FreeRTOS Kernel V10.0.1
+ * Copyright (C) 2017 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ *
+ * http://www.FreeRTOS.org
+ * http://aws.amazon.com/freertos
+ *
+ * 1 tab == 4 spaces!
+ */
+""");
+
+Map tick_src = ["SysTick" : 0, 
+                "User Defined": 2] /* User Defined - kept silent until method is clear */
+
+Map preemption = ["Premptive" : 1, 
+                  "Cooperative": 0]
+
+Map task_selection = ["Port Optimized" : 1, 
+                      "Generic": 0]
+
+Map heap_selection = ["heap_1" : 1, 
+                      "heap_2" : 2,
+                      "heap_3" : 3,
+                      "heap_4" : 4,
+                      "heap_5" : 5]
+
+for (FREERTOS appInstance : appInstancesList ) {
+
+    out.print("""
+#ifndef FREERTOS_CONFIG_H
+#define FREERTOS_CONFIG_H
+
+#ifndef __IASMARM__
+#include <xmc_device.h>
+#endif
+
+/*-----------------------------------------------------------
+ * Application specific definitions.
+ *
+ * These definitions should be adjusted for your particular hardware and
+ * application requirements.
+ *
+ * THESE PARAMETERS ARE DESCRIBED WITHIN THE 'CONFIGURATION' SECTION OF THE
+ * FreeRTOS API DOCUMENTATION AVAILABLE ON THE FreeRTOS.org WEB SITE.
+ *
+ * See http://www.freertos.org/a00110.html.
+ *----------------------------------------------------------*/
+
+#define configUSE_PREEMPTION                    ${preemption.get(appInstance.gcombo_configUSE_PREEMPTION.value)}
+#define configUSE_PORT_OPTIMISED_TASK_SELECTION ${task_selection.get(appInstance.gcombo_configUSE_PORT_OPTIMISED_TASK_SELECTION.value)}
+#define configUSE_TICKLESS_IDLE                 ${tick_src.get(appInstance.gcombo_configTICK_SRC.value) > 0 ? 2 : (appInstance.gcheck_configUSE_TICKLESS_IDLE.value ? 1 : 0)}
+#define configCPU_CLOCK_HZ                      ( SystemCoreClock )
+#define configTICK_RATE_HZ                      ( ( TickType_t ) ${appInstance.gfloat_configTICK_RATE_HZ.value} )
+#define configMAX_PRIORITIES                    ( ${appInstance.ginteger_configMAX_PRIORITIES.value} )
+#define configMINIMAL_STACK_SIZE                ( ( unsigned short ) ${appInstance.ginteger_configMINIMAL_STACK_SIZE.value} )
+#define configMAX_TASK_NAME_LEN                 ( ${appInstance.ginteger_configMAX_TASK_NAME_LEN.value} )
+#define configUSE_16_BIT_TICKS                  0
+#define configIDLE_SHOULD_YIELD                 ( ${appInstance.gcheck_configIDLE_SHOULD_YIELD.value ? 1 : 0} )
+#define configUSE_TASK_NOTIFICATIONS            ${appInstance.gcheck_configUSE_TASK_NOTIFICATIONS.value ? 1 : 0}
+#define configUSE_MUTEXES                       ${appInstance.gcheck_configUSE_MUTEXES.value ? 1 : 0}
+#define configUSE_RECURSIVE_MUTEXES             ${appInstance.gcheck_configUSE_RECURSIVE_MUTEXES.value ? 1 : 0}
+#define configUSE_COUNTING_SEMAPHORES           ${appInstance.gcheck_configUSE_COUNTING_SEMAPHORES.value ? 1 : 0}
+#define configUSE_ALTERNATIVE_API               0
+#define configQUEUE_REGISTRY_SIZE               ${appInstance.ginteger_configQUEUE_REGISTRY_SIZE.value}
+#define configUSE_QUEUE_SETS                    ${appInstance.gcheck_configUSE_QUEUE_SETS.value ? 1 : 0}
+#define configUSE_TIME_SLICING                  ${appInstance.gcheck_configUSE_TIME_SLICING.value ? 1 : 0}
+#define configUSE_NEWLIB_REENTRANT              0
+#define configENABLE_BACKWARD_COMPATIBILITY     1
+#define configNUM_THREAD_LOCAL_STORAGE_POINTERS ${appInstance.ginteger_configNUM_THREAD_LOCAL_STORAGE_POINTERS.value}
+
+/* Memory allocation related definitions. */
+#define configSUPPORT_STATIC_ALLOCATION         ${appInstance.gcheck_configSUPPORT_STATIC_ALLOCATION.value ? 1 : 0}
+#define configSUPPORT_DYNAMIC_ALLOCATION        ${appInstance.gcheck_configSUPPORT_DYNAMIC_ALLOCATION.value ? 1 : 0}
+#define configTOTAL_HEAP_SIZE                   ( ( size_t ) ( ${appInstance.ginteger_configTOTAL_HEAP_SIZE.value} ) )
+#define configAPPLICATION_ALLOCATED_HEAP        ${appInstance.gcheck_configAPPLICATION_ALLOCATED_HEAP.value ? 1 : 0}
+
+/* Hook function related definitions. */
+#define configUSE_IDLE_HOOK                     ${appInstance.gcheck_configUSE_IDLE_HOOK.value ? 1 : 0}
+#define configUSE_TICK_HOOK                     ${appInstance.gcheck_configUSE_TICK_HOOK.value ? 1 : 0}
+#define configCHECK_FOR_STACK_OVERFLOW          ${appInstance.gcheck_configCHECK_FOR_STACK_OVERFLOW.value ? 2 : 0}
+#define configUSE_MALLOC_FAILED_HOOK            ${appInstance.gcheck_configUSE_MALLOC_FAILED_HOOK.value ? 1 : 0}
+
+/* Run time and task stats gathering related definitions. */
+#define configGENERATE_RUN_TIME_STATS           ${appInstance.gcheck_configGENERATE_RUN_TIME_STATS.value ? 1 : 0}
+#define configUSE_TRACE_FACILITY                ${appInstance.gcheck_configUSE_TRACE_FACILITY.value ? 1 : 0}
+#define configUSE_STATS_FORMATTING_FUNCTIONS    1
+
+/* Co-routine definitions. */
+#define configUSE_CO_ROUTINES                   ${appInstance.gcheck_configUSE_CO_ROUTINES.value ? 1 : 0}
+#define configMAX_CO_ROUTINE_PRIORITIES         ( ${appInstance.ginteger_configMAX_CO_ROUTINE_PRIORITIES.value} )
+
+/* Software timer definitions. */
+#define configUSE_TIMERS                        ${appInstance.gcheck_configUSE_TIMERS.value ? 1 : 0}
+#define configTIMER_TASK_PRIORITY               ( ${appInstance.ginteger_configTIMER_TASK_PRIORITY.value} )
+#define configTIMER_QUEUE_LENGTH                ${appInstance.ginteger_configTIMER_QUEUE_LENGTH.value}
+#define configTIMER_TASK_STACK_DEPTH            ( ${appInstance.ginteger_configTIMER_TASK_STACK_DEPTH.value} )
+
+/* Interrupt nesting behaviour configuration. */
+#define configKERNEL_INTERRUPT_PRIORITY         (${appInstance.ginterruptprio_configKERNEL_INTERRUPT_PRIORITY.priorityValue} << (8 - __NVIC_PRIO_BITS))
+#define configMAX_API_CALL_INTERRUPT_PRIORITY   (${appInstance.ginteger_configMAX_API_CALL_INTERRUPT_PRIORITY.value} << (8 - __NVIC_PRIO_BITS))
+#define configMAX_SYSCALL_INTERRUPT_PRIORITY    (${appInstance.ginteger_configMAX_API_CALL_INTERRUPT_PRIORITY.value} << (8 - __NVIC_PRIO_BITS))
+
+/* Define to trap errors during development. */
+#define configASSERT( x )                       ${appInstance.gcheck_configUSE_ASSERTIONS.value ? "if( ( x ) == 0 ) { taskDISABLE_INTERRUPTS(); for( ;; ); }" : ""}
+
+/* Define to select memory allocation method */
+#define configMEM_ALLOC                         ${heap_selection.get(appInstance.gcombo_configMEM_ALLOC.value)}
+
+/* Set the following definitions to 1 to include the API function, or zero
+to exclude the API function. */
+#define INCLUDE_vTaskPrioritySet                ${appInstance.gcheck_INCLUDE_vTaskPrioritySet.value ? 1 : 0}
+#define INCLUDE_uxTaskPriorityGet               ${appInstance.gcheck_INCLUDE_uxTaskPriorityGet.value ? 1 : 0}
+#define INCLUDE_vTaskDelete                     ${appInstance.gcheck_INCLUDE_vTaskDelete.value ? 1 : 0}
+#define INCLUDE_vTaskSuspend                    ${appInstance.gcheck_INCLUDE_vTaskSuspend.value ? 1 : 0}
+#define INCLUDE_vTaskDelayUntil                 ${appInstance.gcheck_INCLUDE_vTaskDelayUntil.value ? 1 : 0}
+#define INCLUDE_vTaskDelay                      ${appInstance.gcheck_INCLUDE_vTaskDelay.value ? 1 : 0}
+#define INCLUDE_xTaskGetIdleTaskHandle          ${appInstance.gcheck_INCLUDE_xTaskGetIdleTaskHandle.value ? 1 : 0}
+#define INCLUDE_xTaskAbortDelay                 ${appInstance.gcheck_INCLUDE_xTaskAbortDelay.value ? 1 : 0}
+#define INCLUDE_xQueueGetMutexHolder            ${appInstance.gcheck_INCLUDE_xQueueGetMutexHolder.value ? 1 : 0}
+#define INCLUDE_xTaskGetHandle                  ${appInstance.gcheck_INCLUDE_xTaskGetHandle.value ? 1 : 0}
+#define INCLUDE_uxTaskGetStackHighWaterMark     ${appInstance.gcheck_INCLUDE_uxTaskGetStackHighWaterMark.value ? 1 : 0}
+#define INCLUDE_eTaskGetState                   ${appInstance.gcheck_INCLUDE_eTaskGetState.value ? 1 : 0}
+#define INCLUDE_xTaskResumeFromISR              ${appInstance.gcheck_INCLUDE_xTaskResumeFromISR.value ? 1 : 0}
+#define INCLUDE_xTimerPendFunctionCall          ${appInstance.gcheck_INCLUDE_xTimerPendFunctionCall.value ? 1 : 0}
+#define INCLUDE_xTaskGetSchedulerState          ${appInstance.gcheck_INCLUDE_xTaskGetSchedulerState.value ? 1 : 0}
+#define INCLUDE_xTaskGetCurrentTaskHandle       ${appInstance.gcheck_INCLUDE_xTaskGetCurrentTaskHandle.value ? 1 : 0}
+
+#define INCLUDE_xResumeFromISR                  1
+#define INCLUDE_xTimerGetTimerDaemonTaskHandle  1
+#define INCLUDE_pcTaskGetTaskName               1
+#define INCLUDE_xEventGroupSetBitFromISR        configUSE_TIMERS
+
+/* Definitions that map the FreeRTOS port interrupt handlers to their CMSIS 
+standard names. */
+#if ENABLE_CPU_CM_001_WORKAROUND == 1
+    #define xPortPendSVHandler PendSV_Handler_Veneer
+#else
+    #define xPortPendSVHandler PendSV_Handler
+#endif
+#define vPortSVCHandler SVC_Handler
+#define xPortSysTickHandler SysTick_Handler
+
+/* Definitions that are used by run time trace feature */
+#if configGENERATE_RUN_TIME_STATS == 1
+extern volatile uint32_t g_stat_timer_ticks;
+#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() (g_stat_timer_ticks = 0UL)
+#define portGET_RUN_TIME_COUNTER_VALUE()          g_stat_timer_ticks
+#endif
+
+#endif /* FREERTOS_CONFIG_H */
+
+    """);
+}

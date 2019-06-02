@@ -1,0 +1,8 @@
+*.lst
+*.map
+*.hex
+*.elf
+*.bak
+*.log
+*.o
+*.pdf

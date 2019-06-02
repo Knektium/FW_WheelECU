@@ -1,0 +1,358 @@
+package Model.APPS.FREERTOS.v4_1_2;
+
+/*
+Copyright (c) 2015-2018, Infineon Technologies AG
+All rights reserved.                       
+                                           
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the
+following conditions are met:  
+                                                                            
+Redistributions of source code must retain the above copyright notice, this list of conditions and the following
+disclaimer.                       
+ 
+Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following
+disclaimer in the documentation and/or other materials provided with the distribution.                      
+ 
+Neither the name of the copyright holders nor the names of its contributors may be used to endorse or promote
+products derived from this software without specific prior written permission.                                          
+                                                                            
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE 
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE  FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR 
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
+WHETHER IN CONTRACT, STRICT LIABILITY,OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.                                                 
+                                                                            
+To improve the quality of the software, users are encouraged to share modifications, enhancements or bug fixes with 
+Infineon Technologies AG: dave@infineon.com. */
+
+/*************** Revision History **********************************************
+Version        Date          Description 
+
+  4.0.2       09-Jul-2015   Initial version for DAVEv4.<br> 
+  
+  4.0.4       09-Oct-2015   Added support for XMC1400 and XMC4800.<br> 
+  
+  4.0.6       15-Dec-2015   Added support for XMC4300.<br> 
+  4.0.8       05-Feb-2016   APP is kept under "System" Category.<br> 
+  
+  4.0.10      04-Mar-2016   1).Update to FreeRTOS v8.2.3.<br> 
+                            2).Fix initialization of configKERNEL_INTERRUPT_PRIORITY.<br> 
+                            3).Fix initialization of configMAX_SYSCALL_INTERRUPT_PRIORITY.<br> 
+ 
+  4.0.12      22-Apr-2016   APP help documentation improved.<br>
+  
+  4.0.14      25-Apr-2016   Content pane of help doc updated.<br>
+  
+  4.0.16      31-May-2016   Update to FreeRTOS v9.0.0<br>  
+
+  4.0.18      27-Mar-2017   1) Fix missing MPU wrapper implementation<br>
+                            2) Add Include Settings tab<br>  
+  4.0.20      13-Apr-2017   Fix compilation warnings
+  4.1.2       24-Jan-2018   Update to FreeRTOS 10.0.1
+*******************************************************************************/
+
+// Import statements
+import ifx.davex.app.manifest.*
+
+class  FREERTOS extends FREERTOS_GUI {
+
+	// Note  : Following App properties are mandatory and important
+	// Begin : App property section
+	
+	/**
+	 * App version
+	 * Format: a string with three digit separated by a dot.
+	 */
+	def version            = '4.1.2'
+	
+	/**
+	 * App categories declaration. 
+	 * It is list of strings. Subcategories are separated by slash.
+	 * No limits on number of categories and subcategories depth.
+	 */
+	def categoriesDescription = ["System"] 
+
+	/** 
+	 * Minimum DAVE version required for this app.
+	 * 
+	 * It is string with three digit separated by a dot.
+	 */
+	def minDaveVersion           = '4.0.0'
+	
+	/** 
+	 * Keywords used by search feature in Apps selection view
+	 * 
+	 * It is a list of string.
+	 */
+	def keywords      = ['RTOS','all']
+	
+	/** 
+	 * softwareIDs is used to declare which devices are compatible with this app.
+	 * It is a map with key a string containing a pattern that shall match the SW id of
+	 * the device and as value the minimal version of the app.
+	 * 
+	 * 
+	 */	
+	def softwareIDs  = [
+	                     "XMC4.8.*.*.*":"1.0.0",
+		                 "XMC4.7.*.*.*":"1.0.0",
+		                 "XMC4.5.*.*.*":"1.0.0",
+		                 "XMC4.4.*.*.*":"1.0.0",
+						 "XMC4.3.*.*.*":"1.0.0",
+		                 "XMC4.2.*.*.*":"1.0.0",
+		                 "XMC4.1.*.*.*":"1.0.0",
+						 "XMC1.4.*.*.*":"1.0.0",
+						 "XMC1.3.*.*.*":"1.0.0",
+						 "XMC1.2.*.*.*":"1.0.0",
+						 "XMC1.1.*.*.*":"1.0.0"		
+		               ]
+	
+	/**
+	 * Singleton property:
+	 * When it is true the app can be instantiated only once. 
+	 */
+	def singleton     = true
+
+
+	/**
+	 * initProvider property
+	 * It shall be true to add a call to <AppName>_Init() 
+	 */
+	def initProvider  = false
+	
+	/**
+	 * Deprecated app
+	 * Set it to true to indicate that the app shall be not used for new projects.
+	 */
+	def deprecated    = false
+	
+	/**
+	 * Sharable property.
+	 * It shall be true to allows multiple apps to require the same instance of this app.
+	 */
+	def sharable      = true
+
+	/**
+	 *  App function description.
+	 */
+	def description = "FreeRTOS is an open source real-time operating system (RTOS) for embedded systems"
+		
+	// End   : App property section
+	
+	// Begin : User app property section 
+
+	/* virtual resource group for System timer */
+	MVirtualResourceGroup hwres_systick
+	MVirtualResourceGroup hwres_exception_systick
+	MVirtualResourceGroup hwres_exception_pendsv
+	MVirtualResourceGroup hwres_exception_svcall
+	
+	/* Required App consumption for System timer */
+	MRequiredApp appres_clock /* CLOCK app consumption for XMC4xxx device and XMC1xxx device */
+	MRequiredApp appres_cpu  /* CPU app consumption for XMC4xxx device device */
+	
+	GFloat g_cpuclock = GFloat(widgetName : "g_cpuclock", value : 0)
+	
+	// End   : User app property section
+	
+	// App Constructor
+	public FREERTOS(DaveEnv daveEnv) {
+		String family = daveEnv.project.selectedDevice.deviceId.family 	//ex:XMC4 or XMC1
+
+		hwres_systick =  MVirtualResourceGroup("systick", ["peripheral", "cpu", "0", "systick"])
+		hwres_exception_systick =  MVirtualResourceGroup("excp_systick", ["peripheral", "cpu", "0", "exception", "systick"])
+		hwres_exception_pendsv =  MVirtualResourceGroup("excp_pendsv", ["peripheral", "cpu", "0", "exception", "pendsv"])
+		hwres_exception_svcall =  MVirtualResourceGroup("excp_svcall", ["peripheral", "cpu", "0", "exception", "svcall"])
+				
+		if (family == "XMC4") {
+			/* CLOCK App consumption for XMC4xxx devices */
+			appres_clock =  MRequiredApp("CLOCK_XMC4", "Clock App", RSHARABLE, "4.0.2")
+			appres_cpu =  MRequiredApp("CPU_CTRL_XMC4", "CPU", RSHARABLE, "4.0.2")
+		}
+		else {
+			/* CLOCK App consumption for XMC1xxx devices */
+			appres_clock =  MRequiredApp("CLOCK_XMC1", "Clock App", RSHARABLE, "4.0.2")
+			appres_cpu =  MRequiredApp("CPU_CTRL_XMC1", "CPU", RSHARABLE, "4.0.2")
+		}
+
+
+		if (family == "XMC4") {
+			/* Read clock value from CLOCK APP */
+			g_cpuclock.value = MF({appres_clock.getVal(["gfloat_cpuclkfreq", "value"])}, Float)
+			/* Subpriority not used */
+			ginterruptprio_configKERNEL_INTERRUPT_PRIORITY.subPriorityValue = 0
+			ginterruptprio_configKERNEL_INTERRUPT_PRIORITY.maxSubPriority =  MF({
+				Integer SubPriority = appres_cpu.getVal(["gint_maxInterruptSubPriority", "value"])
+				return SubPriority
+			}, Integer)
+
+		}
+		else {
+			/* Read clock value from CLOCK APP */
+			g_cpuclock.value = MF({appres_clock.getVal(["gfloat_mclkactfrq", "value"])}, Float)
+		}
+		
+		/* UI logic */
+		
+		if (family == "XMC4") {
+			/* Set default values suitable for 4X devices */
+			ginterruptprio_configKERNEL_INTERRUPT_PRIORITY.priorityValue = 63
+			ginteger_configMAX_API_CALL_INTERRUPT_PRIORITY.value = 63
+			ginteger_configMINIMAL_STACK_SIZE.minValue = 130
+			ginteger_configMINIMAL_STACK_SIZE.value = 130
+			ginteger_configTIMER_TASK_STACK_DEPTH.minValue = 130
+			ginteger_configTIMER_TASK_STACK_DEPTH.value = 260	
+		}
+		else {
+			/* Set default values suitable for 1X devices */
+			ginterruptprio_configKERNEL_INTERRUPT_PRIORITY.priorityValue = 3
+			ginteger_configMAX_API_CALL_INTERRUPT_PRIORITY.value = 3
+			ginteger_configMINIMAL_STACK_SIZE.minValue = 60
+			ginteger_configMINIMAL_STACK_SIZE.value = 60
+			ginteger_configTIMER_TASK_STACK_DEPTH.minValue = 60
+			ginteger_configTIMER_TASK_STACK_DEPTH.value = 120
+			gcombo_configUSE_PORT_OPTIMISED_TASK_SELECTION.value = "Generic"
+			gcombo_configUSE_PORT_OPTIMISED_TASK_SELECTION.enabled = false
+		}
+
+		/* Max Kernel interrupt priority values is taken from CPU APP */
+		ginterruptprio_configKERNEL_INTERRUPT_PRIORITY.maxPriority = MF({
+			Integer Priority = appres_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"]) as Integer
+			return Priority
+		}, Integer)
+
+		/* Max API call interrupt priority values is taken from CPU APP */
+		ginteger_configMAX_API_CALL_INTERRUPT_PRIORITY.maxValue = MF({
+			Integer Priority = appres_cpu.getVal(["gint_maxInterruptPreemptPriority", "value"]) as Integer
+			return Priority
+		}, Integer)
+
+		/* Value of gfloat_configTICK_RATE_HZ when SysTick is clock source, depends on CPU clock */
+		gfloat_configTICK_RATE_HZ.maxValue = MF({
+			return (g_cpuclock.value * 1E6)
+		}, Float)
+
+		gfloat_configTICK_RATE_HZ.minValue = MF({
+			return ((g_cpuclock.value  * 1E6) / 16777216.0) 
+		}, Float)
+
+		/* Heap size not relevant if memory alloc is 3 or 5 */
+		ginteger_configTOTAL_HEAP_SIZE.enabled = MF({
+			if ((gcombo_configMEM_ALLOC.value == "heap_3") || (gcombo_configMEM_ALLOC.value == "heap_5")) {
+				return false
+			}
+			else {
+				return true
+			}
+			
+		}, Boolean)
+		
+		gcheck_configAPPLICATION_ALLOCATED_HEAP.enabled = MF({
+			if ((gcombo_configMEM_ALLOC.value == "heap_3") || (gcombo_configMEM_ALLOC.value == "heap_5")) {
+				return false
+			}
+			else {
+				return true
+			}
+			
+		}, Boolean)
+		
+		/* Enable Tickless Idle checkbox only if SysTick is chosen as tick source */
+		gcheck_configUSE_TICKLESS_IDLE.enabled = MF({
+			gcombo_configTICK_SRC.value == "SysTick"
+		}, Boolean)
+		
+		/* Timer options are enabled only if timer functionality is enabled */
+		ginteger_configTIMER_TASK_PRIORITY.enabled = MF({
+			return gcheck_configUSE_TIMERS.value
+		}, Boolean)
+		ginteger_configTIMER_QUEUE_LENGTH.enabled = MF({
+			return gcheck_configUSE_TIMERS.value
+		}, Boolean)
+		ginteger_configTIMER_TASK_STACK_DEPTH.enabled = MF({
+			return gcheck_configUSE_TIMERS.value
+		}, Boolean)
+
+		/* Timer co-routines are enabled only if co-routine functionality is enabled */
+		ginteger_configMAX_CO_ROUTINE_PRIORITIES.enabled = MF({
+			return gcheck_configUSE_CO_ROUTINES.value
+		}, Boolean)
+
+		/* 'Idle Task should yield' has an effect only if preemptive scheduler is used */
+		gcheck_configIDLE_SHOULD_YIELD.enabled = MF({
+			return (gcombo_configUSE_PREEMPTION.value == "Premptive")
+		}, Boolean)
+		
+		/* Timer task priority cannot be bigger than configMAX_PRIORITIES - 1 */
+		ginteger_configTIMER_TASK_PRIORITY.maxValue = MF({
+			return (ginteger_configMAX_PRIORITIES.value - 1)
+		}, Integer)
+
+		if (family == "XMC4") {
+			gcheck_enable_MPU_support.enabled = true 
+		}
+		else {
+			gcheck_enable_MPU_support.enabled = false
+		}
+		
+	}
+	
+	/* File Generation */
+	def generateFiles(){
+		String family = daveEnv.project.selectedDevice.deviceId.family
+		
+		generate("FreeRTOSConfig.tmpl", "FreeRTOSConfig.h")	
+		generate("freertos_confh.tmpl", "freertos_conf.h")
+		
+		copy("heap.c", "heap.c")		
+		copy("heap_1.h", "heap_1.h")		
+		copy("heap_2.h", "heap_2.h")		
+		copy("heap_3.h", "heap_3.h")		
+		copy("heap_4.h", "heap_4.h")		
+		copy("heap_5.h", "heap_5.h")		
+		
+		copy("croutine.c", "croutine.c")		
+		copy("croutine.h", "croutine.h")		
+		copy("event_groups.c", "event_groups.c")		
+		copy("event_groups.h", "event_groups.h")		
+		copy("list.c", "list.c")		
+		copy("list.h", "list.h")		
+		copy("queue.c", "queue.c")		
+		copy("queue.h", "queue.h")		
+		copy("tasks.c", "tasks.c")		
+		copy("task.h", "task.h")		
+		copy("timers.c", "timers.c")
+		copy("timers.h", "timers.h")
+		copy("stream_buffer.c", "stream_buffer.c")		
+		copy("stream_buffer.h", "stream_buffer.h")		
+		copy("message_buffer.h", "message_buffer.h")		
+		
+		copy("deprecated_definitions.h", "deprecated_definitions.h")
+		copy("freertos.c", "freertos.c")
+		copy("FreeRTOS.h", "FreeRTOS.h")
+		copy("mpu_wrappers.h", "mpu_wrappers.h")
+		copy("mpu_wrappers.c", "mpu_wrappers.c")
+		copy("portable.h", "portable.h")
+		copy("projdefs.h", "projdefs.h")
+		copy("semphr.h", "semphr.h")
+		copy("stack_macros.h", "stack_macros.h")
+		copy("mpu_prototypes.h", "mpu_prototypes.h")
+		
+		if (family == "XMC1") {
+			copy("portable/GCC/ARM_CM0", "portable/GCC")		
+			copy("portable/IAR/ARM_CM0", "portable/IAR")		
+			copy("portable/Keil/ARM_CM0", "portable/Keil")		
+		}	
+		else if (family == "XMC4") {
+ 		    copy("portable/GCC/ARM_CM4F", "portable/GCC")		
+			copy("portable/IAR/ARM_CM4F", "portable/IAR")		
+			copy("portable/Keil/ARM_CM4F", "portable/Keil")		
+		}
+	}
+	
+	//
+	// Add main code here
+	//
+}

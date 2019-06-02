@@ -1,0 +1,297 @@
+<p1:Tab  xmlns="http://www.eclipse.org/xwt/presentation" xmlns:x="http://www.eclipse.org/xwt" xmlns:p1="clr-namespace:com.ifx.davex.ui.controls.app" x:Class="e" layout="{x:Null}">
+	<p1:TabFolder bounds="5, 5, 639, 640">
+		<p1:GTab text="Kernel Settings" widgetName="tab_kernel" visible="true" enabled="true">
+			<p1:GTab.control>
+				<p1:Tab>
+					<p1:Tab.layout>
+						<GridLayout numColumns="2" marginHeight="10" marginWidth="10"/>
+					</p1:Tab.layout>
+					<p1:GLabel text="Scheduler tick interrupt source:" visible="true" widgetName="glabel_configTICK_SRC" toolTipText="Clock selection to generate the tick interrupt (configUSE_TICKLESS_IDLE)">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="194" horizontalAlignment="FILL"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_configTICK_SRC" options="SysTick" value="SysTick" description="&lt;b&gt;SysTick&lt;/b&gt; &lt;br&gt;    - Tick interrupt runs always if &lt;i&gt;tickless idle mode&lt;/i&gt; checkbox is disabled (configUSE_TICKLESS_IDLE = 0).&lt;br&gt;    - Built in tickless idle functionality is used if &lt;i&gt;tickless idle mode&lt;/i&gt; checkbox is enabled (configUSE_TICKLESS_IDLE = 1).&#13;&#10;&#13;&#10;&lt;br&gt;&lt;br&gt;For all the FreeRTOS configuration options, refer &lt;a href=&quot;http://www.freertos.org/a00110.html&quot; target=&quot;_blank&quot;&gt;http://www.freertos.org/a00110.html&lt;/a&gt;&#13;&#10;" toolTipText="Clock selection to generate the tick interrupt (configUSE_TICKLESS_IDLE)">
+						<p1:GCombo.layoutData>
+							<GridData horizontalAlignment="FILL" widthHint="76"/>
+						</p1:GCombo.layoutData>
+					</p1:GCombo>
+					<p1:GLabel text="Scheduler tick rate (Hz):" visible="true" widgetName="glabel_configTICK_RATE_HZ" toolTipText="The frequency of the RTOS tick interrupt (configTICK_RATE_HZ)">
+						<p1:GLabel.layoutData>
+							<GridData horizontalAlignment="FILL"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GFloat x:Style="BORDER" minValue="1" maxValue="10000" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="*,2" manifestObj="true" widgetName="gfloat_configTICK_RATE_HZ" value="1000" description="The frequency of the RTOS tick interrupt (configTICK_RATE_HZ)." toolTipText="The frequency of the RTOS tick interrupt (configTICK_RATE_HZ)">
+						<p1:GFloat.layoutData>
+							<GridData horizontalAlignment="FILL" widthHint="90"/>
+						</p1:GFloat.layoutData>
+					</p1:GFloat>
+					<p1:GLabel text="Scheduler mode:" visible="true" widgetName="glabel_configUSE_PREEMPTION" toolTipText="Use the preemptive or the cooperative RTOS scheduler (configUSE_PREEMPTION)">
+						<p1:GLabel.layoutData>
+							<GridData horizontalAlignment="FILL"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_configUSE_PREEMPTION" options="Premptive&#13;&#10;Cooperative&#13;&#10;" value="Premptive" description="Option to choose preemptive or cooperative RTOS scheduler. (configUSE_PREEMPTION)" toolTipText="Option to choose preemptive or cooperative RTOS scheduler. (configUSE_PREEMPTION)">
+						<p1:GCombo.layoutData>
+							<GridData horizontalAlignment="FILL" widthHint="81"/>
+						</p1:GCombo.layoutData>
+					</p1:GCombo>
+					<p1:GLabel text="Task selection method:" visible="true" widgetName="glabel_configUSE_PORT_OPTIMISED_TASK_SELECTION" toolTipText="Method for selecting the next task to execute.">
+						<p1:GLabel.layoutData>
+							<GridData horizontalAlignment="FILL"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_configUSE_PORT_OPTIMISED_TASK_SELECTION" options="Port Optimized&#13;&#10;Generic" value="Port Optimized" toolTipText="Method of selecting the next task to execute." description="Method of selecting the next task to execute (configUSE_PORT_OPTIMISED_TASK_SELECTION).">
+						<p1:GCombo.layoutData>
+							<GridData horizontalAlignment="FILL" widthHint="110"/>
+						</p1:GCombo.layoutData>
+					</p1:GCombo>
+					<p1:GLabel text="Number of task priorities:" visible="true" widgetName="glabel_configMAX_PRIORITIES" toolTipText="Each task is assigned a priority from 0 to ( configMAX_PRIORITIES - 1). ">
+						<p1:GLabel.layoutData>
+							<GridData horizontalAlignment="FILL"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GInteger x:Style="NONE" minValue="1" maxValue="32" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_configMAX_PRIORITIES" value="5" toolTipText="Each task is assigned a priority from 0 to ( configMAX_PRIORITIES - 1). " description="Task priority limited to the range of 0 to (configMAX_PRIORITIES - 1).">
+						<p1:GInteger.layoutData>
+							<GridData horizontalAlignment="FILL" widthHint="83"/>
+						</p1:GInteger.layoutData>
+					</p1:GInteger>
+					<p1:GCheck text="Use time slicing" manifestObj="true" widgetName="gcheck_configUSE_TIME_SLICING" value="true" toolTipText="RTOS scheduler will always run the highest priority task that is in the Ready state, and will switch between tasks of equal priority on every RTOS tick interrupt. (configUSE_TIME_SLICING)" description="RTOS scheduler will always run the highest priority task that is in the Ready state, and will switch between tasks of equal priority on every RTOS tick interrupt (configUSE_TIME_SLICING)."/>
+					<Label/>
+					<p1:GCheck text="Enable tickless idle mode" manifestObj="true" widgetName="gcheck_configUSE_TICKLESS_IDLE" toolTipText="Use the low power tickless mode. (configUSE_TICKLESS_IDLE)" description="Enables the low power tickless mode (defines configUSE_TICKLESS_IDLE when SysTimer is selected as the tick source)."/>
+					<Label/>
+					<p1:GCheck text="Idle task should yield" manifestObj="true" widgetName="gcheck_configIDLE_SHOULD_YIELD" value="true" toolTipText="This parameter controls the behaviour of tasks at the idle priority. (configIDLE_SHOULD_YIELD)" description="Controls the behaviour of tasks at the idle priority (configIDLE_SHOULD_YIELD)."/>
+					<Label/>
+					<p1:GLabel text="Idle task stack size (words):" widgetName="glabel_configMINIMAL_STACK_SIZE" toolTipText="The size of the stack used by the idle task.(configMINIMAL_STACK_SIZE)">
+						<p1:GLabel.layoutData>
+							<GridData horizontalAlignment="FILL"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="130" widgetName="ginteger_configMINIMAL_STACK_SIZE" value="130" toolTipText="Size of the stack used by the idle task.(configMINIMAL_STACK_SIZE)" description="Size of the stack used by the idle task (configMINIMAL_STACK_SIZE).">
+						<p1:GInteger.layoutData>
+							<GridData horizontalAlignment="FILL" widthHint="85"/>
+						</p1:GInteger.layoutData>
+					</p1:GInteger>
+					<p1:GLabel text="Number of thread local storage(TLS) pointers:" visible="true" manifestObj="true" widgetName="glabel_configNUM_THREAD_LOCAL_STORAGE_POINTERS" toolTipText="Thread local storage pointers allow saving task specific values inside a TCB.(configNUM_THREAD_LOCAL_STORAGE_POINTERS)">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="247"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GInteger x:Style="NONE" minValue="0" maxValue="32" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_configNUM_THREAD_LOCAL_STORAGE_POINTERS" value="5" toolTipText="Thread local storage pointers allow saving task specific values inside a TCB.(configNUM_THREAD_LOCAL_STORAGE_POINTERS)" description="Thread local storage pointers allow saving task specific values inside a TCB. (configNUM_THREAD_LOCAL_STORAGE_POINTERS)">
+						<p1:GInteger.layoutData>
+							<GridData horizontalAlignment="FILL" widthHint="79"/>
+						</p1:GInteger.layoutData>
+					</p1:GInteger>
+					<p1:GCheck text="Enable MPU support" manifestObj="true" widgetName="gcheck_enable_MPU_support" toolTipText="Includes integrated memory protection. See APP documentation Usage section for linker file modifications." description="Includes integrated memory protection"/>
+					<Label/>
+					<p1:GGroup text="Task Synchronization Primitives" widgetName="ggroup_task_sync">
+						<p1:GGroup.layoutData>
+							<GridData horizontalSpan="2" horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout marginHeight="10" marginWidth="10"/>
+						</p1:GGroup.layout>
+						<p1:GCheck text="Use task notifications" manifestObj="true" widgetName="gcheck_configUSE_TASK_NOTIFICATIONS" value="true" toolTipText="Include direct-to-task notification functionality and its associated API in the build. (configUSE_TASK_NOTIFICATIONS)" description="Includes &lt;i&gt;direct to task&lt;/i&gt; notification functionality and its associated API in the build (configUSE_TASK_NOTIFICATIONS)."/>
+						<p1:GCheck text="Use mutexes" manifestObj="true" widgetName="gcheck_configUSE_MUTEXES" value="true" toolTipText="Include mutex functionality in the build. (configUSE_MUTEXES)" description="Includes mutex functionality in the build (configUSE_MUTEXES)."/>
+						<p1:GCheck text="Use recursive mutexes" manifestObj="true" widgetName="gcheck_configUSE_RECURSIVE_MUTEXES" value="true" toolTipText="Includes recursive mutex functionality in the build. (configUSE_RECURSIVE_MUTEXES)" description="Includes recursive mutex functionality in the build (configUSE_RECURSIVE_MUTEXES)."/>
+						<p1:GCheck text="Use counting semaphores" manifestObj="true" widgetName="gcheck_configUSE_COUNTING_SEMAPHORES" value="true" toolTipText="Includes counting semaphore functionality in the build. (configUSE_COUNTING_SEMAPHORES)" description="Includes counting semaphore functionality in the build (configUSE_COUNTING_SEMAPHORES)."/>
+						<p1:GCheck text="Use queue sets" manifestObj="true" widgetName="gcheck_configUSE_QUEUE_SETS" value="true" toolTipText="Includes queue set functionality (the ability to block, or pend, on multiple queues and semaphores) in the build. (configUSE_QUEUE_SETS)" description="Includes queue set functionality (the ability to block, or pend, on multiple queues and semaphores) in the build (configUSE_QUEUE_SETS)."/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Miscellaneous Settings" visible="true" enabled="true" widgetName="gtab_misc" toolTipText="">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_3">
+					<p1:Tab.layout>
+						<GridLayout/>
+					</p1:Tab.layout>
+					<p1:GGroup text="Memory Managment Settings" widgetName="ggroup_memmgmt_settings">
+						<p1:GGroup.layoutData>
+							<GridData horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2" marginHeight="10" marginWidth="10"/>
+						</p1:GGroup.layout>
+						<p1:GCheck text="Enable dynamic memory allocation " manifestObj="true" widgetName="gcheck_configSUPPORT_DYNAMIC_ALLOCATION" value="true" toolTipText="RTOS objects can be created using RAM that is automatically allocated from the FreeRTOS heap"/>
+						<Label/>
+						<p1:GLabel text="  Memory allocation mode:" visible="true" widgetName="glabel_configMEM_ALLOC" toolTipText="Memory allocation schemes:&#13;&#10;  heap_1 - the very simplest, does not permit memory to be freed&#13;&#10;  heap_2 - permits memory to be freed, but does coalescence adjacent free blocks.&#13;&#10;  heap_3 - simply wraps the standard malloc() and free() for thread safety&#13;&#10;  heap_4 - include coalescence of adjacent free blocks to avoid fragmentation&#13;&#10;  heap_5 - as per heap_4, with the ability to span the heap across multiple non-adjacent memory areas&#13;&#10;">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="170"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GCombo mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" widgetName="gcombo_configMEM_ALLOC" options="heap_1&#13;&#10;heap_2&#13;&#10;heap_3&#13;&#10;heap_4&#13;&#10;heap_5&#13;&#10;" value="heap_3" toolTipText="Memory allocation schemes (configMEM_ALLOC):&#13;&#10;  heap_1 - the very simplest, does not permit memory to be freed&#13;&#10;  heap_2 - permits memory to be freed, but does coalescence of adjacent free blocks.&#13;&#10;  heap_3 - simply wraps the standard malloc() and free() for thread safety&#13;&#10;  heap_4 - includes coalescence of adjacent free blocks to avoid fragmentation&#13;&#10;  heap_5 - as per heap_4, and with the ability to span the heap across multiple non-adjacent memory areas&#13;&#10;" description="Memory allocation schemes (configMEM_ALLOC):&lt;br&gt;&#13;&#10; &lt;b&gt;heap_1&lt;/b&gt; - the very simplest, does not permit memory to be freed.&lt;br&gt;&#13;&#10; &lt;b&gt;heap_2&lt;/b&gt; - permits memory to be freed, but does coalescence of adjacent free blocks.&lt;br&gt;&#13;&#10; &lt;b&gt;heap_3&lt;/b&gt; - simply wraps the standard malloc() and free() for thread safety.&lt;br&gt;&#13;&#10; &lt;b&gt;heap_4&lt;/b&gt; - includes coalescence of adjacent free blocks to avoid fragmentation.&lt;br&gt;&#13;&#10; &lt;b&gt;heap_5&lt;/b&gt; - as per heap_4, and with the ability to span the heap across multiple non-adjacent memory areas.&lt;br&gt;&#13;&#10;">
+							<p1:GCombo.layoutData>
+								<GridData horizontalAlignment="FILL" widthHint="70"/>
+							</p1:GCombo.layoutData>
+						</p1:GCombo>
+						<p1:GLabel text="  Heap size (bytes):" visible="true" widgetName="glabel_configTOTAL_HEAP_SIZE" toolTipText="The total amount of RAM available to the RTOS kernel. (configTOTAL_HEAP_SIZE)"/>
+						<p1:GInteger x:Style="NONE" minValue="1" maxValue="MAX_VALUE" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_configTOTAL_HEAP_SIZE" value="4096" toolTipText="The total amount of RAM available to the RTOS kernel (configTOTAL_HEAP_SIZE)." description="The total amount of RAM available to the RTOS kernel (configTOTAL_HEAP_SIZE).">
+							<p1:GInteger.layoutData>
+								<GridData widthHint="67" horizontalAlignment="FILL"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+						<p1:GCheck text="Enable application heap allocation" manifestObj="true" widgetName="gcheck_configAPPLICATION_ALLOCATED_HEAP" toolTipText="Allows the heap to be declared by the user">
+							<p1:GCheck.layoutData>
+								<GridData horizontalAlignment="RIGHT"/>
+							</p1:GCheck.layoutData>
+						</p1:GCheck>
+						<Label/>
+						<p1:GCheck text="Enable static memory allocation" manifestObj="true" widgetName="gcheck_configSUPPORT_STATIC_ALLOCATION" toolTipText="RTOS objects can be created using RAM provided by the application writer"/>
+						<Label/>
+					</p1:GGroup>
+					<p1:GGroup text="Timer Settings" widgetName="ggroup_timer_settings">
+						<p1:GGroup.layoutData>
+							<GridData horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2" marginHeight="10" marginWidth="10"/>
+						</p1:GGroup.layout>
+						<p1:GCheck manifestObj="true" text="Use timers" value="true" widgetName="gcheck_configUSE_TIMERS" toolTipText="Include software timer functionality in the build. (configUSE_TIMERS)" description="Includes software timer functionality in the build (configUSE_TIMERS)."/>
+						<Label/>
+						<p1:GLabel text="Timer task priority:" widgetName="glabel_configTIMER_TASK_PRIORITY" toolTipText="Sets the priority of the software timer service/daemon task. (configTIMER_TASK_PRIORITY)"/>
+						<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="0" value="2" widgetName="ginteger_configTIMER_TASK_PRIORITY" toolTipText="Sets the priority of the software timer service/daemon task (configTIMER_TASK_PRIORITY)." description="Sets the priority of the software timer service/daemon task (configTIMER_TASK_PRIORITY).">
+							<p1:GInteger.layoutData>
+								<GridData widthHint="75" horizontalAlignment="FILL"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+						<p1:GLabel text="Timer queue length:" widgetName="glabel_configTIMER_QUEUE_LENGTH" toolTipText="Sets the length of the software timer command queue. (configTIMER_QUEUE_LENGTH)"/>
+						<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="1" value="5" widgetName="ginteger_configTIMER_QUEUE_LENGTH" toolTipText="Sets the length of the software timer command queue (configTIMER_QUEUE_LENGTH)." description="Sets the length of the software timer command queue (configTIMER_QUEUE_LENGTH).">
+							<p1:GInteger.layoutData>
+								<GridData widthHint="45" horizontalAlignment="FILL"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+						<p1:GLabel text="Timer task stack size (words):" widgetName="glabel_configTIMER_TASK_STACK_DEPTH" toolTipText="Sets the stack depth allocated to the software timer service/daemon task. (configTIMER_TASK_STACK_DEPTH)">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="170"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="260" value="260" widgetName="ginteger_configTIMER_TASK_STACK_DEPTH" toolTipText="Sets the stack depth allocated to the software timer service/daemon task (configTIMER_TASK_STACK_DEPTH)." description="Sets the stack depth allocated to the software timer service/daemon task (configTIMER_TASK_STACK_DEPTH).">
+							<p1:GInteger.layoutData>
+								<GridData widthHint="44" horizontalAlignment="FILL"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+					</p1:GGroup>
+					<p1:GGroup text="Co-routine Settings" widgetName="ggroup_coroutine_settings">
+						<p1:GGroup.layoutData>
+							<GridData grabExcessHorizontalSpace="true" horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GGroup.layout>
+							<GridLayout numColumns="2" marginHeight="10" marginWidth="10"/>
+						</p1:GGroup.layout>
+						<p1:GCheck manifestObj="true" text="Use coroutines" widgetName="gcheck_configUSE_CO_ROUTINES" toolTipText="Include co-routine functionality in the build. (configUSE_CO_ROUTINES)" description="Includes co-routine functionality in the build (configUSE_CO_ROUTINES)."/>
+						<Label/>
+						<p1:GLabel text="Number of co-routine priorities:" widgetName="glabel_configMAX_CO_ROUTINE_PRIORITIES" toolTipText="The number of priorities available to the application co-routines. (configMAX_CO_ROUTINE_PRIORITIES)">
+							<p1:GLabel.layoutData>
+								<GridData widthHint="170"/>
+							</p1:GLabel.layoutData>
+						</p1:GLabel>
+						<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="MAX_VALUE" minValue="1" value="2" widgetName="ginteger_configMAX_CO_ROUTINE_PRIORITIES" toolTipText="The number of priorities available to the application co-routines (configMAX_CO_ROUTINE_PRIORITIES)." description="The number of priorities available to the application co-routines (configMAX_CO_ROUTINE_PRIORITIES).">
+							<p1:GInteger.layoutData>
+								<GridData widthHint="75"/>
+							</p1:GInteger.layoutData>
+						</p1:GInteger>
+					</p1:GGroup>
+					<p1:GGroup text="Hook Settings" widgetName="ggroup_hook_settings">
+						<p1:GGroup.layout>
+							<GridLayout marginHeight="10" marginWidth="10"/>
+						</p1:GGroup.layout>
+						<p1:GGroup.layoutData>
+							<GridData horizontalAlignment="FILL"/>
+						</p1:GGroup.layoutData>
+						<p1:GCheck manifestObj="true" text="Use idle hook" widgetName="gcheck_configUSE_IDLE_HOOK" toolTipText="Enable idle function callback. (configUSE_IDLE_HOOK )&#13;&#10;Note:  User needs to provide implementation of void vApplicationIdleHook( void );" description="Enables idle function callback (configUSE_IDLE_HOOK).&lt;br&gt;&#13;&#10;Note: User needs to provide implementation of &lt;i&gt;void vApplicationIdleHook( void );&lt;/i&gt;"/>
+						<p1:GCheck manifestObj="true" text="Use tick hook" widgetName="gcheck_configUSE_TICK_HOOK" toolTipText="Enable the tick interrupt to call an application defined callback function. (configUSE_TICK_HOOK)&#13;&#10;Note: User needs to provide implementation of void vApplicationTickHook( void );" description="Enables the tick interrupt to call an application defined callback function (configUSE_TICK_HOOK).&lt;br&gt;&#13;&#10;Note: User needs to provide implementation of &lt;i&gt;void vApplicationTickHook( void );&lt;/i&gt;"/>
+						<p1:GCheck manifestObj="true" text="Stack overflow hook" widgetName="gcheck_configCHECK_FOR_STACK_OVERFLOW" toolTipText="Enable stack overflow checking.  (configCHECK_FOR_STACK_OVERFLOW)&#13;&#10;Note: User needs to provide implementation of void vApplicationStackOverflowHook( TaskHandle_t xTask,signed char *pcTaskName );" description="Enables stack overflow checking (configCHECK_FOR_STACK_OVERFLOW).&#13;&#10;Note: User needs to provide implementation of &lt;i&gt;void vApplicationStackOverflowHook( TaskHandle_t xTask,signed char *pcTaskName );&lt;/i&gt;"/>
+						<p1:GCheck manifestObj="true" text="Use malloc failed hook" widgetName="gcheck_configUSE_MALLOC_FAILED_HOOK" toolTipText="Enable function callback in case there is insufficient FreeRTOS heap memory remaining for the requested allocation to succeed.(configUSE_MALLOC_FAILED_HOOK)&#13;&#10;Note: User needs to provide implementation of void vApplicationMallocFailedHook( void ); " description="Enables function callback in case there is insufficient FreeRTOS heap memory remaining for the requested allocation to succeed (configUSE_MALLOC_FAILED_HOOK).&lt;br&gt;&#13;&#10;Note: User needs to provide implementation of &lt;i&gt;void vApplicationMallocFailedHook( void );&lt;/i&gt;"/>
+					</p1:GGroup>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Trace Settings" visible="true" enabled="true" widgetName="gtab_trace">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_5">
+					<p1:Tab.layout>
+						<GridLayout numColumns="2" marginHeight="10" marginWidth="10"/>
+					</p1:Tab.layout>
+					<p1:GCheck text="Generate run time statistics" manifestObj="true" widgetName="gcheck_configGENERATE_RUN_TIME_STATS" toolTipText="Enable collection of run time statistics. (configGENERATE_RUN_TIME_STATS)" description="Enables collection of run time statistics (configGENERATE_RUN_TIME_STATS).&lt;br&gt;&lt;br&gt;&#13;&#10;&#13;&#10;Enabling this feature will generate the following code in FreeRTOSConfig.h, user should implement a logic to increment &lt;i&gt;g_stat_timer_ticks&lt;/i&gt;:&#13;&#10;&lt;br&gt;&lt;br&gt;&#13;&#10;&lt;i&gt;extern volatile uint32_t g_stat_timer_ticks;&lt;br&gt;&#13;&#10;#define portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() (g_stat_timer_ticks = 0UL) &lt;br&gt;&#13;&#10;#define portGET_RUN_TIME_COUNTER_VALUE()    g_stat_timer_ticks&lt;br&gt;&#13;&#10;&lt;/i&gt;&#13;&#10;&lt;br&gt;&#13;&#10;Refer &lt;a href=&quot;http://www.freertos.org/rtos-run-time-stats.html&quot; target=&quot;_blank&quot;&gt;http://www.freertos.org/rtos-run-time-stats.html&lt;/a&gt;&#13;&#10;">
+						<p1:GCheck.layoutData>
+							<GridData horizontalSpan="2"/>
+						</p1:GCheck.layoutData>
+					</p1:GCheck>
+					<p1:GCheck text="Use trace facility" manifestObj="true" widgetName="gcheck_configUSE_TRACE_FACILITY" value="true" toolTipText="Include additional structure members and functions to assist with execution visualisation and tracing. (configUSE_TRACE_FACILITY)" description="Includes additional structure members and functions to assist with execution visualisation and tracing (configUSE_TRACE_FACILITY).">
+						<p1:GCheck.layoutData>
+							<GridData horizontalSpan="2"/>
+						</p1:GCheck.layoutData>
+					</p1:GCheck>
+					<p1:GCheck text="Enable assertions" manifestObj="true" widgetName="gcheck_configUSE_ASSERTIONS" value="true" toolTipText="Enable checks to ensure the application is using FreeRTOS correctly.&#13;&#10;Note: configASSERT() is defined in such a way that if an assertion occurs it will prevent the application from further execution." description="Enables checks to ensure the application is using FreeRTOS correctly.&lt;br&gt;&#13;&#10;Note: &lt;i&gt;configASSERT()&lt;/i&gt; is defined in such a way that if an assertion occurs it will prevent the application from further execution."/>
+					<Label/>
+					<p1:GLabel text="Task name length:" visible="true" widgetName="glabel_configMAX_TASK_NAME_LEN" toolTipText="The maximum permissible length of the descriptive name given to a task when the task is created. The length is specified in the number of characters including the NULL termination. (configMAX_TASK_NAME_LEN)"/>
+					<p1:GInteger x:Style="NONE" minValue="1" maxValue="64" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_configMAX_TASK_NAME_LEN" value="16" toolTipText="The maximum permissible length of the descriptive name given to a task when the task is created. The length is specified in the number of characters including the NULL termination (configMAX_TASK_NAME_LEN)." description="The maximum permissible length of the descriptive name given to a task when the task is created. The length is specified in the number of characters including the NULL termination. (configMAX_TASK_NAME_LEN)">
+						<p1:GInteger.layoutData>
+							<GridData widthHint="71" horizontalAlignment="FILL"/>
+						</p1:GInteger.layoutData>
+					</p1:GInteger>
+					<p1:GLabel text="Queue registry size:" visible="true" widgetName="glabel_configQUEUE_REGISTRY_SIZE" toolTipText="Defines the maximum number of queues and semaphores that can be viewed using a RTOS kernel aware debugger. (configQUEUE_REGISTRY_SIZE)">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="124"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GInteger x:Style="NONE" minValue="0" maxValue="64" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" manifestObj="true" widgetName="ginteger_configQUEUE_REGISTRY_SIZE" value="8" toolTipText="Defines the maximum number of queues and semaphores that can be viewed using a RTOS kernel aware debugger. (configQUEUE_REGISTRY_SIZE)" description="Defines the maximum number of queues and semaphores that can be viewed using a RTOS kernel aware debugger (configQUEUE_REGISTRY_SIZE).">
+						<p1:GInteger.layoutData>
+							<GridData widthHint="44" horizontalAlignment="FILL"/>
+						</p1:GInteger.layoutData>
+					</p1:GInteger>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Include Settings" visible="true" enabled="true" manifestObj="true" widgetName="gtab_include_setings">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_1">
+					<p1:Tab.layout>
+						<GridLayout/>
+					</p1:Tab.layout>
+					<p1:GCheck text="INCLUDE_vTaskPrioritySet" manifestObj="true" widgetName="gcheck_INCLUDE_vTaskPrioritySet" value="true" description="Include the vTaskPrioritySet() API function" toolTipText="Include the vTaskPrioritySet() API function"/>
+					<p1:GCheck text="INCLUDE_uxTaskPriorityGet" manifestObj="true" widgetName="gcheck_INCLUDE_uxTaskPriorityGet" value="true" description="Include the uxTaskPriorityGet() API function" toolTipText="Include the uxTaskPriorityGet() API function"/>
+					<p1:GCheck text="INCLUDE_vTaskDelete" manifestObj="true" widgetName="gcheck_INCLUDE_vTaskDelete" value="true" toolTipText="Include the vTaskDelete() API function" description="Include the vTaskDelete() API function"/>
+					<p1:GCheck text="INCLUDE_vTaskSuspend" manifestObj="true" widgetName="gcheck_INCLUDE_vTaskSuspend" value="true" description="Include the vTaskSuspend() API function" toolTipText="Include the vTaskSuspend() API function"/>
+					<p1:GCheck text="INCLUDE_vTaskDelayUntil" manifestObj="true" widgetName="gcheck_INCLUDE_vTaskDelayUntil" value="true" description="Include the vTaskDelayUntil() API function" toolTipText="Include the vTaskDelayUntil() API function"/>
+					<p1:GCheck text="INCLUDE_vTaskDelay" manifestObj="true" widgetName="gcheck_INCLUDE_vTaskDelay" value="true" description="Include the vTaskDelay() API function" toolTipText="Include the vTaskDelay() API function"/>
+					<p1:GCheck text="INCLUDE_xTaskGetIdleTaskHandle" manifestObj="true" widgetName="gcheck_INCLUDE_xTaskGetIdleTaskHandle" value="true" description="Include the xTaskGetIdleTaskHandle() API function" toolTipText="Include the xTaskGetIdleTaskHandle() API function"/>
+					<p1:GCheck text="INCLUDE_xTaskAbortDelay" manifestObj="true" widgetName="gcheck_INCLUDE_xTaskAbortDelay" value="true" description="Include the xTaskAbortDelay() API function" toolTipText="Include the xTaskAbortDelay() API function"/>
+					<p1:GCheck text="INCLUDE_xQueueGetMutexHolder" manifestObj="true" widgetName="gcheck_INCLUDE_xQueueGetMutexHolder" value="true" description="Include the xQueueGetMutexHolder() API function" toolTipText="Include the xQueueGetMutexHolder() API function"/>
+					<p1:GCheck text="INCLUDE_xTaskGetHandle" manifestObj="true" widgetName="gcheck_INCLUDE_xTaskGetHandle" value="true" description="Include the xTaskGetHandle() API function" toolTipText="Include the xTaskGetHandle() API function"/>
+					<p1:GCheck text="INCLUDE_uxTaskGetStackHighWaterMark" manifestObj="true" widgetName="gcheck_INCLUDE_uxTaskGetStackHighWaterMark" value="true" description="Include the uxTaskGetStackHighWaterMark() API function" toolTipText="Include the uxTaskGetStackHighWaterMark() API function"/>
+					<p1:GCheck text="INCLUDE_eTaskGetState" manifestObj="true" widgetName="gcheck_INCLUDE_eTaskGetState" value="true" description="Include the eTaskGetState() API function" toolTipText="Include the eTaskGetState() API function"/>
+					<p1:GCheck text="INCLUDE_xTaskResumeFromISR" manifestObj="true" widgetName="gcheck_INCLUDE_xTaskResumeFromISR" value="true" description="Include the xTaskResumeFromISR() API function" toolTipText="Include the xTaskResumeFromISR() API function"/>
+					<p1:GCheck text="INCLUDE_xTimerPendFunctionCall" manifestObj="true" widgetName="gcheck_INCLUDE_xTimerPendFunctionCall" value="true" description="Include the xTimerPendFunctionCall() API function" toolTipText="Include the xTimerPendFunctionCall() API function"/>
+					<p1:GCheck text="INCLUDE_xTaskGetSchedulerState" manifestObj="true" widgetName="gcheck_INCLUDE_xTaskGetSchedulerState" value="true" description="Include the xTaskGetSchedulerState() API function" toolTipText="Include the xTaskGetSchedulerState() API function"/>
+					<p1:GCheck text="INCLUDE_xTaskGetCurrentTaskHandle" manifestObj="true" widgetName="gcheck_INCLUDE_xTaskGetCurrentTaskHandle" value="true" description="Include the xTaskGetCurrentTaskHandle() API function" toolTipText="Include the xTaskGetCurrentTaskHandle() API function"/>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+		<p1:GTab text="Interrupt Settings" visible="true" enabled="true" widgetName="gtab_interrupt">
+			<p1:GTab.control>
+				<p1:Tab widgetName="composite_30">
+					<p1:Tab.layout>
+						<GridLayout numColumns="2" marginHeight="10" marginWidth="10"/>
+					</p1:Tab.layout>
+					<p1:GInterruptPrio text="Scheduler Interrupt Priority" x:Style="NONE" minPriority="0" maxPriority="63" minSubPriority="0" maxSubPriority="63" priorityValue="63" subPriorityValue="0" priorityMandatory="false" subPriorityMandatory="false" manifestObj="true" widgetName="ginterruptprio_configKERNEL_INTERRUPT_PRIORITY" toolTipText="Sets the Interrupt Priority for the Scheduler (configKERNEL_INTERRUPT_PRIORITY)." description="Sets the Interrupt Priority for the Scheduler (configKERNEL_INTERRUPT_PRIORITY).">
+						<p1:GInterruptPrio.layoutData>
+							<GridData horizontalSpan="2" widthHint="236" horizontalAlignment="FILL" grabExcessHorizontalSpace="true"/>
+						</p1:GInterruptPrio.layoutData>
+					</p1:GInterruptPrio>
+					<p1:GLabel text="Maximum API call interrupt priority:" widgetName="glabel_configMAX_API_CALL_INTERRUPT_PRIORITY" toolTipText="Sets the highest interrupt priority from which interrupt safe FreeRTOS API functions can be called. (configMAX_SYSCALL_INTERRUPT_PRIORITY)" description="">
+						<p1:GLabel.layoutData>
+							<GridData widthHint="203"/>
+						</p1:GLabel.layoutData>
+					</p1:GLabel>
+					<p1:GInteger format="(com.ifx.davex.ui.controls.util.AppUiConstants).DEC" mandatory="(com.ifx.davex.ui.controls.util.AppUiConstants).FALSE" manifestObj="true" maxValue="63" minValue="0" value="5" widgetName="ginteger_configMAX_API_CALL_INTERRUPT_PRIORITY" description="Sets the highest interrupt priority from which interrupt safe FreeRTOS API functions can be called (configMAX_SYSCALL_INTERRUPT_PRIORITY)." toolTipText="Sets the highest interrupt priority from which interrupt safe FreeRTOS API functions can be called (configMAX_SYSCALL_INTERRUPT_PRIORITY).">
+						<p1:GInteger.layoutData>
+							<GridData widthHint="49"/>
+						</p1:GInteger.layoutData>
+					</p1:GInteger>
+				</p1:Tab>
+			</p1:GTab.control>
+		</p1:GTab>
+	</p1:TabFolder>
+</p1:Tab>
