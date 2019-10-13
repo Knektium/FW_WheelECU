@@ -83,13 +83,8 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of PWM APP instance PWM_MotorForward */
-	 init_status = (DAVE_STATUS_t)PWM_Init(&PWM_MotorForward); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of PWM APP instance PWM_MotorBackward */
-	 init_status = (DAVE_STATUS_t)PWM_Init(&PWM_MotorBackward); 
+	 /**  Initialization of PWM APP instance PWM_Motor */
+	 init_status = (DAVE_STATUS_t)PWM_Init(&PWM_Motor); 
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
@@ -110,6 +105,21 @@ DAVE_STATUS_t DAVE_Init(void)
   {
 	 /**  Initialization of RTC APP instance RTC_0 */
 	 init_status = (DAVE_STATUS_t)RTC_Init(&RTC_0); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of DIGITAL_IO APP instance DIGITAL_IO_MotorDirection */
+	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_MotorDirection); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of DIGITAL_IO APP instance DIGITAL_IO_MotorDisable */
+	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_MotorDisable); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of SPI_MASTER APP instance SPI_MASTER_0 */
+	 init_status = (DAVE_STATUS_t)SPI_MASTER_Init(&SPI_MASTER_0); 
    }  
   return init_status;
 } /**  End of function DAVE_Init */

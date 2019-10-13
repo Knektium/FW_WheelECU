@@ -18,4 +18,7 @@ void ModeManager_Init(void);
 void ModeManager_Main(void *pvParameters);
 void ModeManager_RequestMode(ApplicationMode mode);
 
+ApplicationMode ModeManager_GetCurrentMode(void);
+void ModeManager_SetCurrentMode(ApplicationMode);
+
 #endif /* TASKS_MODEMANAGER_H_ */

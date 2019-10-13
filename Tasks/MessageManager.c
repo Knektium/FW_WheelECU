@@ -24,15 +24,18 @@ StaticTask_t xMessageManagerBuffer;
 StackType_t xMessageManagerStack[300U];
 
 
-BaseType_t MessageManager_PushMessage(Message_t *message)
+void MessageManager_PushMessage(Message_t *message)
 {
-	return xQueueSend(xQueue_Messages, message, (TickType_t) 2000);
+	BaseType_t xHigherPriorityTaskWoken;
+	xHigherPriorityTaskWoken = pdFALSE;
+
+	xQueueSendFromISR(xQueue_Messages, message, &xHigherPriorityTaskWoken);
 }
 
 void MessageManager_Init(void)
 {
 	xQueue_Messages = xQueueCreateStatic(MESSAGE_QUEUE_LENGTH, MESSAGE_QUEUE_ITEM_SIZE, ucMessageQueueStorageArea, &xMessageStaticQueue);
-	xMessageManagerHandle = xTaskCreateStatic(MessageManager_Main, "MessageManager", MESSAGE_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 1), xMessageManagerStack, &xMessageManagerBuffer);
+	xMessageManagerHandle = xTaskCreateStatic(MessageManager_Main, "MessageManager", MESSAGE_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 2), xMessageManagerStack, &xMessageManagerBuffer);
 }
 
 void MessageManager_Main(void *pvParameters)

@@ -69,6 +69,10 @@ extern const DIGITAL_IO_t DIGITAL_IO_CANStandBy;
 	
 extern const DIGITAL_IO_t DIGITAL_IO_WheelSensor; 
 	
+extern const DIGITAL_IO_t DIGITAL_IO_MotorDirection; 
+	
+extern const DIGITAL_IO_t DIGITAL_IO_MotorDisable; 
+	
  
 #endif  /* DIGITAL_IO_EXTERN_H */
 

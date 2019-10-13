@@ -3,7 +3,7 @@
 //#include "../timers.h"
 #include "tasks.h"
 #include "ModeManager.h"
-
+#include "MessageManager.h"
 #include "MotorManager.h"
 
 StaticQueue_t xModeRequestStaticQueue;
@@ -14,7 +14,7 @@ TaskHandle_t xModeManagerHandle = NULL;
 StaticTask_t xModeManagerBuffer;
 StackType_t xModeManagerStack[300U];
 
-ApplicationMode current_mode;
+ApplicationMode current_mode = MODE_STARTUP;
 
 void ModeManager_Init(void)
 {
@@ -24,6 +24,16 @@ void ModeManager_Init(void)
 	current_mode = MODE_STARTUP;
 }
 
+ApplicationMode ModeManager_GetCurrentMode(void)
+{
+	return current_mode;
+}
+
+void ModeManager_SetCurrentMode(ApplicationMode mode)
+{
+	current_mode = mode;
+}
+
 void ModeManager_RequestMode(ApplicationMode mode)
 {
 	xQueueSend(xQueue_ModeRequest, &mode, (TickType_t) 0);
@@ -31,7 +41,7 @@ void ModeManager_RequestMode(ApplicationMode mode)
 
 static void ModeManager_SuspendAllTasks(void)
 {
-	vTaskSuspend(xMotorManagerHandle);
+	//vTaskSuspend(xMotorManagerHandle);
 }
 
 static void ModeManager_StopAllTimers(void)
@@ -61,7 +71,7 @@ void ModeManager_Main(void *pvParameters)
 				//xTimerStart(xTimer_ReadSensorsHandle, 0);
 
 				/* Start tasks */
-				//vTaskResume(xMotorManagerHandle);
+				//vTaskResume(xMessageManagerHandle);
 
 				break;
 

@@ -85,7 +85,7 @@
 /*
  * CCU4 Compare mode configuration
  */
-const XMC_CCU4_SLICE_COMPARE_CONFIG_t PWM_MotorForward_compare_config =
+const XMC_CCU4_SLICE_COMPARE_CONFIG_t PWM_Motor_compare_config =
 {
   .timer_mode 		   = (uint32_t) XMC_CCU4_SLICE_TIMER_COUNT_MODE_EA,
   .monoshot   		   = (uint32_t) false,
@@ -104,7 +104,7 @@ const XMC_CCU4_SLICE_COMPARE_CONFIG_t PWM_MotorForward_compare_config =
 /*
  * GPIO Related configuration for PWM output 
  */
-const XMC_GPIO_CONFIG_t  PWM_MotorForward_gpio_out_config	= 
+const XMC_GPIO_CONFIG_t  PWM_Motor_gpio_out_config	= 
 {
   .mode                = XMC_GPIO_MODE_OUTPUT_PUSH_PULL_ALT9,
   .input_hysteresis    = XMC_GPIO_INPUT_HYSTERESIS_STANDARD,
@@ -114,17 +114,17 @@ const XMC_GPIO_CONFIG_t  PWM_MotorForward_gpio_out_config	=
 /*
  * APP Handle for the PWM
  */
-PWM_t PWM_MotorForward =
+PWM_t PWM_Motor =
 {
   .global_ccu4_handle             = (GLOBAL_CCU4_t*)&GLOBAL_CCU4_0,
   .ccu4_kernel_ptr                = (XMC_CCU4_MODULE_t*) CCU41_BASE,
   .ccu4_slice_ptr                 = (XMC_CCU4_SLICE_t*)  CCU41_CC40,
-  .ccu4_slice_config_ptr          = &PWM_MotorForward_compare_config,
+  .ccu4_slice_config_ptr          = &PWM_Motor_compare_config,
   .gpio_out_port                  = XMC_GPIO_PORT4,
-  .gpio_out_config                = &PWM_MotorForward_gpio_out_config,
-  .compare_value                  = 2400U,
+  .gpio_out_config                = &PWM_Motor_gpio_out_config,
+  .compare_value                  = 720U,
   .period_value                   = 4799U,
-  .duty_cycle                     = 5000U,
+  .duty_cycle                     = 8500U,
   .shadow_mask                    = (uint32_t)((uint32_t)XMC_CCU4_SHADOW_TRANSFER_SLICE_0 | 
                                                (uint32_t)XMC_CCU4_SHADOW_TRANSFER_PRESCALER_SLICE_0),
   .timer_type                     = PWM_TIMER_SLICE_CCU4,
@@ -134,66 +134,6 @@ PWM_t PWM_MotorForward =
   .gpio_out_pin                   = (uint8_t) 4,
   .kernel_number		          = (uint8_t) 1U,
   .slice_number                   = (uint8_t) 0U,
-  .start_control                  = false,
-  .period_match_enable            = false,
-  .compare_match_enable           = false,
-};
-
-/********************************************************************************************************/
-
-
-/*
- * CCU4 Compare mode configuration
- */
-const XMC_CCU4_SLICE_COMPARE_CONFIG_t PWM_MotorBackward_compare_config =
-{
-  .timer_mode 		   = (uint32_t) XMC_CCU4_SLICE_TIMER_COUNT_MODE_EA,
-  .monoshot   		   = (uint32_t) false,
-  .shadow_xfer_clear   = (uint32_t) 0,
-  .dither_timer_period = (uint32_t) 0,	
-  .dither_duty_cycle   = (uint32_t) 0,
-  .prescaler_mode	   = (uint32_t) XMC_CCU4_SLICE_PRESCALER_MODE_NORMAL,
-  .mcm_enable		   = (uint32_t) 0,
-  .prescaler_initval   = (uint32_t) 0,
-  .float_limit		   = (uint32_t) 0,
-  .dither_limit		   = (uint32_t) 0,
-  .passive_level 	   = (uint32_t) XMC_CCU4_SLICE_OUTPUT_PASSIVE_LEVEL_LOW,
-  .timer_concatenation = (uint32_t) 0
-};
-
-/*
- * GPIO Related configuration for PWM output 
- */
-const XMC_GPIO_CONFIG_t  PWM_MotorBackward_gpio_out_config	= 
-{
-  .mode                = XMC_GPIO_MODE_OUTPUT_PUSH_PULL_ALT9,
-  .input_hysteresis    = XMC_GPIO_INPUT_HYSTERESIS_STANDARD,
-  .output_level        = XMC_GPIO_OUTPUT_LEVEL_LOW,
-};
-
-/*
- * APP Handle for the PWM
- */
-PWM_t PWM_MotorBackward =
-{
-  .global_ccu4_handle             = (GLOBAL_CCU4_t*)&GLOBAL_CCU4_0,
-  .ccu4_kernel_ptr                = (XMC_CCU4_MODULE_t*) CCU41_BASE,
-  .ccu4_slice_ptr                 = (XMC_CCU4_SLICE_t*)  CCU41_CC41,
-  .ccu4_slice_config_ptr          = &PWM_MotorBackward_compare_config,
-  .gpio_out_port                  = XMC_GPIO_PORT4,
-  .gpio_out_config                = &PWM_MotorBackward_gpio_out_config,
-  .compare_value                  = 2400U,
-  .period_value                   = 4799U,
-  .duty_cycle                     = 5000U,
-  .shadow_mask                    = (uint32_t)((uint32_t)XMC_CCU4_SHADOW_TRANSFER_SLICE_1 | 
-                                               (uint32_t)XMC_CCU4_SHADOW_TRANSFER_PRESCALER_SLICE_1),
-  .timer_type                     = PWM_TIMER_SLICE_CCU4,
-  .state                          = PWM_STATUS_UNINITIALIZED,
-  .ccu4_slice_period_match_node   = XMC_CCU4_SLICE_SR_ID_0,
-  .ccu4_slice_compare_match_node  = XMC_CCU4_SLICE_SR_ID_0,
-  .gpio_out_pin                   = (uint8_t) 5,
-  .kernel_number		          = (uint8_t) 1U,
-  .slice_number                   = (uint8_t) 1U,
   .start_control                  = false,
   .period_match_enable            = false,
   .compare_match_enable           = false,

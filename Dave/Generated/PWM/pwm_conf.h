@@ -88,18 +88,11 @@
  **********************************************************************************************************************/
 
 
-#define PWM_MotorForward_KERNEL_PTR (XMC_CCU4_MODULE_t*)(void *)CCU41_BASE
-#define PWM_MotorForward_SLICE_PTR  (XMC_CCU4_SLICE_t*)(void *)CCU41_CC40
+#define PWM_Motor_KERNEL_PTR (XMC_CCU4_MODULE_t*)(void *)CCU41_BASE
+#define PWM_Motor_SLICE_PTR  (XMC_CCU4_SLICE_t*)(void *)CCU41_CC40
 /* PWM shadow transfer masks */
-#define PWM_MotorForward_SLICE_SH_MSK  XMC_CCU4_SHADOW_TRANSFER_SLICE_0
-#define PWM_MotorForward_PRESCALER_SH_MSK  XMC_CCU4_SHADOW_TRANSFER_PRESCALER_SLICE_0
-
-
-#define PWM_MotorBackward_KERNEL_PTR (XMC_CCU4_MODULE_t*)(void *)CCU41_BASE
-#define PWM_MotorBackward_SLICE_PTR  (XMC_CCU4_SLICE_t*)(void *)CCU41_CC41
-/* PWM shadow transfer masks */
-#define PWM_MotorBackward_SLICE_SH_MSK  XMC_CCU4_SHADOW_TRANSFER_SLICE_1
-#define PWM_MotorBackward_PRESCALER_SH_MSK  XMC_CCU4_SHADOW_TRANSFER_PRESCALER_SLICE_1
+#define PWM_Motor_SLICE_SH_MSK  XMC_CCU4_SHADOW_TRANSFER_SLICE_0
+#define PWM_Motor_PRESCALER_SH_MSK  XMC_CCU4_SHADOW_TRANSFER_PRESCALER_SLICE_0
    
 #define PWM_SLICE_USED_CCU4  1
 		

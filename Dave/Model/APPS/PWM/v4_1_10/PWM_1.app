@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
-<ResourceModel:App xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="PWM" URI="http://resources/4.1.10/app/PWM/1" description="Generates a PWM using one timer slice of CCU4 or CCU8" mode="NOTSHARABLE" version="4.1.10" minDaveVersion="4.3.2" instanceLabel="PWM_MotorBackward" appLabel="" containingProxySignal="true">
+<ResourceModel:App xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="PWM" URI="http://resources/4.1.10/app/PWM/1" description="Generates a PWM using one timer slice of CCU4 or CCU8" mode="NOTSHARABLE" version="4.1.10" minDaveVersion="4.3.2" instanceLabel="PWM_Motor" appLabel="" containingProxySignal="true">
   <properties provideInit="true"/>
   <virtualSignals name="global_signal" URI="http://resources/4.1.10/app/PWM/1/vs_pwm_ccu8_cc8_slice_global" hwSignal="global_signal" hwResource="//@hwResources.0" required="false"/>
   <virtualSignals name="event_compare_match" URI="http://resources/4.1.10/app/PWM/1/vs_pwm_ccu8_cc8_slice_compare_match_interrupt" hwSignal="cmd1s_cmu1s" hwResource="//@hwResources.0" required="false"/>
@@ -19,13 +19,13 @@
   </requiredApps>
   <hwResources name="CC8 Slice" URI="http://resources/4.1.10/app/PWM/1/hwres_ccu8_cc8_slice" resourceGroupUri="" required="false" mResGrpUri="peripheral/ccu8/*/cc8/*"/>
   <hwResources name="CC4 Slice" URI="http://resources/4.1.10/app/PWM/1/hwres_ccu4_cc4_slice" resourceGroupUri="peripheral/ccu4/*/cc4/*" mResGrpUri="peripheral/ccu4/*/cc4/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/ccu41/ccu41_1.dd#//@provided.11"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/ccu41/ccu41_1.dd#//@provided.0"/>
   </hwResources>
   <hwResources name="PWM Output Pin" URI="http://resources/4.1.10/app/PWM/1/hwres_port_pad_pwm_out" resourceGroupUri="port/p/*/pad/*" mResGrpUri="port/p/*/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port4/port4_4.dd#//@provided.15"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port4/port4_4.dd#//@provided.10"/>
   </hwResources>
-  <hwResources name="PWM Output Pin" URI="http://resources/4.1.10/app/PWM/1/__pin_hwres_port_pad_pwm_out" resourceGroupUri="devicepackage/0/64" constraintType="GLOBAL_RESOURCE" mResGrpUri="devicepackage/0/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/DEVICEPACKAGE/DEVICEPACKAGE_0.dd#//@provided.9"/>
+  <hwResources name="PWM Output Pin" URI="http://resources/4.1.10/app/PWM/1/__pin_hwres_port_pad_pwm_out" resourceGroupUri="devicepackage/0/63" constraintType="GLOBAL_RESOURCE" mResGrpUri="devicepackage/0/*">
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/DEVICEPACKAGE/DEVICEPACKAGE_0.dd#//@provided.8"/>
   </hwResources>
   <connections URI="http://resources/4.1.10/app/PWM/1/http://resources/4.1.10/app/PWM/1/vs_pwm_ccu8_cc8_global/http://resources/4.1.10/app/PWM/1/vs_pwm_ccu8_cc8_slice_global" systemDefined="true" targetSignal="global_signal" required="false" targetVirtualSignal="//@virtualSignals.0" containingProxySignal="true"/>
   <connections URI="http://resources/4.1.10/app/PWM/1/http://resources/4.1.10/app/PWM/1/vs_pwm_ccu4_cc4_global/http://resources/4.1.10/app/PWM/1/vs_pwm_ccu4_cc4_slice_global" systemDefined="true" sourceSignal="ccu4_global" targetSignal="global_signal" targetVirtualSignal="//@virtualSignals.5" proxySrcVirtualSignalUri="http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_global_ccu4_globalsignal" containingProxySignal="true">

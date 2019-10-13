@@ -201,6 +201,16 @@
                 <Path>\Dave\Generated\RTC\rtc_conf.c</Path>
                 <Type>C File</Type>
             </Source_File>
+            <Source_File>
+                <File_Name>spi_master.c</File_Name>
+                <Path>\Dave\Generated\SPI_MASTER\spi_master.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>spi_master_conf.c</File_Name>
+                <Path>\Dave\Generated\SPI_MASTER\spi_master_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
         </Source_Files>
         <Header_Files>
             <Header_File>
@@ -521,6 +531,21 @@
             <Header_File>
                 <File_Name>rtc_extern.h</File_Name>
                 <Path>\Dave\Generated\RTC\rtc_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>spi_master.h</File_Name>
+                <Path>\Dave\Generated\SPI_MASTER\spi_master.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>spi_master_conf.h</File_Name>
+                <Path>\Dave\Generated\SPI_MASTER\spi_master_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>spi_master_extern.h</File_Name>
+                <Path>\Dave\Generated\SPI_MASTER\spi_master_extern.h</Path>
                 <Type>H File</Type>
             </Header_File>
         </Header_Files>

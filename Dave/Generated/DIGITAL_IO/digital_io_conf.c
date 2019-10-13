@@ -72,7 +72,31 @@ const DIGITAL_IO_t DIGITAL_IO_WheelSensor =
   .gpio_pin = 0U,
   .gpio_config = {
     .mode = XMC_GPIO_MODE_INPUT_PULL_UP,
-    .input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_STANDARD
+    .input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_LARGE
+  },
+  .hwctrl = XMC_GPIO_HWCTRL_DISABLED
+};
+		
+const DIGITAL_IO_t DIGITAL_IO_MotorDirection =
+{
+  .gpio_port = XMC_GPIO_PORT4,
+  .gpio_pin = 5U,
+  .gpio_config = {
+    .mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL,
+    .output_level = XMC_GPIO_OUTPUT_LEVEL_LOW,
+
+  },
+  .hwctrl = XMC_GPIO_HWCTRL_DISABLED
+};
+		
+const DIGITAL_IO_t DIGITAL_IO_MotorDisable =
+{
+  .gpio_port = XMC_GPIO_PORT4,
+  .gpio_pin = 3U,
+  .gpio_config = {
+    .mode = XMC_GPIO_MODE_OUTPUT_PUSH_PULL,
+    .output_level = XMC_GPIO_OUTPUT_LEVEL_HIGH,
+
   },
   .hwctrl = XMC_GPIO_HWCTRL_DISABLED
 };

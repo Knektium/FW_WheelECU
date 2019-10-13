@@ -13,7 +13,7 @@ typedef enum {
 } MotorDirection_t;
 
 typedef enum {
-	SPEED_HIGH, SPEED_MEDIUM, SPEED_LOW
+	SPEED_HIGH, SPEED_MEDIUM, SPEED_LOW, SPEED_STILL
 } MotorSpeed_t;
 
 typedef struct {

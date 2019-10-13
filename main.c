@@ -16,22 +16,59 @@
 #include "Tasks/MotorManager.h"
 #include "Tasks/MessageManager.h"
 
-void Time_Handler(void) {
-	uint16_t count_value;
+// SPI command set
+#define RD_DIA	0x00U
+#define RES_DIA	0x80U
+#define RD_REV	0x20U
+#define RD_CTRL	0x60U
+#define WR_CTRL_RD_DIA	0xD0U
+#define WR_CTRL	0xE0U
 
-	CAN_NODE_MO_Transmit(CAN_NODE_0.lmobj_ptr[0]);
+void Time_Handler(void)
+{
+	uint16_t count_value;
+	uint16_t data[8];
+
+	uint8_t spi_read_data;
+	uint8_t spi_write_data;
 
 	count_value = COUNTER_GetCurrentCount(&COUNTER_WheelRevolution);
-	//COUNTER_ResetCounter(&COUNTER_WheelRevolution);
+	COUNTER_ResetCounter(&COUNTER_WheelRevolution);
+
+	spi_read_data = 0xFFU;
+	spi_write_data = RES_DIA;
+	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
+
+	spi_write_data = RD_DIA;
+	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
+
+	// Dummy message to get answer to first message
+	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
+
+	data[0] = count_value;
+	data[1] = (uint16_t) 89U;
+	data[2] = (uint16_t) 0U;
+	data[3] = (uint16_t) spi_read_data;
+	CAN_NODE_MO_UpdateData(CAN_NODE_0.lmobj_ptr[0], (uint8_t *) data);
+	CAN_NODE_MO_Transmit(CAN_NODE_0.lmobj_ptr[0]);
 }
 
 void EventHandler_CanNode_0()
 {
 	// Check transmit pending status in LMO_01
-	uint32_t status = 0x00;
+	uint32_t status = 0x00U;
+
 	XMC_CAN_MO_t* lmsgobjct_ptr_0 = CAN_NODE_0.lmobj_ptr[1]->mo_ptr; // CAN_NODE transmit message object pointer
 
-	status = CAN_NODE_MO_GetStatus((void*)CAN_NODE_0.lmobj_ptr[0]);
+	// Check for Node error
+	status = CAN_NODE_GetStatus(&CAN_NODE_0);
+	if (status & XMC_CAN_NODE_STATUS_ALERT_WARNING)
+	{
+		//Clear the flag
+		CAN_NODE_DisableEvent(&CAN_NODE_0, XMC_CAN_NODE_EVENT_ALERT);
+	}
+
+	status = CAN_NODE_MO_GetStatus((void*) CAN_NODE_0.lmobj_ptr[0]);
 	if (status & XMC_CAN_MO_STATUS_TX_PENDING)
 	{
 		// Clear the flag
@@ -43,33 +80,28 @@ void EventHandler_CanNode_0()
 	if (status & XMC_CAN_MO_STATUS_RX_PENDING) //XMC_CAN_MO_STATUS_NEW_DATA
 	{
 		// Clear the flag
-		CAN_NODE_MO_ClearStatus((void*)CAN_NODE_0.lmobj_ptr[1], XMC_CAN_MO_RESET_STATUS_RX_PENDING);
+		CAN_NODE_MO_ClearStatus((void*) CAN_NODE_0.lmobj_ptr[1], XMC_CAN_MO_RESET_STATUS_RX_PENDING);
 
 		// Read the received Message object and stores the received data in the MO structure.
-		CAN_NODE_MO_Receive((void*)CAN_NODE_0.lmobj_ptr[1]);
+		CAN_NODE_MO_Receive((void*) CAN_NODE_0.lmobj_ptr[1]);
 
-		Message_t message;
-		uint8_t *can_data = CAN_NODE_0.lmobj_ptr[1]->mo_ptr->can_data_byte;
+		if (ModeManager_GetCurrentMode() == MODE_RUN) {
+			Message_t message;
+			uint8_t *can_data = CAN_NODE_0.lmobj_ptr[1]->mo_ptr->can_data_byte;
 
-		message.id = CAN_NODE_0.lmobj_ptr[1]->mo_ptr->can_identifier;
+			message.id = CAN_NODE_0.lmobj_ptr[1]->mo_ptr->can_identifier;
 
-		message.data[0] = can_data[0];
-		message.data[1] = can_data[1];
-		message.data[2] = can_data[2];
-		message.data[3] = can_data[3];
-		message.data[4] = can_data[4];
-		message.data[5] = can_data[5];
-		message.data[6] = can_data[6];
-		message.data[7] = can_data[7];
+			message.data[0] = can_data[0];
+			message.data[1] = can_data[1];
+			message.data[2] = can_data[2];
+			message.data[3] = can_data[3];
+			message.data[4] = can_data[4];
+			message.data[5] = can_data[5];
+			message.data[6] = can_data[6];
+			message.data[7] = can_data[7];
 
-		MessageManager_PushMessage(&message);
-	}
-
-	// Check for Node error
-	if (CAN_NODE_GetStatus(&CAN_NODE_0) & XMC_CAN_NODE_STATUS_ALERT_WARNING)
-	{
-		//Clear the flag
-		CAN_NODE_DisableEvent(&CAN_NODE_0,XMC_CAN_NODE_EVENT_ALERT);
+			MessageManager_PushMessage(&message);
+		}
 	}
 }
 
@@ -87,6 +119,7 @@ int main(void)
 {
 	DAVE_STATUS_t status;
 
+	ModeManager_SetCurrentMode(MODE_STARTUP);
 	status = DAVE_Init();           /* Initialization of DAVE APPs  */
 
 	if (status != DAVE_STATUS_SUCCESS)

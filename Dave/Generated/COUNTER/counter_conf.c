@@ -94,11 +94,11 @@ COUNTER_CCU4_CONFIG_t  COUNTER_WheelRevolution_ccu4_config =
 {
   .global_handle          = (GLOBAL_CCU4_t*) &GLOBAL_CCU4_0,
   .kernel_ptr             = (XMC_CCU4_MODULE_t*) (void*) CCU41_BASE,
-  .slice_ptr              = (XMC_CCU4_SLICE_t*) (void*) CCU41_CC42,
+  .slice_ptr              = (XMC_CCU4_SLICE_t*) (void*) CCU41_CC41,
   .event0_config          = (XMC_CCU4_SLICE_EVENT_CONFIG_t*) &COUNTER_WheelRevolution_event0_config,
   .count_dir_event_config = NULL,
   .gating_event_config    = NULL,
-  .shadow_mask            = (uint32_t)XMC_CCU4_SHADOW_TRANSFER_SLICE_2,
+  .shadow_mask            = (uint32_t)XMC_CCU4_SHADOW_TRANSFER_SLICE_1,
   .count_match_value      = (uint16_t) 200,
   .countdir_event         = XMC_CCU4_SLICE_EVENT_NONE,
   .gating_event           = XMC_CCU4_SLICE_EVENT_NONE,
@@ -109,13 +109,13 @@ COUNTER_CCU4_CONFIG_t  COUNTER_WheelRevolution_ccu4_config =
   .event2_node_id         = XMC_CCU4_SLICE_SR_ID_0,
   .state                  = COUNTER_STATUS_UNINITIALIZED,
   .kernel_number          = (uint8_t) 1,
-  .slice_number           = (uint8_t) 2,
+  .slice_number           = (uint8_t) 1,
   .intr_count_match       = (bool) false,
   .intr_count_rollover    = (bool) false,
   .intr_evt_edge_detect   = (bool) false,
   .intr_event1_detect     = (bool) false,
    .intr_event2_detect    = (bool) false,
-  .init_start             = (bool) false
+  .init_start             = (bool) true
 };
 
 /* App Handle for Instance COUNTER_WheelRevolution*/

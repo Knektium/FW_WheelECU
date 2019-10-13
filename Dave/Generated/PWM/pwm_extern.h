@@ -89,12 +89,7 @@
 ***********************************************************************************************************************/
 
 
-extern PWM_t PWM_MotorForward;
-
-
-
-
-extern PWM_t PWM_MotorBackward;
+extern PWM_t PWM_Motor;
 
 
 

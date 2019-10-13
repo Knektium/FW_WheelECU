@@ -28,6 +28,6 @@ extern TaskHandle_t xMessageManagerHandle;
 void MessageManager_Init(void);
 void MessageManager_Main(void *pvParameters);
 
-BaseType_t MessageManager_PushMessage(Message_t *message);
+void MessageManager_PushMessage(Message_t *message);
 
 #endif /* TASKS_MESSAGEMANAGER_H_ */

@@ -81,7 +81,7 @@
   </provided>
   <provided xsi:type="ResourceModel:BitField" name="RXSEL" URI="http://resources/14.0.0/peripheral/can/0/node1_npcr/rxsel" value="0x00000000" toolTipHelpDescription="Receive Select" defaultValue="0x00000000" startPos="0" stopPos="2" accessPermission="rw" maxValue="7" minValue="0"/>
   <provided xsi:type="ResourceModel:ResourceGroup" name="19" URI="http://resources/14.0.0/peripheral/can/0/mo/19">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@hwResources.4"/>
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@hwResources.3"/>
     <resourcesList name="moamr" requiredResourceUri="http://resources/14.0.0/peripheral/can/0/mo19_moamr"/>
     <resourcesList name="moar" requiredResourceUri="http://resources/14.0.0/peripheral/can/0/mo19_moar"/>
     <resourcesList name="mofcr" requiredResourceUri="http://resources/14.0.0/peripheral/can/0/mo19_mofcr"/>
@@ -169,7 +169,6 @@
     <resourcesList name="global_signal" requiredResourceUri="http://resources/14.0.0/peripheral/can/0/global_global_signal"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="17" URI="http://resources/14.0.0/peripheral/can/0/mo/17">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@hwResources.3"/>
     <resourcesList name="moamr" requiredResourceUri="http://resources/14.0.0/peripheral/can/0/mo17_moamr"/>
     <resourcesList name="moar" requiredResourceUri="http://resources/14.0.0/peripheral/can/0/mo17_moar"/>
     <resourcesList name="mofcr" requiredResourceUri="http://resources/14.0.0/peripheral/can/0/mo17_mofcr"/>

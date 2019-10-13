@@ -93,19 +93,15 @@ void MotorManager_Init(void)
 	xMotorManagerHandle = xTaskCreateStatic(MotorManager_Main, "MotorManager", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xMotorManagerStack, &xMotorManagerBuffer);
 }
 
-void set_motor_state(MotorDirection_t direction)
+void set_motor_direction(MotorDirection_t direction)
 {
-	PWM_Stop(&PWM_MotorForward);
-	PWM_Stop(&PWM_MotorBackward);
-
 	switch (direction) {
 	case MOTOR_FORWARD:
-		PWM_Start(&PWM_MotorForward);
+		DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDirection);
 		break;
 	case MOTOR_BACKWARD:
-		PWM_Start(&PWM_MotorBackward);
+		DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDirection);
 		break;
-	case MOTOR_STILL:
 	default:
 		break;
 	}
@@ -115,6 +111,8 @@ void set_motor_speed(MotorSpeed_t speed)
 {
 	const uint32_t frequency = 20000UL; // 20 kHz
 	BaseType_t duty_cycle = 0UL;		// Duty cycle in 1/10000
+
+	PWM_Stop(&PWM_Motor);
 
 	switch (speed) {
 	case SPEED_HIGH:
@@ -126,20 +124,31 @@ void set_motor_speed(MotorSpeed_t speed)
 	case SPEED_LOW:
 		duty_cycle = 5000UL;
 		break;
+	case SPEED_STILL:
 	default:
 		duty_cycle = 0UL;
 		break;
 	}
 
-	PWM_SetFreqAndDutyCycle(&PWM_MotorForward, frequency, duty_cycle);
-	PWM_SetFreqAndDutyCycle(&PWM_MotorBackward, frequency, duty_cycle);
+	if (duty_cycle > 0UL) {
+		PWM_SetFreqAndDutyCycle(&PWM_Motor, frequency, duty_cycle);
+		PWM_Start(&PWM_Motor);
+
+		DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDisable);
+	} else {
+		DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDisable);
+	}
+
 }
 
 void MotorManager_Main(void *pvParameters)
 {
 	MotorCommand_t command;
 
-	set_motor_state(MOTOR_STILL);
+	set_motor_speed(SPEED_STILL);
+	set_motor_direction(MOTOR_STILL);
+
+	DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDisable);
 
 	while(1U) {
 		if (xQueueReceive(xQueue_MotorCommands, &command, (TickType_t) 2000)) {
@@ -149,8 +158,8 @@ void MotorManager_Main(void *pvParameters)
 
 			switch (command.type) {
 			case COMMAND_START:
+				set_motor_direction(command.parameters.direction);
 				set_motor_speed(command.parameters.speed);
-				set_motor_state(command.parameters.direction);
 
 				COUNTER_ResetCounter(&COUNTER_WheelRevolution);
 				COUNTER_Start(&COUNTER_WheelRevolution);
@@ -158,7 +167,7 @@ void MotorManager_Main(void *pvParameters)
 				break;
 			case COMMAND_STOP:
 			default:
-				set_motor_state(MOTOR_STILL);
+				set_motor_speed(SPEED_STILL);
 
 				COUNTER_Stop(&COUNTER_WheelRevolution);
 
