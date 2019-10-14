@@ -15,7 +15,7 @@ typedef struct {
 } Message_t;
 
 // Message ID definitions
-#define MESSAGE_SPEED_ID 0x555
+#define MESSAGE_SPEED_ID 0x1000000U
 
 // Message structs
 typedef struct {

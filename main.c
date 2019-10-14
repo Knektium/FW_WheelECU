@@ -49,8 +49,8 @@ void Time_Handler(void)
 	data[1] = (uint16_t) 89U;
 	data[2] = (uint16_t) 0U;
 	data[3] = (uint16_t) spi_read_data;
-	CAN_NODE_MO_UpdateData(CAN_NODE_0.lmobj_ptr[0], (uint8_t *) data);
-	CAN_NODE_MO_Transmit(CAN_NODE_0.lmobj_ptr[0]);
+	CAN_NODE_MO_UpdateData(CAN_NODE_0.lmobj_ptr[1], (uint8_t *) data);
+	CAN_NODE_MO_Transmit(CAN_NODE_0.lmobj_ptr[1]);
 }
 
 void EventHandler_CanNode_0()

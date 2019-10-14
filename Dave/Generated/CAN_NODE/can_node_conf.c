@@ -93,6 +93,7 @@
  **********************************************************************************************************************/
 
 #include "can_node.h"
+#include "CAN_Config.h"
 
 
 
@@ -318,75 +319,11 @@ const CAN_NODE_t  CAN_NODE_0 = {
 
   .node_sr_ptr       = (CAN_NODE_SR_t*)&CAN_NODE_0_sr,
 
-  .lmobj_ptr         = { 
-
-      (CAN_NODE_LMO_t*)&CAN_NODE_0_LMO_01_Config, 
-
-      (CAN_NODE_LMO_t*)&CAN_NODE_0_LMO_02_Config,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL,  
-
-      NULL },
+  .lmobj_ptr         = CAN_MESSAGE_CONFIGS,
 
   .node_num          = 1U,
 
-  .mo_count          = 2U,
+  .mo_count          = NUMBER_OF_CAN_MESSAGE_CONFIGS,
 
   .loopback_enable         = false, 
 

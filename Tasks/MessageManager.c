@@ -45,7 +45,7 @@ void MessageManager_Main(void *pvParameters)
 	while (1U) {
 		if (xQueueReceive(xQueue_Messages, &message, (TickType_t) 2000)) {
 			// Route it
-			if (message.id == MESSAGE_SPEED_ID) {
+			if ((message.id & MESSAGE_SPEED_ID) == MESSAGE_SPEED_ID) {
 				// Marshall message
 				Message_Speed_t speed_message;
 
