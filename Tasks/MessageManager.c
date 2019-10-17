@@ -9,6 +9,7 @@
 #include "tasks.h"
 #include "MessageManager.h"
 #include "MotorManager.h"
+#include "CAN_Config.h"
 
 #define MESSAGE_MANAGER_STACK_DEPTH	300U
 
@@ -45,7 +46,7 @@ void MessageManager_Main(void *pvParameters)
 	while (1U) {
 		if (xQueueReceive(xQueue_Messages, &message, (TickType_t) 2000)) {
 			// Route it
-			if ((message.id & MESSAGE_SPEED_ID) == MESSAGE_SPEED_ID) {
+			if ((message.id & CAN_MESSAGE_WHEELCONTROL_MASK) == CAN_MESSAGE_WHEELCONTROL_MASK) {
 				// Marshall message
 				Message_Speed_t speed_message;
 

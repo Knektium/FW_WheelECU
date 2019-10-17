@@ -14,9 +14,6 @@ typedef struct {
 	uint32_t crc;
 } Message_t;
 
-// Message ID definitions
-#define MESSAGE_SPEED_ID 0x1000000U
-
 // Message structs
 typedef struct {
 	uint8_t speed;
