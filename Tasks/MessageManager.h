@@ -16,7 +16,7 @@ typedef struct {
 
 // Message structs
 typedef struct {
-	uint8_t speed;
+	uint16_t speed;
 	uint8_t direction;
 } Message_Speed_t;
 

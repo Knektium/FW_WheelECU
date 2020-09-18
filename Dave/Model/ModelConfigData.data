@@ -106,7 +106,6 @@
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.3"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.4"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.5"/>
-  <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.6"/>
   <hwConnections href="APPS/PWM/v4_1_10/PWM_1.app#//@connections.1"/>
   <hwConnections href="APPS/PWM/v4_1_10/PWM_1.app#//@connections.2"/>
   <hwConnections href="APPS/PWM/v4_1_10/PWM_1.app#//@connections.4"/>
@@ -151,4 +150,5 @@
   <hwConnections href="APPS/SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@connections.46"/>
   <hwConnections href="APPS/SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@connections.47"/>
   <hwConnections href="APPS/SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@connections.48"/>
+  <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.6"/>
 </ApplicationModel:ApplicationData>

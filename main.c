@@ -26,14 +26,10 @@
 
 void Time_Handler(void)
 {
-	uint16_t count_value;
 	uint16_t data[8];
 
 	uint8_t spi_read_data;
 	uint8_t spi_write_data;
-
-	count_value = COUNTER_GetCurrentCount(&COUNTER_WheelRevolution);
-	COUNTER_ResetCounter(&COUNTER_WheelRevolution);
 
 	spi_read_data = 0xFFU;
 	spi_write_data = RES_DIA;
@@ -45,7 +41,7 @@ void Time_Handler(void)
 	// Dummy message to get answer to first message
 	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
 
-	data[0] = count_value;
+	data[0] = MotorManager_GetRPM();
 	data[1] = (uint16_t) 89U;
 	data[2] = (uint16_t) 0U;
 	data[3] = (uint16_t) spi_read_data;
@@ -58,38 +54,36 @@ void EventHandler_CanNode_0()
 	// Check transmit pending status in LMO_01
 	uint32_t status = 0x00U;
 
-	XMC_CAN_MO_t* lmsgobjct_ptr_0 = CAN_NODE_0.lmobj_ptr[1]->mo_ptr; // CAN_NODE transmit message object pointer
-
 	// Check for Node error
 	status = CAN_NODE_GetStatus(&CAN_NODE_0);
 	if (status & XMC_CAN_NODE_STATUS_ALERT_WARNING)
 	{
-		//Clear the flag
+		// Clear the flag
 		CAN_NODE_DisableEvent(&CAN_NODE_0, XMC_CAN_NODE_EVENT_ALERT);
 	}
 
-	status = CAN_NODE_MO_GetStatus((void*) CAN_NODE_0.lmobj_ptr[0]);
+	status = CAN_NODE_MO_GetStatus((void *) CAN_NODE_0.lmobj_ptr[1]);
 	if (status & XMC_CAN_MO_STATUS_TX_PENDING)
 	{
 		// Clear the flag
-		CAN_NODE_MO_ClearStatus((void*)CAN_NODE_0.lmobj_ptr[0], XMC_CAN_MO_RESET_STATUS_TX_PENDING);
+		CAN_NODE_MO_ClearStatus((void *)CAN_NODE_0.lmobj_ptr[1], XMC_CAN_MO_RESET_STATUS_TX_PENDING);
 	}
 
 	// Check receive pending status in LMO_02
-	status = CAN_NODE_MO_GetStatus((void*)CAN_NODE_0.lmobj_ptr[1]);
+	status = CAN_NODE_MO_GetStatus((void *)CAN_NODE_0.lmobj_ptr[0]);
 	if (status & XMC_CAN_MO_STATUS_RX_PENDING) //XMC_CAN_MO_STATUS_NEW_DATA
 	{
 		// Clear the flag
-		CAN_NODE_MO_ClearStatus((void*) CAN_NODE_0.lmobj_ptr[1], XMC_CAN_MO_RESET_STATUS_RX_PENDING);
+		CAN_NODE_MO_ClearStatus((void *) CAN_NODE_0.lmobj_ptr[0], XMC_CAN_MO_RESET_STATUS_RX_PENDING);
 
 		// Read the received Message object and stores the received data in the MO structure.
-		CAN_NODE_MO_Receive((void*) CAN_NODE_0.lmobj_ptr[1]);
+		CAN_NODE_MO_Receive((void *) CAN_NODE_0.lmobj_ptr[0]);
 
 		if (ModeManager_GetCurrentMode() == MODE_RUN) {
 			Message_t message;
-			uint8_t *can_data = CAN_NODE_0.lmobj_ptr[1]->mo_ptr->can_data_byte;
+			uint8_t *can_data = CAN_NODE_0.lmobj_ptr[0]->mo_ptr->can_data_byte;
 
-			message.id = CAN_NODE_0.lmobj_ptr[1]->mo_ptr->can_identifier;
+			message.id = CAN_NODE_0.lmobj_ptr[0]->mo_ptr->can_identifier;
 
 			message.data[0] = can_data[0];
 			message.data[1] = can_data[1];

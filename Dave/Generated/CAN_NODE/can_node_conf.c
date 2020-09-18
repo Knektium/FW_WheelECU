@@ -93,7 +93,6 @@
  **********************************************************************************************************************/
 
 #include "can_node.h"
-#include "CAN_Config.h"
 
 
 
@@ -209,19 +208,19 @@ const CAN_NODE_SR_t CAN_NODE_0_sr = {
 
 XMC_CAN_MO_t  CAN_NODE_0_LMO_01 = {  
 
-  .can_mo_type      =  XMC_CAN_MO_TYPE_TRANSMSGOBJ,
+  .can_mo_type      =  XMC_CAN_MO_TYPE_RECMSGOBJ,
 
-  .can_id_mode      = XMC_CAN_FRAME_TYPE_STANDARD_11BITS,
+  .can_id_mode      = XMC_CAN_FRAME_TYPE_EXTENDED_29BITS,
 
   .can_priority     = XMC_CAN_ARBITRATION_MODE_IDE_DIR_BASED_PRIO_2,
 
-  .can_identifier   = 0x556U, 
+  .can_identifier   = 0x10000aU, 
 
-  .can_id_mask      = 0x556U,
+  .can_id_mask      = 0x100000U,
 
   .can_ide_mask     = 1U,
 
-  .can_mo_ptr       = (CAN_MO_TypeDef*)CAN_MO17,
+  .can_mo_ptr       = (CAN_MO_TypeDef*)CAN_MO19,
 
   .can_data_length  = 8U,
 
@@ -237,15 +236,15 @@ const CAN_NODE_LMO_t CAN_NODE_0_LMO_01_Config = {
 
   .mo_ptr     = (XMC_CAN_MO_t*)&CAN_NODE_0_LMO_01,     
 
-  .number  = 17U,   
+  .number  = 19U,   
 
   .tx_sr   = 0U,
 
   .rx_sr   = 0U,
 
-  .tx_event_enable = true,
+  .tx_event_enable = false,
 
-  .rx_event_enable = false
+  .rx_event_enable = true
 
 };
 
@@ -253,19 +252,19 @@ const CAN_NODE_LMO_t CAN_NODE_0_LMO_01_Config = {
 
 XMC_CAN_MO_t  CAN_NODE_0_LMO_02 = {  
 
-  .can_mo_type      =  XMC_CAN_MO_TYPE_RECMSGOBJ,
+  .can_mo_type      =  XMC_CAN_MO_TYPE_TRANSMSGOBJ,
 
-  .can_id_mode      = XMC_CAN_FRAME_TYPE_STANDARD_11BITS,
+  .can_id_mode      = XMC_CAN_FRAME_TYPE_EXTENDED_29BITS,
 
   .can_priority     = XMC_CAN_ARBITRATION_MODE_IDE_DIR_BASED_PRIO_2,
 
-  .can_identifier   = 0x555U, 
+  .can_identifier   = 0x200129U, 
 
-  .can_id_mask      = 0x555U,
+  .can_id_mask      = 0x200000U,
 
   .can_ide_mask     = 1U,
 
-  .can_mo_ptr       = (CAN_MO_TypeDef*)CAN_MO19,
+  .can_mo_ptr       = (CAN_MO_TypeDef*)CAN_MO17,
 
   .can_data_length  = 8U,
 
@@ -281,15 +280,15 @@ const CAN_NODE_LMO_t CAN_NODE_0_LMO_02_Config = {
 
   .mo_ptr     = (XMC_CAN_MO_t*)&CAN_NODE_0_LMO_02,     
 
-  .number  = 19U,   
+  .number  = 17U,   
 
-  .tx_sr   = 0U,
+  .tx_sr   = 1U,
 
   .rx_sr   = 0U,
 
-  .tx_event_enable = false,
+  .tx_event_enable = true,
 
-  .rx_event_enable = true
+  .rx_event_enable = false
 
 };
 
@@ -319,11 +318,75 @@ const CAN_NODE_t  CAN_NODE_0 = {
 
   .node_sr_ptr       = (CAN_NODE_SR_t*)&CAN_NODE_0_sr,
 
-  .lmobj_ptr         = CAN_MESSAGE_CONFIGS,
+  .lmobj_ptr         = { 
+
+      (CAN_NODE_LMO_t*)&CAN_NODE_0_LMO_01_Config, 
+
+      (CAN_NODE_LMO_t*)&CAN_NODE_0_LMO_02_Config,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL },
 
   .node_num          = 1U,
 
-  .mo_count          = NUMBER_OF_CAN_MESSAGE_CONFIGS,
+  .mo_count          = 2U,
 
   .loopback_enable         = false, 
 

@@ -16,6 +16,7 @@
             <BindMap MUri="devicepackage/0/11" Proxy="app/SPI_MASTER/0/__pin_hwres_port_pad_spi_mosi_1"/>
             <BindMap MUri="peripheral/can/0/mo/19" Proxy="app/CAN_NODE/0/hwres_can_mobj1"/>
             <BindMap MUri="port/p/3/pad/2" Proxy="app/DIGITAL_IO/0/hwres_port_pin"/>
+            <BindMap MUri="peripheral/can/0/mo/17" Proxy="app/CAN_NODE/0/hwres_can_mobj2"/>
             <BindMap MUri="devicepackage/0/10" Proxy="app/SPI_MASTER/0/__pin_hwres_port_pad_spi_mosi_0"/>
             <BindMap MUri="port/p/3/pad/0" Proxy="app/DIGITAL_IO/1/hwres_port_pin"/>
             <BindMap MUri="devicepackage/0/62" Proxy="app/DIGITAL_IO/4/__pin_hwres_port_pin"/>

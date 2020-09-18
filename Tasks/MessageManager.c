@@ -46,44 +46,33 @@ void MessageManager_Main(void *pvParameters)
 	while (1U) {
 		if (xQueueReceive(xQueue_Messages, &message, (TickType_t) 2000)) {
 			// Route it
-			if ((message.id & CAN_MESSAGE_WHEELCONTROL_MASK) == CAN_MESSAGE_WHEELCONTROL_MASK) {
+			uint16_t from_device = (message.id >> 4U) & 0xFFU;
+
+			if (((message.id & CAN_MESSAGE_WHEELCONTROL_MASK) == CAN_MESSAGE_WHEELCONTROL_MASK) && from_device == 0x12U) {
 				// Marshall message
 				Message_Speed_t speed_message;
 
-				speed_message.speed = message.data[0];
-				speed_message.direction = message.data[1];
+				speed_message.speed = (((uint16_t)  message.data[0]) << 8U) | (uint16_t) message.data[1];
+				speed_message.direction = message.data[2];
 
 				// Handle message
-				MotorSpeed_t motor_speed;
 				MotorDirection_t motor_direction;
-
-				switch (speed_message.speed) {
-				case 2U:
-					motor_speed = SPEED_HIGH;
-					break;
-				case 1U:
-					motor_speed = SPEED_MEDIUM;
-					break;
-				case 0U:
-				default:
-					motor_speed = SPEED_LOW;
-					break;
-				}
+				uint16_t motor_speed = speed_message.speed;
 
 				switch (speed_message.direction) {
 				case 2U:
-					motor_direction = MOTOR_FORWARD;
+					motor_direction = DIR_FORWARD;
 					break;
 				case 1U:
-					motor_direction = MOTOR_BACKWARD;
+					motor_direction = DIR_BACKWARD;
 					break;
 				case 0U:
 				default:
-					motor_direction = MOTOR_STILL;
+					motor_direction = DIR_NONE;
 					break;
 				}
 
-				if (MOTOR_STILL == motor_direction) {
+				if (DIR_NONE == motor_direction) {
 					MotorManager_Stop();
 				} else {
 					MotorManager_SetSpeed(motor_speed, motor_direction);
