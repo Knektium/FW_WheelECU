@@ -46,9 +46,9 @@ void MessageManager_Main(void *pvParameters)
 	while (1U) {
 		if (xQueueReceive(xQueue_Messages, &message, (TickType_t) 2000)) {
 			// Route it
-			uint16_t from_device = (message.id >> 4U) & 0xFFU;
+			uint16_t to_device = (message.id >> 12U) & (uint16_t) 0xFFU;
 
-			if (((message.id & CAN_MESSAGE_WHEELCONTROL_MASK) == CAN_MESSAGE_WHEELCONTROL_MASK) && from_device == 0x12U) {
+			if (((message.id & CAN_MESSAGE_WHEELCONTROL_MASK) == CAN_MESSAGE_WHEELCONTROL_MASK) && to_device == NODE_ID) {
 				// Marshall message
 				Message_Speed_t speed_message;
 

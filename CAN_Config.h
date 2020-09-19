@@ -3,6 +3,8 @@
 
 #include "Dave/Generated/CAN_NODE/can_node.h"
 
+#define NODE_ID 0x11U
+
 /* Message masks */
 #define CAN_MESSAGE_WHEELCONTROL_MASK 0x100000U
 #define CAN_MESSAGE_WHEELSTATUS_MASK 0x200000U
@@ -10,7 +12,7 @@
 
 /* Message struct typedefs */
 typedef struct WheelControl_s {
-	uint8_t Speed;
+	uint16_t Speed;
 	uint8_t Direction;
 } WheelControl_t;
 typedef struct WheelStatus_s {
