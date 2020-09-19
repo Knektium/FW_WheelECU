@@ -2,7 +2,7 @@
 
 
 XMC_CAN_MO_t CAN_NODE_Wheel_LMO_WheelControl = {
-	.can_mo_type      = XMC_CAN_MO_TYPE_TRANSMSGOBJ,
+	.can_mo_type      = XMC_CAN_MO_TYPE_RECMSGOBJ,
 	.can_id_mode      = XMC_CAN_FRAME_TYPE_EXTENDED_29BITS,
 	.can_priority     = XMC_CAN_ARBITRATION_MODE_IDE_DIR_BASED_PRIO_2,
 	.can_identifier   = 0x10000aU,
