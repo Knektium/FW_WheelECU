@@ -8,17 +8,7 @@
 #ifndef TASKS_MESSAGEMANAGER_H_
 #define TASKS_MESSAGEMANAGER_H_
 
-typedef struct {
-	uint32_t id;
-	uint8_t data[8];
-	uint32_t crc;
-} Message_t;
-
-// Message structs
-typedef struct {
-	uint16_t speed;
-	uint8_t direction;
-} Message_Speed_t;
+#include "CAN_Router.h"
 
 extern TaskHandle_t xMessageManagerHandle;
 

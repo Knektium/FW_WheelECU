@@ -10,17 +10,6 @@
 #define CAN_MESSAGE_WHEELSTATUS_MASK 0x200000U
 
 
-/* Message struct typedefs */
-typedef struct WheelControl_s {
-	uint16_t Speed;
-	uint8_t Direction;
-} WheelControl_t;
-typedef struct WheelStatus_s {
-	uint16_t RevolutionsPerMinute;
-	uint16_t ErrorCode;
-} WheelStatus_t;
-
-
 /* Message configs */
 
 extern XMC_CAN_MO_t CAN_NODE_Wheel_LMO_WheelControl;
