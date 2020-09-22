@@ -94,6 +94,7 @@
 
 #include "can_node.h"
 #include "Can_Config.h"
+#include "Can_Config_XMC1400.h"
 
 
 

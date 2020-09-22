@@ -1,10 +1,14 @@
 ifndef $(TOOLCHAIN_PATH)
   TOOLCHAIN_PATH := /usr/bin
 endif
+ifndef $(NODE_ID)
+  NODE_ID := 0x11
+endif
 CC := $(TOOLCHAIN_PATH)/arm-none-eabi-gcc
 OBJCOPY := $(TOOLCHAIN_PATH)/arm-none-eabi-objcopy
 OBJDUMP := $(TOOLCHAIN_PATH)/arm-none-eabi-objdump
 RM := rm -f
+MEDDELA := ../../meddela/meddela.py
 
 APP_NAME := WheelECU
 
@@ -35,6 +39,8 @@ OBJS :=
 DAVE_PATH := Dave/Generated
 LIB_PATH := Libraries
 STARTUP_PATH := Startup
+MEDDELA_CONFIG_PATH := ../Networking
+MEDDELA_TEMPLATE_PATH := $(MEDDELA_CONFIG_PATH)/templates
 
 INCLUDE_PATHS := \
 	-I. \
@@ -72,6 +78,15 @@ LIB_MODULES := \
 	XMCLib/src \
 	Newlib
 
+MEDDELA_SOURCE_FILES := \
+	CAN_Config_XMC1400.c \
+	Can_Router.c
+
+MEDDELA_HEADER_FILES := \
+	CAN_Config_XMC1400.h \
+	CAN_Config.h \
+	Can_Router.h
+
 .PHONY: all clean cleanall
 
 all: $(APP_NAME).elf $(APP_NAME).hex
@@ -92,6 +107,9 @@ OBJS += $(patsubst %.c,%.o,$(wildcard ./*.c))
 # Include Tasks
 OBJS += $(patsubst %.c,%.o,$(wildcard Tasks/*.c))
 
+# Include Meddela files
+OBJS += $(patsubst %.c,%.o,$(MEDDELA_SOURCE_FILES))
+
 # Include Startup
 OBJS += $(patsubst %.c,%.o,$(wildcard $(STARTUP_PATH)/*.c))
 OBJS += $(patsubst %.S,%.o,$(wildcard $(STARTUP_PATH)/*.S))
@@ -103,7 +121,25 @@ $(APP_NAME).elf: $(OBJS) $(LINKER_SCRIPT)
 $(APP_NAME).hex: $(APP_NAME).elf
 	@$(OBJCOPY) -O ihex $< $@
 
-%.o: %.c
+$(MEDDELA_HEADER_FILES):
+	$(MEDDELA) \
+	--messages=$(MEDDELA_CONFIG_PATH)/messages.json \
+	--nodes=$(MEDDELA_CONFIG_PATH)/nodes.json \
+	--config=$(MEDDELA_CONFIG_PATH)/wolley.json \
+	--id=$(NODE_ID) \
+	--template=$(MEDDELA_TEMPLATE_PATH)/$@.template \
+	> $@
+
+$(MEDDELA_SOURCE_FILES):
+	$(MEDDELA) \
+	--messages=$(MEDDELA_CONFIG_PATH)/messages.json \
+	--nodes=$(MEDDELA_CONFIG_PATH)/nodes.json \
+	--config=$(MEDDELA_CONFIG_PATH)/wolley.json \
+	--id=$(NODE_ID) \
+	--template=$(MEDDELA_TEMPLATE_PATH)/$@.template \
+	> $@
+
+%.o: %.c $(MEDDELA_HEADER_FILES)
 	@echo "Compiling $<..."
 	@$(CC) $(CFLAGS) $(INCLUDE_PATHS) -Wa,-adhlns="$@.lst" -o $@ $<
 
@@ -118,6 +154,7 @@ clean:
 cleanall: clean
 	-$(RM) $(APP_NAME).elf
 	-$(RM) $(APP_NAME).hex
+	-$(RM) $(MEDDELA_SOURCE_FILES) $(MEDDELA_HEADER_FILES)
 
 patch:
 	@git apply FreeRTOS_HeapSourceRemoval.patch
