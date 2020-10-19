@@ -16,9 +16,9 @@
 
 const uint32_t pwm_frequency = 20000UL; // 20 kHz
 const uint32_t max_duty = 10000UL;  // 100 %
-const uint32_t min_duty = 5000UL;   // 50 %
+const uint32_t min_duty = 4000UL;   // 50 %
 const uint16_t max_rpm = 0x35UL;
-const uint16_t min_rpm = 0x1AUL;
+const uint16_t min_rpm = 0x12UL;
 
 typedef enum {
 	COMMAND_START, COMMAND_STOP
@@ -53,6 +53,7 @@ MotorStatus_t motor_status;
 MotorParameters_t target_params;
 uint32_t current_duty_cycle = 100UL;
 uint16_t actual_rpm = 0U;
+uint16_t requested_rpm_changed;
 
 uint32_t generate_crc(MotorCommand_t *command)
 {
@@ -119,6 +120,7 @@ void MotorManager_Init(void)
 	motor_status = STATUS_STOPPED;
 	target_params.direction = DIR_NONE;
 	target_params.rpm = 0U;
+	requested_rpm_changed = 0U;
 
 	xStatusSemaphore = xSemaphoreCreateMutexStatic(&xStatusMutexBuffer);
 
@@ -150,33 +152,35 @@ void set_motor_speed(MotorSpeed_t rpm)
 {
 	BaseType_t duty_cycle = 0UL;		// Duty cycle in 1/10000
 
-	PWM_Stop(&PWM_Motor);
+	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 250) == pdTRUE) {
+		PWM_Stop(&PWM_Motor);
 
-	if (0U == rpm) {
-		duty_cycle = 0UL;
-	} else if (min_rpm >= rpm) {
-		duty_cycle = min_duty;
-	} else if (max_rpm <= rpm) {
-		duty_cycle = max_duty;
-	} else {
-		uint32_t percentage = ((rpm - min_rpm) * 100U) / (max_rpm - min_rpm);
+		if (0U == rpm) {
+			duty_cycle = 0UL;
+		} else if (rpm == target_params.rpm) {
+			duty_cycle = current_duty_cycle;
+		} else if (min_rpm >= rpm) {
+			duty_cycle = min_duty;
+		} else if (max_rpm <= rpm) {
+			duty_cycle = max_duty;
+		} else {
+			uint32_t percentage = ((rpm - min_rpm) * 100U) / (max_rpm - min_rpm);
 
-		duty_cycle = min_duty + ((max_duty - min_duty) * percentage) / 100UL;
-	}
+			duty_cycle = min_duty + ((max_duty - min_duty) * percentage) / 100UL;
+		}
 
-	if (duty_cycle > 0UL) {
-		PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, duty_cycle);
-		PWM_Start(&PWM_Motor);
+		if (duty_cycle > 0UL) {
+			PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, duty_cycle);
+			PWM_Start(&PWM_Motor);
 
-		DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDisable);
-	} else {
-		DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDisable);
-	}
+			DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDisable);
+			current_duty_cycle = duty_cycle;
+			target_params.rpm = rpm;
+		} else {
+			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDisable);
+		}
 
-	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 200) == pdTRUE) {
-		current_duty_cycle = duty_cycle;
-		target_params.rpm = rpm;
-
+		requested_rpm_changed = 1U;
 		xSemaphoreGive(xStatusSemaphore);
 	}
 }
@@ -193,36 +197,40 @@ void MotorManager_SpeedController(void *pvParameters)
 		rpm = gear_carrier_count * 3U; //(gear_carrier_count * 60) / 3;
 
 		if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 50) == pdTRUE) {
-			actual_rpm = rpm;
-			target_rpm = target_params.rpm;
+			if (1U == requested_rpm_changed) {
+				requested_rpm_changed = 0U;
+			} else {
+				actual_rpm = rpm;
+				target_rpm = target_params.rpm;
 
-			if (STATUS_RUNNING == motor_status && 0U != target_rpm) {
-				duty_cycle = current_duty_cycle;
+				if (STATUS_RUNNING == motor_status && 0U != target_rpm) {
+					duty_cycle = current_duty_cycle;
 
-				if (rpm != target_rpm) {
-					if (rpm > target_rpm) {
-						rpmdiff = rpm - target_rpm;
-					} else {
-						rpmdiff = target_rpm - rpm;
+					if (rpm != target_rpm) {
+						if (rpm > target_rpm) {
+							rpmdiff = rpm - target_rpm;
+						} else {
+							rpmdiff = target_rpm - rpm;
+						}
+
+						uint32_t percentage = (rpmdiff * 100U) / target_rpm;
+						duty_cycle_correction = (current_duty_cycle * percentage) / 100UL;
+
+						if (rpm > target_rpm) {
+							duty_cycle -= duty_cycle_correction;
+						} else {
+							duty_cycle += duty_cycle_correction;
+						}
+
+						if (duty_cycle > max_duty) {
+							duty_cycle = max_duty;
+						} else if (duty_cycle < min_duty) {
+							duty_cycle = min_duty;
+						}
+
+						current_duty_cycle = duty_cycle;
+						PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, duty_cycle);
 					}
-
-					uint32_t percentage = (rpmdiff * 100U) / target_rpm;
-					duty_cycle_correction = (current_duty_cycle * percentage) / 100UL;
-
-					if (rpm > target_rpm) {
-						duty_cycle -= duty_cycle_correction;
-					} else {
-						duty_cycle += duty_cycle_correction;
-					}
-
-					if (duty_cycle > max_duty) {
-						duty_cycle = max_duty;
-					} else if (duty_cycle < min_duty) {
-						duty_cycle = min_duty;
-					}
-
-					current_duty_cycle = duty_cycle;
-					PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, duty_cycle);
 				}
 			}
 
