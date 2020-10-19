@@ -102,7 +102,7 @@ $(foreach module,$(DAVE_MODULES),$(eval $(call include_module,$(module),$(DAVE_P
 $(foreach module,$(LIB_MODULES),$(eval $(call include_module,$(module),$(LIB_PATH)/$(module))))
 
 # Include main
-OBJS += $(patsubst %.c,%.o,$(wildcard ./*.c))
+OBJS += $(patsubst %.c,%.o,main.c)
 
 # Include Tasks
 OBJS += $(patsubst %.c,%.o,$(wildcard Tasks/*.c))
