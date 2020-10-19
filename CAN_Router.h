@@ -18,10 +18,13 @@ typedef struct WheelControl_s {
 typedef struct WheelStatus_s {
 	uint16_t RevolutionsPerMinute;
 	uint16_t ErrorCode;
+	uint8_t Status;
 } WheelStatus_t;
 
 void CAN_HandleReceivedMessage(Message_t message);
-void Handle_WheelControl_Received(WheelControl_t msg, uint8_t from_node_id, uint8_t to_node_id);
+extern void Handle_WheelControl_Received(WheelControl_t msg, uint8_t from_node_id, uint8_t to_node_id);
+
+void Send_WheelStatus(WheelStatus_t *s, uint32_t to_node);
 
 
 #endif /* End of CAN_ROUTER_H */

@@ -15,6 +15,7 @@
 #include "Tasks/ModeManager.h"
 #include "Tasks/MotorManager.h"
 #include "Tasks/MessageManager.h"
+#include "CAN_Router.h"
 
 // SPI command set
 #define RD_DIA	0x00U
@@ -26,8 +27,7 @@
 
 void Time_Handler(void)
 {
-	uint16_t data[8];
-
+	WheelStatus_t wheel_status;
 	uint8_t spi_read_data;
 	uint8_t spi_write_data;
 
@@ -41,12 +41,10 @@ void Time_Handler(void)
 	// Dummy message to get answer to first message
 	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
 
-	data[0] = MotorManager_GetRPM();
-	data[1] = (uint16_t) 89U;
-	data[2] = (uint16_t) 0U;
-	data[3] = (uint16_t) spi_read_data;
-	CAN_NODE_MO_UpdateData(CAN_NODE_0.lmobj_ptr[1], (uint8_t *) data);
-	CAN_NODE_MO_Transmit(CAN_NODE_0.lmobj_ptr[1]);
+	wheel_status.RevolutionsPerMinute = (uint16_t) MotorManager_GetRPM();
+	wheel_status.ErrorCode = (uint16_t) spi_read_data;
+
+	Send_WheelStatus(&wheel_status, 0x00);
 }
 
 void EventHandler_CanNode_0()

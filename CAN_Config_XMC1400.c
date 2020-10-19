@@ -1,5 +1,4 @@
 #include "Dave/Generated/CAN_NODE/can_node.h"
-#include "CAN_Config_XMC1400.h"
 
 
 XMC_CAN_MO_t CAN_NODE_Wheel_LMO_WheelControl = {
