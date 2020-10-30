@@ -30,10 +30,6 @@ typedef struct {
 	uint32_t crc;
 } MotorCommand_t;
 
-typedef enum {
-	STATUS_STOPPED, STATUS_RUNNING
-} MotorStatus_t;
-
 StaticQueue_t xMotorCommandsStaticQueue;
 uint8_t ucMotorCommandsQueueStorageArea[COMMAND_QUEUE_LENGTH * COMMAND_QUEUE_ITEM_SIZE];
 QueueHandle_t xQueue_MotorCommands;
@@ -62,9 +58,14 @@ uint32_t generate_crc(MotorCommand_t *command)
 	return CRC_SW_GetCRCResult(&CRC_SW_0);
 }
 
-BaseType_t MotorManager_GetRPM(void)
+uint16_t MotorManager_GetSpeed(void)
 {
 	return actual_rpm;
+}
+
+MotorStatus_t MotorManager_GetStatus(void)
+{
+	return motor_status;
 }
 
 BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction)

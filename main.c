@@ -41,7 +41,8 @@ void Time_Handler(void)
 	// Dummy message to get answer to first message
 	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
 
-	wheel_status.RevolutionsPerMinute = (uint16_t) MotorManager_GetRPM();
+	wheel_status.RevolutionsPerMinute = MotorManager_GetSpeed();
+	wheel_status.Status = MotorManager_GetStatus();
 	wheel_status.ErrorCode = (uint16_t) spi_read_data;
 
 	Send_WheelStatus(&wheel_status, 0x00);
