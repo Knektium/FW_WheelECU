@@ -17,7 +17,7 @@ typedef struct WheelControl_s {
 
 typedef struct WheelStatus_s {
 	uint16_t RevolutionsPerMinute;
-	uint16_t ErrorCode;
+	uint8_t ErrorCode;
 	uint8_t Status;
 } WheelStatus_t;
 

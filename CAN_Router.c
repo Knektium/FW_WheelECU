@@ -33,9 +33,8 @@ void Send_WheelStatus(WheelStatus_t *s, uint32_t to_node)
 	data[1U] |= (uint8_t) (s->RevolutionsPerMinute << 8U) & 255U;
 	
 	data[2U] |= (uint8_t) (s->ErrorCode) & 255U;
-	data[3U] |= (uint8_t) (s->ErrorCode << 8U) & 255U;
 	
-	data[4U] |= (uint8_t) (s->Status) & 3U;
+	data[3U] |= (uint8_t) (s->Status) & 3U;
 	
 	CAN_NODE_MO_UpdateData(CAN_NODE_0.lmobj_ptr[CAN_MESSAGE_WHEELSTATUS_INDEX], (uint8_t *) data);
 	CAN_NODE_MO_Transmit(CAN_NODE_0.lmobj_ptr[CAN_MESSAGE_WHEELSTATUS_INDEX]);
