@@ -11,7 +11,9 @@
 typedef uint16_t MotorSpeed_t;
 
 typedef enum {
-	DIR_FORWARD, DIR_BACKWARD, DIR_NONE
+	DIR_NONE = 0U,
+	DIR_FORWARD = 1U,
+	DIR_BACKWARD = 2U
 } MotorDirection_t;
 
 typedef struct {
@@ -33,7 +35,7 @@ void MotorManager_SpeedController(void *pvParameters);
 
 BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction);
 BaseType_t MotorManager_Stop(void);
-uint16_t MotorManager_GetSpeed(void);
+void MotorManager_GetSpeed(MotorParameters_t *params);
 MotorStatus_t MotorManager_GetStatus(void);
 
 #endif /* TASKS_MOTORMANAGER_H_ */

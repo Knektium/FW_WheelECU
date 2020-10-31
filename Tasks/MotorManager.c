@@ -58,9 +58,10 @@ uint32_t generate_crc(MotorCommand_t *command)
 	return CRC_SW_GetCRCResult(&CRC_SW_0);
 }
 
-uint16_t MotorManager_GetSpeed(void)
+void MotorManager_GetSpeed(MotorParameters_t *params)
 {
-	return actual_rpm;
+	params->rpm = (MotorSpeed_t) actual_rpm;
+	params->direction = target_params.direction;
 }
 
 MotorStatus_t MotorManager_GetStatus(void)

@@ -19,6 +19,7 @@ typedef struct WheelStatus_s {
 	uint16_t RevolutionsPerMinute;
 	uint8_t ErrorCode;
 	uint8_t Status;
+	uint8_t Direction;
 } WheelStatus_t;
 
 void CAN_HandleReceivedMessage(Message_t message);
