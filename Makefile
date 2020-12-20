@@ -8,7 +8,7 @@ CC := $(TOOLCHAIN_PATH)/arm-none-eabi-gcc
 OBJCOPY := $(TOOLCHAIN_PATH)/arm-none-eabi-objcopy
 OBJDUMP := $(TOOLCHAIN_PATH)/arm-none-eabi-objdump
 RM := rm -f
-MEDDELA := ../../meddela/meddela.py
+MEDDELA := python3 -m meddela
 
 APP_NAME := WheelECU
 
