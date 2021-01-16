@@ -3,9 +3,9 @@
 
 XMC_CAN_MO_t CAN_NODE_Wheel_LMO_WheelControl = {
 	.can_mo_type      = XMC_CAN_MO_TYPE_RECMSGOBJ,
+	.can_identifier   = 0x10000aU,
 	.can_id_mode      = XMC_CAN_FRAME_TYPE_EXTENDED_29BITS,
 	.can_priority     = XMC_CAN_ARBITRATION_MODE_IDE_DIR_BASED_PRIO_2,
-	.can_identifier   = 0x10000aU,
 	.can_id_mask      = 0x100000U,
 	.can_ide_mask     = 1U,
 	.can_mo_ptr       = (CAN_MO_TypeDef*) CAN_MO1,
@@ -25,9 +25,9 @@ const CAN_NODE_LMO_t CAN_NODE_Wheel_LMO_WheelControl_Config = {
 
 XMC_CAN_MO_t CAN_NODE_Wheel_LMO_WheelStatus = {
 	.can_mo_type      = XMC_CAN_MO_TYPE_TRANSMSGOBJ,
+	.can_identifier   = 0x200119U,
 	.can_id_mode      = XMC_CAN_FRAME_TYPE_EXTENDED_29BITS,
 	.can_priority     = XMC_CAN_ARBITRATION_MODE_IDE_DIR_BASED_PRIO_2,
-	.can_identifier   = 0x200119U,
 	.can_id_mask      = 0x200000U,
 	.can_ide_mask     = 1U,
 	.can_mo_ptr       = (CAN_MO_TypeDef*) CAN_MO2,

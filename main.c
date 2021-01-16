@@ -47,7 +47,18 @@ void Time_Handler(void)
 	wheel_status.RevolutionsPerMinute = (uint16_t) motor_params.rpm;
 	wheel_status.Direction = motor_params.direction;
 	wheel_status.Status = MotorManager_GetStatus();
-	wheel_status.ErrorCode = (uint16_t) spi_read_data;
+	wheel_status.OvertemperatureShutdown = spi_read_data & (1U << 6U);
+	wheel_status.CurrentLimitation = spi_read_data & (1U << 4U);
+
+	if (0xCU != spi_read_data && 0x3U != spi_read_data) {
+		wheel_status.ShortCircuitCode = spi_read_data & 0xFU;
+		wheel_status.OpenLoad = 0U;
+		wheel_status.Undervoltage = 0U;
+	} else {
+		wheel_status.ShortCircuitCode = 0U;
+		wheel_status.OpenLoad = spi_read_data == 0xCU;
+		wheel_status.Undervoltage = spi_read_data == 0x3U;
+	}
 
 	Send_WheelStatus(&wheel_status, 0x00);
 }
