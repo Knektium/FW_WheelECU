@@ -1,13 +1,3 @@
-/*
- * main.c
- *
- *  Created on: 2018 Nov 15 19:38:19
- *  Author: Jack
- */
-
-
-
-
 #include <DAVE.h>                 //Declarations from DAVE Code Generation (includes SFR declaration)
 #include <FREERTOS/task.h>
 
@@ -17,50 +7,9 @@
 #include "Tasks/MessageManager.h"
 #include "CAN_Router.h"
 
-// SPI command set
-#define RD_DIA	0x00U
-#define RES_DIA	0x80U
-#define RD_REV	0x20U
-#define RD_CTRL	0x60U
-#define WR_CTRL_RD_DIA	0xD0U
-#define WR_CTRL	0xE0U
-
 void Time_Handler(void)
 {
-	WheelStatus_t wheel_status;
-	MotorParameters_t motor_params;
-	uint8_t spi_read_data;
-	uint8_t spi_write_data;
-
-	spi_read_data = 0xFFU;
-	spi_write_data = RES_DIA;
-	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
-
-	spi_write_data = RD_DIA;
-	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
-
-	// Dummy message to get answer to first message
-	SPI_MASTER_Transfer(&SPI_MASTER_0, &spi_write_data, &spi_read_data, 1);
-
-	MotorManager_GetSpeed(&motor_params);
-
-	wheel_status.RevolutionsPerMinute = (uint16_t) motor_params.rpm;
-	wheel_status.Direction = motor_params.direction;
-	wheel_status.Status = MotorManager_GetStatus();
-	wheel_status.OvertemperatureShutdown = spi_read_data & (1U << 6U);
-	wheel_status.CurrentLimitation = spi_read_data & (1U << 4U);
-
-	if (0xCU != spi_read_data && 0x3U != spi_read_data) {
-		wheel_status.ShortCircuitCode = spi_read_data & 0xFU;
-		wheel_status.OpenLoad = 0U;
-		wheel_status.Undervoltage = 0U;
-	} else {
-		wheel_status.ShortCircuitCode = 0U;
-		wheel_status.OpenLoad = spi_read_data == 0xCU;
-		wheel_status.Undervoltage = spi_read_data == 0x3U;
-	}
-
-	Send_WheelStatus(&wheel_status, 0x00);
+	// Empty
 }
 
 void EventHandler_CanNode_0()

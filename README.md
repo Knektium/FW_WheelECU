@@ -23,5 +23,3 @@ Now run make to build:
 ```
 make -j4 NODE_ID=0x11
 ```
-
-

@@ -1,10 +1,3 @@
-/*
- * ModeManager.h
- *
- *  Created on: 5 Sep 2018
- *      Author: Jack
- */
-
 #ifndef TASKS_MODEMANAGER_H_
 #define TASKS_MODEMANAGER_H_
 

@@ -1,9 +1,3 @@
-/*
- * MessageManager.c
- *
- *  Created on: 23 Jan 2019
- *      Author: Jack
- */
 #include <DAVE.h>
 
 #include "tasks.h"
@@ -24,6 +18,10 @@ QueueHandle_t xQueue_Messages;
 TaskHandle_t xMessageManagerHandle = NULL;
 StaticTask_t xMessageManagerBuffer;
 StackType_t xMessageManagerStack[300U];
+
+TaskHandle_t xPeriodicTaskHandle = NULL;
+StaticTask_t xPeriodicTaskBuffer;
+StackType_t xPeriodicTaskStack[300U];
 
 
 void Handle_WheelControl_Received(WheelControl_t msg, uint8_t from_node_id, uint8_t to_node_id)
@@ -66,7 +64,35 @@ void MessageManager_PushMessage(Message_t *message)
 void MessageManager_Init(void)
 {
 	xQueue_Messages = xQueueCreateStatic(MESSAGE_QUEUE_LENGTH, MESSAGE_QUEUE_ITEM_SIZE, ucMessageQueueStorageArea, &xMessageStaticQueue);
-	xMessageManagerHandle = xTaskCreateStatic(MessageManager_Main, "MessageManager", MESSAGE_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 2), xMessageManagerStack, &xMessageManagerBuffer);
+	xMessageManagerHandle = xTaskCreateStatic(MessageManager_Main, "MessageManager_Main", MESSAGE_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 2), xMessageManagerStack, &xMessageManagerBuffer);
+	xPeriodicTaskHandle = xTaskCreateStatic(MessageManager_PeriodicTask, "MessageManager_Periodic", MESSAGE_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 2), xPeriodicTaskStack, &xPeriodicTaskBuffer);
+}
+
+void MessageManager_PeriodicTask(void *pvParameters)
+{
+	WheelStatus_t wheel_status;
+	MotorStatus_t motor_status;
+	MotorParameters_t motor_params;
+	MotorDiagnosis_t motor_diag;
+
+	while (1U) {
+		motor_status = MotorManager_GetStatus();
+		motor_diag = MotorManager_GetDiagnosis();
+		MotorManager_GetSpeed(&motor_params);
+
+		wheel_status.RevolutionsPerMinute = (uint16_t) motor_params.rpm;
+		wheel_status.Direction = motor_params.direction;
+		wheel_status.Status = motor_status;
+
+		wheel_status.OvertemperatureShutdown = motor_diag.OvertemperatureShutdown;
+		wheel_status.CurrentLimitation = motor_diag.CurrentLimitation;
+		wheel_status.ShortCircuitCode = motor_diag.ShortCircuitCode;
+		wheel_status.OpenLoad = motor_diag.OpenLoad;
+		wheel_status.Undervoltage = motor_diag.Undervoltage;
+
+		Send_WheelStatus(&wheel_status, 0x00);
+		vTaskDelay(500 / portTICK_PERIOD_MS);
+	}
 }
 
 void MessageManager_Main(void *pvParameters)
