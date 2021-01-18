@@ -160,23 +160,41 @@ uint8_t get_driver_diag()
 	return spi_read_data;
 }
 
-void MotorManager_GetSpeed(MotorParameters_t *params)
+BaseType_t MotorManager_GetStatus(MotorStatus_t *status)
 {
-	params->rpm = (MotorSpeed_t) actual_rpm;
-	params->direction = target_params.direction;
-}
+	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 500) == pdTRUE) {
+		*status = motor_status;
 
-void MotorManager_GetStatus(MotorStatus_t *status)
-{
-	*status = motor_status;
-}
-
-void MotorManager_GetDiagnosis(MotorDiagnosis_t *diagnosis)
-{
-	if (xSemaphoreTake(xDiagnosticsSemaphore, (TickType_t) 250) == pdTRUE) {
-		*diagnosis = motor_diag;
-		xSemaphoreGive(xDiagnosticsSemaphore);
+		xSemaphoreGive(xStatusSemaphore);
+		return pdTRUE;
 	}
+
+	return pdFALSE;
+}
+
+BaseType_t MotorManager_GetDiagnosis(MotorDiagnosis_t *diagnosis)
+{
+	if (xSemaphoreTake(xDiagnosticsSemaphore, (TickType_t) 500) == pdTRUE) {
+		*diagnosis = motor_diag;
+
+		xSemaphoreGive(xDiagnosticsSemaphore);
+		return pdTRUE;
+	}
+
+	return pdFALSE;
+}
+
+BaseType_t MotorManager_GetSpeed(MotorParameters_t *params)
+{
+	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 500) == pdTRUE) {
+		params->rpm = (MotorSpeed_t) actual_rpm;
+		params->direction = target_params.direction;
+
+		xSemaphoreGive(xStatusSemaphore);
+		return pdTRUE;
+	}
+
+	return pdFALSE;
 }
 
 BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction)
