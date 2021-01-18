@@ -166,21 +166,17 @@ void MotorManager_GetSpeed(MotorParameters_t *params)
 	params->direction = target_params.direction;
 }
 
-MotorStatus_t MotorManager_GetStatus(void)
+void MotorManager_GetStatus(MotorStatus_t *status)
 {
-	return motor_status;
+	*status = motor_status;
 }
 
-MotorDiagnosis_t MotorManager_GetDiagnosis(void)
+void MotorManager_GetDiagnosis(MotorDiagnosis_t *diagnosis)
 {
-	MotorDiagnosis_t diag;
-
 	if (xSemaphoreTake(xDiagnosticsSemaphore, (TickType_t) 250) == pdTRUE) {
-		diag = motor_diag;
+		*diagnosis = motor_diag;
 		xSemaphoreGive(xDiagnosticsSemaphore);
 	}
-
-	return diag;
 }
 
 BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction)

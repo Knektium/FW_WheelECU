@@ -76,8 +76,8 @@ void MessageManager_PeriodicTask(void *pvParameters)
 	MotorDiagnosis_t motor_diag;
 
 	while (1U) {
-		motor_status = MotorManager_GetStatus();
-		motor_diag = MotorManager_GetDiagnosis();
+		MotorManager_GetStatus(&motor_status);
+		MotorManager_GetDiagnosis(&motor_diag);
 		MotorManager_GetSpeed(&motor_params);
 
 		wheel_status.RevolutionsPerMinute = (uint16_t) motor_params.rpm;

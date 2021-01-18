@@ -38,10 +38,10 @@ void MotorManager_DiagnosticsTask(void *pvParameters);
 
 // Functions
 void MotorManager_Init(void);
+void MotorManager_GetStatus(MotorStatus_t *status);
+void MotorManager_GetDiagnosis(MotorDiagnosis_t *diagnosis);
 void MotorManager_GetSpeed(MotorParameters_t *params);
 BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction);
 BaseType_t MotorManager_Stop(void);
-MotorStatus_t MotorManager_GetStatus(void);
-MotorDiagnosis_t MotorManager_GetDiagnosis(void);
 
 #endif /* TASKS_MOTORMANAGER_H_ */
