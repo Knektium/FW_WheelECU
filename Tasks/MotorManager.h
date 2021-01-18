@@ -27,17 +27,20 @@ typedef enum {
 	STATUS_RUNNING = 1U
 } MotorStatus_t;
 
-extern TaskHandle_t xMotorManagerHandle;
-extern TaskHandle_t xSpeedControllerHandle;
+extern TaskHandle_t xMotorManager_MainTask_Handle;
+extern TaskHandle_t xMotorManager_SpeedControllerTask_Handle;
+extern TaskHandle_t xMotorManager_DiagnosticsTask_Handle;
 
-void MotorManager_Init(void);
-void MotorManager_Main(void *pvParameters);
-void MotorManager_SpeedController(void *pvParameters);
+// Tasks
+void MotorManager_MainTask(void *pvParameters);
+void MotorManager_SpeedControllerTask(void *pvParameters);
 void MotorManager_DiagnosticsTask(void *pvParameters);
 
+// Functions
+void MotorManager_Init(void);
+void MotorManager_GetSpeed(MotorParameters_t *params);
 BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction);
 BaseType_t MotorManager_Stop(void);
-void MotorManager_GetSpeed(MotorParameters_t *params);
 MotorStatus_t MotorManager_GetStatus(void);
 MotorDiagnosis_t MotorManager_GetDiagnosis(void);
 

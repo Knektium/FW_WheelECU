@@ -24,41 +24,37 @@ typedef struct {
 	uint32_t crc;
 } MotorCommand_t;
 
+// Queues
 StaticQueue_t xMotorCommandsStaticQueue;
 uint8_t ucMotorCommandsQueueStorageArea[COMMAND_QUEUE_LENGTH * COMMAND_QUEUE_ITEM_SIZE];
 QueueHandle_t xQueue_MotorCommands;
 
-TaskHandle_t xMotorManagerHandle = NULL;
-StaticTask_t xMotorManagerBuffer;
-StackType_t xMotorManagerStack[300U];
+// Task handles, buffers and stacks
+TaskHandle_t xMotorManager_MainTask_Handle = NULL;
+StaticTask_t xMainTask_Buffer;
+StackType_t xMainTask_Stack[300U];
 
-TaskHandle_t xSpeedControllerHandle = NULL;
-StaticTask_t xSpeedControllerBuffer;
-StackType_t xSpeedControllerStack[300U];
+TaskHandle_t xMotorManager_SpeedControllerTask_Handle = NULL;
+StaticTask_t xSpeedControllerTask_Buffer;
+StackType_t xSpeedControllerTask_Stack[300U];
 
-TaskHandle_t xDiagnosticsTaskHandle = NULL;
-StaticTask_t xDiagnosticsTaskBuffer;
-StackType_t xDiagnosticsTaskStack[300U];
+TaskHandle_t xMotorManager_DiagnosticsTask_Handle = NULL;
+StaticTask_t xDiagnosticsTask_Buffer;
+StackType_t xDiagnosticsTask_Stack[300U];
 
+// Semaphores
 SemaphoreHandle_t xStatusSemaphore = NULL;
 StaticSemaphore_t xStatusMutexBuffer;
 SemaphoreHandle_t xDiagnosticsSemaphore = NULL;
 StaticSemaphore_t xDiagnosticsMutexBuffer;
 
+// Motor state
 MotorStatus_t motor_status;
 MotorParameters_t target_params;
+MotorDiagnosis_t motor_diag;
 uint32_t current_duty_cycle = 100UL;
 uint16_t actual_rpm = 0U;
 uint16_t requested_rpm_changed;
-
-MotorDiagnosis_t motor_diag;
-
-uint32_t generate_crc(MotorCommand_t *command)
-{
-	CRC_SW_CalculateCRC(&CRC_SW_0, command, sizeof (MotorCommand_t));
-
-	return CRC_SW_GetCRCResult(&CRC_SW_0);
-}
 
 void set_motor_direction(MotorDirection_t direction)
 {
@@ -114,6 +110,33 @@ void set_motor_speed(MotorSpeed_t rpm)
 		requested_rpm_changed = 1U;
 		xSemaphoreGive(xStatusSemaphore);
 	}
+}
+
+uint32_t generate_crc(MotorCommand_t *command)
+{
+	CRC_SW_CalculateCRC(&CRC_SW_0, command, sizeof (MotorCommand_t));
+
+	return CRC_SW_GetCRCResult(&CRC_SW_0);
+}
+
+BaseType_t verify_command(MotorCommand_t *command)
+{
+	uint32_t crc;
+	uint32_t old_crc;
+	BaseType_t passed = pdFALSE;
+
+	return pdTRUE;
+
+	old_crc = command->crc;
+	command->crc = 0U;
+
+	crc = generate_crc(command);
+
+	if (crc == old_crc) {
+		passed = pdTRUE;
+	}
+
+	return passed;
 }
 
 uint8_t get_driver_diag()
@@ -188,26 +211,6 @@ BaseType_t MotorManager_Stop()
 	return xQueueSend(xQueue_MotorCommands, &command, (TickType_t) 2000);
 }
 
-BaseType_t MotorManager_VerifyCommand(MotorCommand_t *command)
-{
-	uint32_t crc;
-	uint32_t old_crc;
-	BaseType_t passed = pdFALSE;
-
-	return pdTRUE;
-
-	old_crc = command->crc;
-	command->crc = 0U;
-
-	crc = generate_crc(command);
-
-	if (crc == old_crc) {
-		passed = pdTRUE;
-	}
-
-	return passed;
-}
-
 void MotorManager_Init(void)
 {
 	motor_status = STATUS_STOPPED;
@@ -219,9 +222,10 @@ void MotorManager_Init(void)
 	xDiagnosticsSemaphore = xSemaphoreCreateMutexStatic(&xDiagnosticsMutexBuffer);
 
 	xQueue_MotorCommands = xQueueCreateStatic(COMMAND_QUEUE_LENGTH, COMMAND_QUEUE_ITEM_SIZE, ucMotorCommandsQueueStorageArea, &xMotorCommandsStaticQueue);
-	xMotorManagerHandle = xTaskCreateStatic(MotorManager_Main, "MotorManager", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xMotorManagerStack, &xMotorManagerBuffer);
-	xSpeedControllerHandle = xTaskCreateStatic(MotorManager_SpeedController, "SpeedController", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xSpeedControllerStack, &xSpeedControllerBuffer);
-	xDiagnosticsTaskHandle = xTaskCreateStatic(MotorManager_DiagnosticsTask, "DiagnosticsTask", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xDiagnosticsTaskStack, &xDiagnosticsTaskBuffer);
+
+	xMotorManager_MainTask_Handle = xTaskCreateStatic(MotorManager_MainTask, "MotorManager_Main", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xMainTask_Stack, &xMainTask_Buffer);
+	xMotorManager_SpeedControllerTask_Handle = xTaskCreateStatic(MotorManager_SpeedControllerTask, "MotorManager_SpeedController", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xSpeedControllerTask_Stack, &xSpeedControllerTask_Buffer);
+	xMotorManager_DiagnosticsTask_Handle = xTaskCreateStatic(MotorManager_DiagnosticsTask, "MotorManager_Diagnostics", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xDiagnosticsTask_Stack, &xDiagnosticsTask_Buffer);
 }
 
 void MotorManager_DiagnosticsTask(void *pvParameters)
@@ -254,7 +258,7 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 	}
 }
 
-void MotorManager_SpeedController(void *pvParameters)
+void MotorManager_SpeedControllerTask(void *pvParameters)
 {
 	const TickType_t xInterval = 333 / portTICK_PERIOD_MS;
 	uint16_t gear_carrier_count, rpm, rpmdiff;
@@ -311,7 +315,7 @@ void MotorManager_SpeedController(void *pvParameters)
 	}
 }
 
-void MotorManager_Main(void *pvParameters)
+void MotorManager_MainTask(void *pvParameters)
 {
 	MotorCommand_t command;
 
@@ -320,7 +324,7 @@ void MotorManager_Main(void *pvParameters)
 
 	while (1U) {
 		if (xQueueReceive(xQueue_MotorCommands, &command, (TickType_t) 2000)) {
-			if (pdFALSE == MotorManager_VerifyCommand(&command)) {
+			if (pdFALSE == verify_command(&command)) {
 				continue;
 			}
 
