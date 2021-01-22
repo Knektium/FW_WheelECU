@@ -3,6 +3,7 @@
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../INTERRUPT/v4_0_8/INTERRUPT_0.app#//@requiredApps.0"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../FREERTOS/v4_1_2/FREERTOS_0.app#//@requiredApps.1"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../GLOBAL_SCU_XMC1/v4_1_10/GLOBAL_SCU_XMC1_0.app#//@requiredApps.0"/>
+  <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../INTERRUPT/v4_0_8/INTERRUPT_1.app#//@requiredApps.0"/>
   <properties singleton="true" sharable="true"/>
   <hwResources name="swd0_pin0" URI="http://resources/4.0.8/app/CPU_CTRL_XMC1/0/hwres_swd0_0" resourceGroupUri="port/p/0/pad/14" mResGrpUri="port/p/0/pad/14">
     <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port0/port0_0.dd#//@provided.6"/>

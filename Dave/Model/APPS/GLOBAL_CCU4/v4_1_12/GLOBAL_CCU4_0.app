@@ -2,10 +2,12 @@
 <ResourceModel:App xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="GLOBAL_CCU4" URI="http://resources/4.1.12/app/GLOBAL_CCU4/0" description="Initializes CCU4 Global Register Set." version="4.1.12" minDaveVersion="4.0.0" instanceLabel="GLOBAL_CCU4_0" appLabel="">
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../PWM/v4_1_10/PWM_1.app#//@requiredApps.1"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../COUNTER/v4_1_10/COUNTER_0.app#//@requiredApps.0"/>
+  <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../COUNTER/v4_1_10/COUNTER_1.app#//@requiredApps.0"/>
   <properties provideInit="true" sharable="true"/>
   <virtualSignals name="ccu4_global" URI="http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_global_ccu4_globalsignal" hwSignal="global_signal" hwResource="//@hwResources.0">
     <upwardMapList xsi:type="ResourceModel:Connections" href="../../PWM/v4_1_10/PWM_1.app#//@connections.1"/>
     <upwardMapList xsi:type="ResourceModel:Connections" href="../../COUNTER/v4_1_10/COUNTER_0.app#//@connections.0"/>
+    <upwardMapList xsi:type="ResourceModel:Connections" href="../../COUNTER/v4_1_10/COUNTER_1.app#//@connections.0"/>
   </virtualSignals>
   <virtualSignals name="clock_ccu" URI="http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_global_ccu4_clk" hwSignal="clk" hwResource="//@hwResources.0"/>
   <virtualSignals name="ccu4_global_start" URI="http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_global_ccu4_gsc_enable" hwSignal="gsc_enable" hwResource="//@hwResources.1" visible="true"/>

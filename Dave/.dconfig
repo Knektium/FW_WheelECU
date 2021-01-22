@@ -6,6 +6,7 @@
             <BindMap MUri="port/p/0/pad/15" Proxy="app/CPU_CTRL_XMC1/0/hwres_swd0_1"/>
             <BindMap MUri="devicepackage/0/9" Proxy="app/SPI_MASTER/0/__pin_hwres_port_pad_spi_sclkout"/>
             <BindMap MUri="peripheral/cpu/0/nvic/interrupt/2" Proxy="app/GLOBAL_SCU_XMC1/0/hwres_sr2_scunode"/>
+            <BindMap MUri="peripheral/cpu/0/nvic/interrupt/21" Proxy="app/INTERRUPT/1/hwres_nvicnode"/>
             <BindMap MUri="peripheral/cpu/0/exception/hardfault" Proxy="app/CPU_CTRL_XMC1/0/hwres_exception_hardfault"/>
             <BindMap MUri="port/p/4/pad/4" Proxy="app/PWM/1/hwres_port_pad_pwm_out"/>
             <BindMap MUri="port/p/0/pad/14" Proxy="app/CPU_CTRL_XMC1/0/hwres_swd0_0"/>
@@ -21,7 +22,7 @@
             <BindMap MUri="port/p/3/pad/0" Proxy="app/DIGITAL_IO/1/hwres_port_pin"/>
             <BindMap MUri="devicepackage/0/62" Proxy="app/DIGITAL_IO/4/__pin_hwres_port_pin"/>
             <BindMap MUri="devicepackage/0/38" Proxy="app/DIGITAL_IO/0/__pin_hwres_port_pin"/>
-            <BindMap MUri="peripheral/ccu4/1/cc4/1" Proxy="app/COUNTER/0/hwres_ccu4_slice"/>
+            <BindMap MUri="peripheral/ccu4/1/cc4/2" Proxy="app/COUNTER/0/hwres_ccu4_slice"/>
             <BindMap MUri="peripheral/cpu/0/exception/pendsv" Proxy="app/FREERTOS/0/hwres_exception_pendsv"/>
             <BindMap MUri="peripheral/cpu/0/exception/svcall" Proxy="app/FREERTOS/0/hwres_exception_svcall"/>
             <BindMap MUri="peripheral/cpu/0/nvic/interrupt/3" Proxy="app/INTERRUPT/0/hwres_nvicnode"/>
@@ -41,6 +42,7 @@
             <BindMap MUri="devicepackage/0/28" Proxy="app/SPI_MASTER/0/__pin_hwres_port_pad_spi_ss_0"/>
             <BindMap MUri="port/p/2/pad/0" Proxy="app/SPI_MASTER/0/hwres_port_pad_spi_sclkout"/>
             <BindMap MUri="devicepackage/0/64" Proxy="app/DIGITAL_IO/3/__pin_hwres_port_pin"/>
+            <BindMap MUri="peripheral/ccu4/1/cc4/1" Proxy="app/COUNTER/1/hwres_ccu4_slice"/>
             <BindMap MUri="devicepackage/0/36" Proxy="app/DIGITAL_IO/1/__pin_hwres_port_pin"/>
             <BindMap MUri="peripheral/ccu4/1/global" Proxy="app/GLOBAL_CCU4/0/hwres_peripheral_ccu4_global"/>
             <BindMap MUri="peripheral/can/0/global" Proxy="app/GLOBAL_CAN/0/hwres_can_global"/>

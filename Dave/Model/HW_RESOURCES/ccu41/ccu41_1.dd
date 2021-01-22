@@ -200,7 +200,7 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#101111" description="CCU4x.INyBV"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="1" URI="http://resources/14.0.1/peripheral/ccu4/1/cc4/1">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/COUNTER/v4_1_10/COUNTER_0.app#//@hwResources.0"/>
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/COUNTER/v4_1_10/COUNTER_1.app#//@hwResources.0"/>
     <resourcesList name="stc" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc41_stc"/>
     <resourcesList name="c0v" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc41_c0v"/>
     <resourcesList name="c1v" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc41_c1v"/>
@@ -522,6 +522,7 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="CCU4x.ECLKC"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="2" URI="http://resources/14.0.1/peripheral/ccu4/1/cc4/2">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/COUNTER/v4_1_10/COUNTER_0.app#//@hwResources.0"/>
     <resourcesList name="stc" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc42_stc"/>
     <resourcesList name="c0v" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc42_c0v"/>
     <resourcesList name="c1v" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc42_c1v"/>

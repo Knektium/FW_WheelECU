@@ -88,6 +88,10 @@ extern COUNTER_t COUNTER_WheelRevolution;
 
 
 
+extern COUNTER_t COUNTER_AutoStop;
+
+
+
 #endif /* COUNTERCONF_H_ */
 
 /*CODE_BLOCK_END*/

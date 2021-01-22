@@ -21,7 +21,7 @@ typedef enum {
 typedef struct {
 	MotorCommandType_t type;
 	MotorParameters_t parameters;
-	uint32_t crc;
+	uint16_t revolutions;
 } MotorCommand_t;
 
 // Queues
@@ -112,31 +112,15 @@ void set_motor_speed(MotorSpeed_t rpm)
 	}
 }
 
-uint32_t generate_crc(MotorCommand_t *command)
+void set_motor_auto_stop(uint16_t revolutions)
 {
-	CRC_SW_CalculateCRC(&CRC_SW_0, command, sizeof (MotorCommand_t));
+	COUNTER_Stop(&COUNTER_AutoStop);
 
-	return CRC_SW_GetCRCResult(&CRC_SW_0);
-}
-
-BaseType_t verify_command(MotorCommand_t *command)
-{
-	uint32_t crc;
-	uint32_t old_crc;
-	BaseType_t passed = pdFALSE;
-
-	return pdTRUE;
-
-	old_crc = command->crc;
-	command->crc = 0U;
-
-	crc = generate_crc(command);
-
-	if (crc == old_crc) {
-		passed = pdTRUE;
+	if (revolutions > 0U) {
+		COUNTER_ResetCounter(&COUNTER_AutoStop);
+		COUNTER_SetCountMatch(&COUNTER_AutoStop, revolutions);
+		COUNTER_Start(&COUNTER_AutoStop);
 	}
-
-	return passed;
 }
 
 uint8_t get_driver_diag()
@@ -197,16 +181,14 @@ BaseType_t MotorManager_GetSpeed(MotorParameters_t *params)
 	return pdFALSE;
 }
 
-BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction)
+BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction, uint16_t revolutions)
 {
 	MotorCommand_t command;
 
 	command.type = COMMAND_START;
 	command.parameters.rpm = rpm;
 	command.parameters.direction = direction;
-	command.crc = 0U;
-
-	command.crc = generate_crc(&command);
+	command.revolutions = revolutions;
 
 	return xQueueSend(xQueue_MotorCommands, &command, (TickType_t) 2000);
 }
@@ -218,11 +200,15 @@ BaseType_t MotorManager_Stop()
 	command.type = COMMAND_STOP;
 	command.parameters.rpm = 0U;
 	command.parameters.direction = 0U;
-	command.crc = 0U;
-
-	command.crc = generate_crc(&command);
+	command.revolutions = 0U;
 
 	return xQueueSend(xQueue_MotorCommands, &command, (TickType_t) 2000);
+}
+
+void MotorManager_AutoStopHandler(void)
+{
+	MotorManager_Stop();
+	COUNTER_Stop(&COUNTER_AutoStop);
 }
 
 void MotorManager_Init(void)
@@ -338,15 +324,11 @@ void MotorManager_MainTask(void *pvParameters)
 
 	while (1U) {
 		if (xQueueReceive(xQueue_MotorCommands, &command, (TickType_t) 2000)) {
-			if (pdFALSE == verify_command(&command)) {
-				continue;
-			}
-
 			switch (command.type) {
 			case COMMAND_START:
-				COUNTER_ResetCounter(&COUNTER_WheelRevolution);
 				COUNTER_Start(&COUNTER_WheelRevolution);
 
+				set_motor_auto_stop(command.revolutions);
 				set_motor_direction(command.parameters.direction);
 				set_motor_speed(command.parameters.rpm);
 
@@ -358,6 +340,7 @@ void MotorManager_MainTask(void *pvParameters)
 				break;
 			case COMMAND_STOP:
 			default:
+				set_motor_auto_stop(0U);
 				set_motor_speed(0U);
 				set_motor_direction(DIR_NONE);
 

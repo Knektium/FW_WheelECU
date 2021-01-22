@@ -259,5 +259,136 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
   </provided>
   <provided xsi:type="ResourceModel:BitField" name="setena10" URI="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena10" value="0" toolTipHelpDescription="Writing 0 to a SETENA bit has no effect, writing 1 to a bit enables the corresponding interrupt." defaultValue="0" startPos="10" stopPos="10" accessPermission="rw" maxValue="1" minValue="0"/>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="IRQ4_Handler" URI="http://resources/14.0.1/peripheral/cpu/0/nvic/interrupt/4">
+    <resourcesList name="iser_setena" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena4"/>
+    <resourcesList name="icer_clrena" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_icer/clrena4"/>
+    <resourcesList name="ispr_setpend" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_ispr/setpend4"/>
+    <resourcesList name="icpr_clrpend" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_icpr/clrpend4"/>
+    <resourcesList name="ipr_pri" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_ipr1/pri_4"/>
+    <resourcesList name="intcr_insel" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/intcr0/intsel4"/>
+    <resourcesList name="signal_in" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/irq4_handler"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="setena4" URI="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena4" value="0" toolTipHelpDescription="Writing 0 to a SETENA bit has no effect, writing 1 to a bit enables the corresponding interrupt." defaultValue="0" startPos="4" stopPos="4" accessPermission="rw" maxValue="1" minValue="0"/>
+  <provided xsi:type="ResourceModel:BitField" name="INTSEL4" URI="http://resources/14.0.1/peripheral/cpu/0/intcr0/intsel4" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 4" defaultValue="0x00000000" startPos="8" stopPos="9" accessPermission="rw" maxValue="3" minValue="0">
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+  </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="IRQ21_Handler" URI="http://resources/14.0.1/peripheral/cpu/0/nvic/interrupt/21">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/INTERRUPT/v4_0_8/INTERRUPT_1.app#//@hwResources.0"/>
+    <resourcesList name="iser_setena" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena21"/>
+    <resourcesList name="icer_clrena" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_icer/clrena21"/>
+    <resourcesList name="ispr_setpend" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_ispr/setpend21"/>
+    <resourcesList name="icpr_clrpend" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_icpr/clrpend21"/>
+    <resourcesList name="ipr_pri" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_ipr5/pri_21"/>
+    <resourcesList name="intcr_insel" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel21"/>
+    <resourcesList name="signal_in" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/irq21_handler"/>
+  </provided>
+  <provided xsi:type="ResourceModel:RegisterParameter" name="INTCR1" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1" value="0x00000000" toolTipHelpDescription="Interrupt Control Register 1" defaultValue="0x00000000" addressOffset="0x0070" resetValue="0x00000000" resetMask="0xFFFFFFFF">
+    <bitFields name="INTSEL16" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel16" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 16" defaultValue="0x00000000" startPos="0" stopPos="1" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL17" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel17" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 17" defaultValue="0x00000000" startPos="2" stopPos="3" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL18" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel18" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 18" defaultValue="0x00000000" startPos="4" stopPos="5" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL19" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel19" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 19" defaultValue="0x00000000" startPos="6" stopPos="7" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL20" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel20" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 20" defaultValue="0x00000000" startPos="8" stopPos="9" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL21" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel21" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 21" defaultValue="0x00000000" startPos="10" stopPos="11" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL22" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel22" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 22" defaultValue="0x00000000" startPos="12" stopPos="13" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL23" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel23" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 23" defaultValue="0x00000000" startPos="14" stopPos="15" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL24" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel24" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 24" defaultValue="0x00000000" startPos="16" stopPos="17" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL25" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel25" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 25" defaultValue="0x00000000" startPos="18" stopPos="19" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL26" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel26" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 26" defaultValue="0x00000000" startPos="20" stopPos="21" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL27" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel27" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 27" defaultValue="0x00000000" startPos="22" stopPos="23" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL28" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel28" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 28" defaultValue="0x00000000" startPos="24" stopPos="25" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL29" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel29" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 29" defaultValue="0x00000000" startPos="26" stopPos="27" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL30" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel30" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 30" defaultValue="0x00000000" startPos="28" stopPos="29" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+    <bitFields name="INTSEL31" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel31" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 31" defaultValue="0x00000000" startPos="30" stopPos="31" accessPermission="rw" maxValue="3" minValue="0">
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+      <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+    </bitFields>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="INTSEL21" URI="http://resources/14.0.1/peripheral/cpu/0/intcr1/intsel21" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 21" defaultValue="0x00000000" startPos="10" stopPos="11" accessPermission="rw" maxValue="3" minValue="0">
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="setena21" URI="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena21" value="0" toolTipHelpDescription="Writing 0 to a SETENA bit has no effect, writing 1 to a bit enables the corresponding interrupt." defaultValue="0" startPos="21" stopPos="21" accessPermission="rw" maxValue="1" minValue="0"/>
   <addressBlock offset="0x0" size="0x1000" usage="registers"/>
 </ResourceModel:Peripheral>

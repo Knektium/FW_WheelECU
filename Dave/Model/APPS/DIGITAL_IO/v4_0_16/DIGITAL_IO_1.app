@@ -23,4 +23,8 @@
     <downwardMapList xsi:type="ResourceModel:VirtualSignal" href="../../COUNTER/v4_1_10/COUNTER_0.app#//@virtualSignals.14"/>
     <targetVirtualSignal href="../../COUNTER/v4_1_10/COUNTER_0.app#//@virtualSignals.14"/>
   </connections>
+  <connections URI="http://resources/4.0.16/app/DIGITAL_IO/1/http://resources/4.0.16/app/DIGITAL_IO/1/vs_digital_io_pad_pin/http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_input_signal" sourceSignal="pin" targetSignal="counter_input" srcVirtualSignal="//@virtualSignals.1">
+    <downwardMapList xsi:type="ResourceModel:VirtualSignal" href="../../COUNTER/v4_1_10/COUNTER_1.app#//@virtualSignals.14"/>
+    <targetVirtualSignal href="../../COUNTER/v4_1_10/COUNTER_1.app#//@virtualSignals.14"/>
+  </connections>
 </ResourceModel:App>

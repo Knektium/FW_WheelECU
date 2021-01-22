@@ -49,7 +49,7 @@ void Handle_WheelControl_Received(WheelControl_t msg, uint8_t from_node_id, uint
 	if (DIR_NONE == motor_direction) {
 		MotorManager_Stop();
 	} else {
-		MotorManager_SetSpeed(motor_speed, motor_direction);
+		MotorManager_SetSpeed(motor_speed, motor_direction, msg.Revolutions);
 	}
 }
 

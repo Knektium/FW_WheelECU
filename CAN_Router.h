@@ -13,6 +13,7 @@ typedef struct {
 typedef struct WheelControl_s {
 	uint16_t Speed;
 	uint8_t Direction;
+	uint16_t Revolutions;
 } WheelControl_t;
 
 typedef struct WheelStatus_s {

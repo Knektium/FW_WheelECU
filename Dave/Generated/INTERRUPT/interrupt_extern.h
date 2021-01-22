@@ -58,11 +58,15 @@
 	
 #define EventHandler_CanNode_0 IRQ_Hdlr_3
 		
+#define MotorManager_AutoStopHandler IRQ_Hdlr_21
+		
 /***********************************************************************************************************************
  * EXTERN DECLARATIONS
 ***********************************************************************************************************************/
 	
 extern const INTERRUPT_t INTERRUPT_0; 
+	
+extern const INTERRUPT_t INTERRUPT_AutoStop; 
 	
 #endif  /* INTERRUPT_EXTERN_H */
 

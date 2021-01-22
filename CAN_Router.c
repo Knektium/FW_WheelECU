@@ -19,6 +19,10 @@ void CAN_HandleReceivedMessage(Message_t message)
 		s.Direction = 0U;
 		s.Direction += ((message.data[2U]) & 3U);
 
+		s.Revolutions = 0U;
+		s.Revolutions += ((message.data[3U]) & 255U);
+		s.Revolutions += ((message.data[4U]) & 255U) << 8U;
+
 		Handle_WheelControl_Received(s, from_node_id, to_node_id);
 	}
 }

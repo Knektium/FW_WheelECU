@@ -52,16 +52,6 @@
                 <Type>C File</Type>
             </Source_File>
             <Source_File>
-                <File_Name>crc_sw.c</File_Name>
-                <Path>\Dave\Generated\CRC_SW\crc_sw.c</Path>
-                <Type>C File</Type>
-            </Source_File>
-            <Source_File>
-                <File_Name>crc_sw_conf.c</File_Name>
-                <Path>\Dave\Generated\CRC_SW\crc_sw_conf.c</Path>
-                <Type>C File</Type>
-            </Source_File>
-            <Source_File>
                 <File_Name>DAVE.c</File_Name>
                 <Path>\Dave\Generated\DAVE.c</Path>
                 <Type>C File</Type>
@@ -271,21 +261,6 @@
             <Header_File>
                 <File_Name>cpu_ctrl_xmc1_extern.h</File_Name>
                 <Path>\Dave\Generated\CPU_CTRL_XMC1\cpu_ctrl_xmc1_extern.h</Path>
-                <Type>H File</Type>
-            </Header_File>
-            <Header_File>
-                <File_Name>crc_sw.h</File_Name>
-                <Path>\Dave\Generated\CRC_SW\crc_sw.h</Path>
-                <Type>H File</Type>
-            </Header_File>
-            <Header_File>
-                <File_Name>crc_sw_conf.h</File_Name>
-                <Path>\Dave\Generated\CRC_SW\crc_sw_conf.h</Path>
-                <Type>H File</Type>
-            </Header_File>
-            <Header_File>
-                <File_Name>crc_sw_extern.h</File_Name>
-                <Path>\Dave\Generated\CRC_SW\crc_sw_extern.h</Path>
                 <Type>H File</Type>
             </Header_File>
             <Header_File>

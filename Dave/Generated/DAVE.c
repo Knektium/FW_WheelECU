@@ -78,11 +78,6 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of CRC_SW APP instance CRC_SW_0 */
-	 init_status = (DAVE_STATUS_t)CRC_SW_Init(&CRC_SW_0); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
 	 /**  Initialization of PWM APP instance PWM_Motor */
 	 init_status = (DAVE_STATUS_t)PWM_Init(&PWM_Motor); 
    } 
@@ -120,6 +115,16 @@ DAVE_STATUS_t DAVE_Init(void)
   {
 	 /**  Initialization of SPI_MASTER APP instance SPI_MASTER_0 */
 	 init_status = (DAVE_STATUS_t)SPI_MASTER_Init(&SPI_MASTER_0); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of COUNTER APP instance COUNTER_AutoStop */
+	 init_status = (DAVE_STATUS_t)COUNTER_Init(&COUNTER_AutoStop); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of INTERRUPT APP instance INTERRUPT_AutoStop */
+	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_AutoStop); 
    }  
   return init_status;
 } /**  End of function DAVE_Init */

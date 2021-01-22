@@ -67,9 +67,6 @@
 #include "FREERTOS/freertos.h"
   
 
-#include "CRC_SW/crc_sw.h"
-  
-
 #include "GLOBAL_CCU4/global_ccu4.h"
   
 
