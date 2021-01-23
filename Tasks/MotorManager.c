@@ -52,6 +52,10 @@ StaticSemaphore_t xDiagnosticsMutexBuffer;
 MotorStatus_t motor_status;
 MotorParameters_t target_params;
 MotorDiagnosis_t motor_diag;
+
+// Speed adjustment
+int duty_cycle_adjustment = 0;
+uint32_t calculated_duty_cycle = 100UL;
 uint32_t current_duty_cycle = 100UL;
 uint16_t actual_rpm = 0U;
 uint16_t requested_rpm_changed;
@@ -96,7 +100,11 @@ void set_motor_speed(MotorSpeed_t rpm)
 			duty_cycle = min_duty + ((max_duty - min_duty) * percentage) / 100UL;
 		}
 
+		calculated_duty_cycle = duty_cycle;
+
 		if (duty_cycle > 0UL) {
+			duty_cycle = duty_cycle + (duty_cycle * duty_cycle_adjustment) / 100UL;
+
 			PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, duty_cycle);
 			PWM_Start(&PWM_Motor);
 
@@ -303,6 +311,9 @@ void MotorManager_SpeedControllerTask(void *pvParameters)
 
 						current_duty_cycle = duty_cycle;
 						PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, duty_cycle);
+
+						// Persist calibration
+						duty_cycle_adjustment = ((int) (current_duty_cycle - calculated_duty_cycle) * 100) / calculated_duty_cycle;
 					}
 				}
 			}
