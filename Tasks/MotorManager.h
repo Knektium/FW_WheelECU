@@ -20,11 +20,13 @@ typedef struct {
 	uint8_t OpenLoad;
 	uint8_t Undervoltage;
 	uint8_t ShortCircuitCode;
+	uint8_t NoRotation;
 } MotorDiagnosis_t;
 
 typedef enum {
 	STATUS_STOPPED = 0U,
-	STATUS_RUNNING = 1U
+	STATUS_RUNNING = 1U,
+	STATUS_ERROR = 2U
 } MotorStatus_t;
 
 extern TaskHandle_t xMotorManager_MainTask_Handle;
