@@ -283,8 +283,8 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 		dia_code = driver_dia_reg & 0xFU;
 
 		if (xSemaphoreTake(xDiagnosticsSemaphore, (TickType_t) 250) == pdTRUE) {
-			motor_diag.OvertemperatureShutdown = driver_dia_reg & (1U << 6U);
-			motor_diag.CurrentLimitation = driver_dia_reg & (1U << 4U);
+			motor_diag.OvertemperatureShutdown = (uint8_t) (0U == (driver_dia_reg & 20U));
+			motor_diag.CurrentLimitation = (uint8_t) (0U == (driver_dia_reg & 8U));
 
 			if (0U != motor_diag.OvertemperatureShutdown || 0U != motor_diag.CurrentLimitation) {
 				has_errors = 1L;
