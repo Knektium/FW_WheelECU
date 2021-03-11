@@ -42,6 +42,7 @@ void MotorManager_DiagnosticsTask(void *pvParameters);
 void MotorManager_Init(void);
 BaseType_t MotorManager_GetStatus(MotorStatus_t *status);
 BaseType_t MotorManager_GetDiagnosis(MotorDiagnosis_t *diagnosis);
+BaseType_t MotorManager_GetRequestedSpeed(MotorParameters_t *params);
 BaseType_t MotorManager_GetSpeed(MotorParameters_t *params);
 BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction, uint16_t revolutions);
 BaseType_t MotorManager_Stop(void);

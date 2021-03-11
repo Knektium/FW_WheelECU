@@ -189,6 +189,19 @@ BaseType_t MotorManager_GetDiagnosis(MotorDiagnosis_t *diagnosis)
 	return pdFALSE;
 }
 
+BaseType_t MotorManager_GetRequestedSpeed(MotorParameters_t *params)
+{
+	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 50) == pdTRUE) {
+		params->rpm = target_params.rpm;
+		params->direction = target_params.direction;
+
+		xSemaphoreGive(xStatusSemaphore);
+		return pdTRUE;
+	}
+
+	return pdFALSE;
+}
+
 BaseType_t MotorManager_GetSpeed(MotorParameters_t *params)
 {
 	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 500) == pdTRUE) {
