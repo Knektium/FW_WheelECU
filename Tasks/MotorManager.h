@@ -46,6 +46,7 @@ BaseType_t MotorManager_GetRequestedSpeed(MotorParameters_t *params);
 BaseType_t MotorManager_GetSpeed(MotorParameters_t *params);
 BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction, uint16_t revolutions);
 BaseType_t MotorManager_Stop(void);
+BaseType_t MotorManager_NotifyError(void);
 
 // Interrupt handlers
 void MotorManager_AutoStopHandler(void);

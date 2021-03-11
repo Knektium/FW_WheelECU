@@ -16,7 +16,7 @@ const BaseType_t max_duty_cycle = 10000L; // 100 %
 const BaseType_t min_duty_cycle = 4000L; // 50 %
 
 typedef enum {
-	COMMAND_START, COMMAND_STOP
+	COMMAND_START, COMMAND_STOP, COMMAND_NOTIFY_ERROR
 } MotorCommandType_t;
 
 typedef struct {
@@ -61,6 +61,7 @@ uint32_t current_duty_cycle = 100UL;
 uint16_t actual_rpm = 0U;
 uint16_t requested_rpm_changed;
 
+/* Make sure to take the xStatusSemaphore before calling this function */
 void set_motor_direction(MotorDirection_t direction)
 {
 	switch (direction) {
@@ -74,10 +75,7 @@ void set_motor_direction(MotorDirection_t direction)
 		break;
 	}
 
-	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 200) == pdTRUE) {
-		target_params.direction = direction;
-		xSemaphoreGive(xStatusSemaphore);
-	}
+	target_params.direction = direction;
 }
 
 BaseType_t get_duty_cycle_from_rpm(MotorSpeed_t rpm)
@@ -104,32 +102,29 @@ BaseType_t get_adjusted_duty_cycle(BaseType_t duty_cycle)
 	return duty_cycle + (duty_cycle * duty_cycle_adjustment) / 100L;
 }
 
+/* Make sure to take the xStatusSemaphore before calling this function */
 void set_motor_speed(MotorSpeed_t rpm)
 {
 	BaseType_t duty_cycle = 0L;
 
-	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 250) == pdTRUE) {
-		PWM_Stop(&PWM_Motor);
+	PWM_Stop(&PWM_Motor);
 
-		duty_cycle = get_duty_cycle_from_rpm(rpm);
+	duty_cycle = get_duty_cycle_from_rpm(rpm);
 
-		calculated_duty_cycle = duty_cycle;
-		requested_rpm_changed = 1U;
+	calculated_duty_cycle = duty_cycle;
+	requested_rpm_changed = 1U;
+	target_params.rpm = rpm;
 
-		if (duty_cycle > 0L) {
-			duty_cycle = get_adjusted_duty_cycle(duty_cycle);
+	if (duty_cycle > 0L) {
+		duty_cycle = get_adjusted_duty_cycle(duty_cycle);
 
-			PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, (uint32_t) duty_cycle);
-			PWM_Start(&PWM_Motor);
-			DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDisable);
+		PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, (uint32_t) duty_cycle);
+		PWM_Start(&PWM_Motor);
+		DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDisable);
 
-			current_duty_cycle = duty_cycle;
-			target_params.rpm = rpm;
-		} else {
-			DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDisable);
-		}
-
-		xSemaphoreGive(xStatusSemaphore);
+		current_duty_cycle = duty_cycle;
+	} else {
+		DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDisable);
 	}
 }
 
@@ -227,11 +222,23 @@ BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction, u
 	return xQueueSend(xQueue_MotorCommands, &command, (TickType_t) 2000);
 }
 
-BaseType_t MotorManager_Stop()
+BaseType_t MotorManager_Stop(void)
 {
 	MotorCommand_t command;
 
 	command.type = COMMAND_STOP;
+	command.parameters.rpm = 0U;
+	command.parameters.direction = 0U;
+	command.revolutions = 0U;
+
+	return xQueueSend(xQueue_MotorCommands, &command, (TickType_t) 2000);
+}
+
+BaseType_t MotorManager_NotifyError(void)
+{
+	MotorCommand_t command;
+
+	command.type = COMMAND_NOTIFY_ERROR;
 	command.parameters.rpm = 0U;
 	command.parameters.direction = 0U;
 	command.revolutions = 0U;
@@ -296,7 +303,7 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 				motor_diag.OpenLoad = dia_code == 0xCU;
 				motor_diag.Undervoltage = dia_code == 0x3U;
 
-				if (0U != motor_diag.OpenLoad || 0U != motor_diag.Undervoltage) {
+				if (0U != motor_diag.Undervoltage) {
 					has_errors = 1L;
 				}
 
@@ -320,9 +327,8 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 			xSemaphoreGive(xStatusSemaphore);
 		}
 
-		if (has_errors) {
-			motor_status = STATUS_ERROR;
-			MotorManager_Stop();
+		if (1L == has_errors) {
+			MotorManager_NotifyError();
 		}
 
 		vTaskDelay(333 / portTICK_PERIOD_MS);
@@ -385,34 +391,42 @@ void MotorManager_MainTask(void *pvParameters)
 
 	while (1U) {
 		if (xQueueReceive(xQueue_MotorCommands, &command, (TickType_t) 2000)) {
-			switch (command.type) {
-			case COMMAND_START:
-				COUNTER_Start(&COUNTER_WheelRevolution);
+			if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 2000) == pdTRUE) {
+				switch (command.type) {
+				case COMMAND_NOTIFY_ERROR:
+					motor_status = STATUS_ERROR;
 
-				set_motor_auto_stop(command.revolutions);
-				set_motor_direction(command.parameters.direction);
-				set_motor_speed(command.parameters.rpm);
+					set_motor_auto_stop(0U);
+					set_motor_speed(0U);
+					set_motor_direction(DIR_NONE);
 
-				if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 100) == pdTRUE) {
+					COUNTER_Stop(&COUNTER_WheelRevolution);
+
+					break;
+				case COMMAND_START:
 					motor_status = STATUS_RUNNING;
-					xSemaphoreGive(xStatusSemaphore);
-				}
 
-				break;
-			case COMMAND_STOP:
-			default:
-				set_motor_auto_stop(0U);
-				set_motor_speed(0U);
-				set_motor_direction(DIR_NONE);
+					COUNTER_Start(&COUNTER_WheelRevolution);
 
-				COUNTER_Stop(&COUNTER_WheelRevolution);
+					set_motor_auto_stop(command.revolutions);
+					set_motor_direction(command.parameters.direction);
+					set_motor_speed(command.parameters.rpm);
 
-				if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 100) == pdTRUE) {
+					break;
+				case COMMAND_STOP:
+				default:
 					motor_status = STATUS_STOPPED;
-					xSemaphoreGive(xStatusSemaphore);
+
+					set_motor_auto_stop(0U);
+					set_motor_speed(0U);
+					set_motor_direction(DIR_NONE);
+
+					COUNTER_Stop(&COUNTER_WheelRevolution);
+
+					break;
 				}
 
-				break;
+				xSemaphoreGive(xStatusSemaphore);
 			}
 		}
 	}
