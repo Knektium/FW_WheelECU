@@ -266,10 +266,12 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 {
 	uint8_t driver_dia_reg;
 	uint8_t dia_code;
+	BaseType_t open_load;
 	BaseType_t has_errors;
 
 	while (1U) {
 		has_errors = 0L;
+		open_load = 0L;
 		driver_dia_reg = get_driver_diag();
 		dia_code = driver_dia_reg & 0xFU;
 
@@ -297,15 +299,24 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 				if (0U != motor_diag.OpenLoad || 0U != motor_diag.Undervoltage) {
 					has_errors = 1L;
 				}
+
+				open_load = (BaseType_t) motor_diag.OpenLoad;
 			}
 
 			xSemaphoreGive(xDiagnosticsSemaphore);
 		}
 
 		if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 100) == pdTRUE) {
-			if (STATUS_RUNNING == motor_status && 0U == requested_rpm_changed && (MIN_RPM / 2U) > actual_rpm) {
-				has_errors = 1L;
+			if (STATUS_RUNNING == motor_status) {
+				if (0U == requested_rpm_changed && (MIN_RPM / 2U) > actual_rpm) {
+					has_errors = 1L;
+				}
+			} else {
+				if (0L != open_load) {
+					has_errors = 1L;
+				}
 			}
+
 			xSemaphoreGive(xStatusSemaphore);
 		}
 
@@ -397,9 +408,7 @@ void MotorManager_MainTask(void *pvParameters)
 				COUNTER_Stop(&COUNTER_WheelRevolution);
 
 				if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 100) == pdTRUE) {
-					if (STATUS_ERROR != motor_status) {
-						motor_status = STATUS_STOPPED;
-					}
+					motor_status = STATUS_STOPPED;
 					xSemaphoreGive(xStatusSemaphore);
 				}
 
