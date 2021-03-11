@@ -274,10 +274,10 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 	uint8_t driver_dia_reg;
 	uint8_t dia_code;
 	BaseType_t open_load;
-	BaseType_t has_errors;
+	BaseType_t driver_errors = 0U;
+	BaseType_t mechanical_errors = 0U;
 
 	while (1U) {
-		has_errors = 0L;
 		open_load = 0L;
 		driver_dia_reg = get_driver_diag();
 		dia_code = driver_dia_reg & 0xFU;
@@ -287,7 +287,7 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 			motor_diag.CurrentLimitation = (uint8_t) (0U == (driver_dia_reg & 8U));
 
 			if (0U != motor_diag.OvertemperatureShutdown || 0U != motor_diag.CurrentLimitation) {
-				has_errors = 1L;
+				driver_errors += 1L;
 			}
 
 			if (0xCU != dia_code && 0x3U != dia_code && 0xFU != dia_code) {
@@ -296,7 +296,7 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 				motor_diag.Undervoltage = 0U;
 
 				if (0U != motor_diag.ShortCircuitCode) {
-					has_errors = 1L;
+					driver_errors += 1L;
 				}
 			} else {
 				motor_diag.ShortCircuitCode = 0U;
@@ -304,7 +304,7 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 				motor_diag.Undervoltage = dia_code == 0x3U;
 
 				if (0U != motor_diag.Undervoltage) {
-					has_errors = 1L;
+					driver_errors += 1L;
 				}
 
 				open_load = (BaseType_t) motor_diag.OpenLoad;
@@ -316,18 +316,23 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 		if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 100) == pdTRUE) {
 			if (STATUS_RUNNING == motor_status) {
 				if (0U == requested_rpm_changed && (MIN_RPM / 2U) > actual_rpm) {
-					has_errors = 1L;
+					mechanical_errors += 1L;
+				} else {
+					mechanical_errors = 0L;
 				}
 			} else {
 				if (0L != open_load) {
-					has_errors = 1L;
+					driver_errors += 1L;
 				}
 			}
 
 			xSemaphoreGive(xStatusSemaphore);
 		}
 
-		if (1L == has_errors) {
+		if (3L <= driver_errors || 3L <= mechanical_errors) {
+			driver_errors = 0L;
+			mechanical_errors = 0L;
+
 			MotorManager_NotifyError();
 		}
 
