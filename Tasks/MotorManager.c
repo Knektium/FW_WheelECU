@@ -11,7 +11,8 @@
 #define MAX_RPM						0x35U
 #define MIN_RPM						0x12U
 
-const uint32_t pwm_frequency = 20000UL; // 20 kHz
+#define PWM_FREQUENCY				20000UL // 20 kHz
+
 const BaseType_t max_duty_cycle = 10000L; // 100 %
 const BaseType_t min_duty_cycle = 4000L; // 50 %
 
@@ -55,7 +56,7 @@ MotorParameters_t target_params;
 MotorDiagnosis_t motor_diag;
 
 // Speed adjustment
-int duty_cycle_adjustment = 0;
+BaseType_t duty_cycle_adjustment = 100L;
 uint32_t calculated_duty_cycle = 100UL;
 uint32_t current_duty_cycle = 100UL;
 uint16_t actual_rpm = 0U;
@@ -99,7 +100,7 @@ BaseType_t get_duty_cycle_from_rpm(MotorSpeed_t rpm)
 
 BaseType_t get_adjusted_duty_cycle(BaseType_t duty_cycle)
 {
-	return duty_cycle + (duty_cycle * duty_cycle_adjustment) / 100L;
+	return (duty_cycle * duty_cycle_adjustment) / 100L;
 }
 
 /* Make sure to take the xStatusSemaphore before calling this function */
@@ -118,7 +119,7 @@ void set_motor_speed(MotorSpeed_t rpm)
 	if (duty_cycle > 0L) {
 		duty_cycle = get_adjusted_duty_cycle(duty_cycle);
 
-		PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, (uint32_t) duty_cycle);
+		PWM_SetFreqAndDutyCycle(&PWM_Motor, (uint32_t) PWM_FREQUENCY, (uint32_t) duty_cycle);
 		PWM_Start(&PWM_Motor);
 		DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDisable);
 
@@ -258,6 +259,7 @@ void MotorManager_Init(void)
 	target_params.direction = DIR_NONE;
 	target_params.rpm = 0U;
 	requested_rpm_changed = 0U;
+	duty_cycle_adjustment = 100L;
 
 	xStatusSemaphore = xSemaphoreCreateMutexStatic(&xStatusMutexBuffer);
 	xDiagnosticsSemaphore = xSemaphoreCreateMutexStatic(&xDiagnosticsMutexBuffer);
@@ -343,11 +345,12 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 void MotorManager_SpeedControllerTask(void *pvParameters)
 {
 	uint16_t target_rpm, rpm;
-	BaseType_t duty_cycle, duty_cycle_correction;
-	BaseType_t rpm_diff, percentage;
+	BaseType_t duty_cycle;
+	BaseType_t deviation;
 
 	while (1U) {
 		rpm = 3U * COUNTER_GetCurrentCount(&COUNTER_WheelRevolution);
+		COUNTER_ResetCounter(&COUNTER_WheelRevolution);
 
 		if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 50) == pdTRUE) {
 			if (0U == requested_rpm_changed) {
@@ -357,21 +360,18 @@ void MotorManager_SpeedControllerTask(void *pvParameters)
 					duty_cycle = current_duty_cycle;
 
 					if (rpm != target_rpm) {
-						rpm_diff = rpm - target_rpm;
-
-						percentage = (rpm_diff * 100L) / target_rpm;
-						duty_cycle_correction = (current_duty_cycle * percentage) / 100L;
-						duty_cycle = duty_cycle + duty_cycle_correction;
+						deviation = (target_rpm * 100U) / rpm;
+						duty_cycle = (duty_cycle * deviation) / 100L;
 
 						if (duty_cycle > max_duty_cycle) {
 							duty_cycle = max_duty_cycle;
 						}
 
-						PWM_SetFreqAndDutyCycle(&PWM_Motor, pwm_frequency, (uint32_t) duty_cycle);
+						PWM_SetFreqAndDutyCycle(&PWM_Motor, (uint32_t) PWM_FREQUENCY, (uint32_t) duty_cycle);
 
 						// Persist calibration
 						current_duty_cycle = duty_cycle;
-						duty_cycle_adjustment = ((current_duty_cycle - calculated_duty_cycle) * 100L) / calculated_duty_cycle;
+						duty_cycle_adjustment = (current_duty_cycle * 100L) / calculated_duty_cycle;
 					}
 				}
 			} else {
@@ -382,7 +382,6 @@ void MotorManager_SpeedControllerTask(void *pvParameters)
 			xSemaphoreGive(xStatusSemaphore);
 		}
 
-		COUNTER_ResetCounter(&COUNTER_WheelRevolution);
 		vTaskDelay(333 / portTICK_PERIOD_MS);
 	}
 }
