@@ -125,6 +125,16 @@ DAVE_STATUS_t DAVE_Init(void)
   {
 	 /**  Initialization of INTERRUPT APP instance INTERRUPT_AutoStop */
 	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_AutoStop); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of DIGITAL_IO APP instance DIGITAL_IO_StatusLED */
+	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_StatusLED); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of ADC_MEASUREMENT APP instance ADC_MEASUREMENT_Temperature */
+	 init_status = (DAVE_STATUS_t)ADC_MEASUREMENT_Init(&ADC_MEASUREMENT_Temperature); 
    }  
   return init_status;
 } /**  End of function DAVE_Init */

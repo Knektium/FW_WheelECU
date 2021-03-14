@@ -390,5 +390,22 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
   </provided>
   <provided xsi:type="ResourceModel:BitField" name="setena21" URI="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena21" value="0" toolTipHelpDescription="Writing 0 to a SETENA bit has no effect, writing 1 to a bit enables the corresponding interrupt." defaultValue="0" startPos="21" stopPos="21" accessPermission="rw" maxValue="1" minValue="0"/>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="IRQ15_Handler" URI="http://resources/14.0.1/peripheral/cpu/0/nvic/interrupt/15">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@hwResources.106"/>
+    <resourcesList name="iser_setena" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena15"/>
+    <resourcesList name="icer_clrena" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_icer/clrena15"/>
+    <resourcesList name="ispr_setpend" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_ispr/setpend15"/>
+    <resourcesList name="icpr_clrpend" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_icpr/clrpend15"/>
+    <resourcesList name="ipr_pri" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_ipr3/pri_15"/>
+    <resourcesList name="intcr_insel" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/intcr0/intsel15"/>
+    <resourcesList name="signal_in" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/irq15_handler"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="setena15" URI="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena15" value="0" toolTipHelpDescription="Writing 0 to a SETENA bit has no effect, writing 1 to a bit enables the corresponding interrupt." defaultValue="0" startPos="15" stopPos="15" accessPermission="rw" maxValue="1" minValue="0"/>
+  <provided xsi:type="ResourceModel:BitField" name="INTSEL15" URI="http://resources/14.0.1/peripheral/cpu/0/intcr0/intsel15" value="0x00000000" toolTipHelpDescription="Interrupt Source Select for Node 15" defaultValue="0x00000000" startPos="30" stopPos="31" accessPermission="rw" maxValue="3" minValue="0">
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Select source A"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="Select source B"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="Select source C"/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
+  </provided>
   <addressBlock offset="0x0" size="0x1000" usage="registers"/>
 </ResourceModel:Peripheral>

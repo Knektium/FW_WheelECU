@@ -8,13 +8,8 @@
 #define COMMAND_QUEUE_LENGTH		8U
 #define COMMAND_QUEUE_ITEM_SIZE		sizeof (MotorCommand_t)
 
-#define MAX_RPM						0x35U
-#define MIN_RPM						0x12U
-
+#define MIN_RPM						0x8U
 #define PWM_FREQUENCY				20000UL // 20 kHz
-
-const BaseType_t max_duty_cycle = 10000L; // 100 %
-const BaseType_t min_duty_cycle = 4000L; // 50 %
 
 typedef enum {
 	COMMAND_START, COMMAND_STOP, COMMAND_NOTIFY_ERROR
@@ -55,12 +50,8 @@ MotorStatus_t motor_status;
 MotorParameters_t target_params;
 MotorDiagnosis_t motor_diag;
 
-// Speed adjustment
-BaseType_t duty_cycle_adjustment = 100L;
-uint32_t calculated_duty_cycle = 100UL;
-uint32_t current_duty_cycle = 100UL;
 uint16_t actual_rpm = 0U;
-uint16_t requested_rpm_changed;
+uint16_t temperature = 0U;
 
 /* Make sure to take the xStatusSemaphore before calling this function */
 void set_motor_direction(MotorDirection_t direction)
@@ -79,51 +70,19 @@ void set_motor_direction(MotorDirection_t direction)
 	target_params.direction = direction;
 }
 
-BaseType_t get_duty_cycle_from_rpm(MotorSpeed_t rpm)
-{
-	BaseType_t duty_cycle = 0L; // Duty cycle in 1/10000
-
-	if (0U == rpm) {
-		duty_cycle = 0L;
-	} else if (MIN_RPM >= rpm) {
-		duty_cycle = min_duty_cycle;
-	} else if (MAX_RPM <= rpm) {
-		duty_cycle = max_duty_cycle;
-	} else {
-		BaseType_t percentage = ((rpm - MIN_RPM) * 100L) / (MAX_RPM - MIN_RPM);
-
-		duty_cycle = min_duty_cycle + ((max_duty_cycle - min_duty_cycle) * percentage) / 100L;
-	}
-
-	return duty_cycle;
-}
-
-BaseType_t get_adjusted_duty_cycle(BaseType_t duty_cycle)
-{
-	return (duty_cycle * duty_cycle_adjustment) / 100L;
-}
-
 /* Make sure to take the xStatusSemaphore before calling this function */
-void set_motor_speed(MotorSpeed_t rpm)
+void set_motor_speed(MotorSpeed_t speed)
 {
-	BaseType_t duty_cycle = 0L;
+	uint32_t duty_cycle = speed * 100L;
 
 	PWM_Stop(&PWM_Motor);
 
-	duty_cycle = get_duty_cycle_from_rpm(rpm);
-
-	calculated_duty_cycle = duty_cycle;
-	requested_rpm_changed = 1U;
-	target_params.rpm = rpm;
+	target_params.duty_cycle = speed;
 
 	if (duty_cycle > 0L) {
-		duty_cycle = get_adjusted_duty_cycle(duty_cycle);
-
-		PWM_SetFreqAndDutyCycle(&PWM_Motor, (uint32_t) PWM_FREQUENCY, (uint32_t) duty_cycle);
+		PWM_SetFreqAndDutyCycle(&PWM_Motor, (uint32_t) PWM_FREQUENCY, duty_cycle);
 		PWM_Start(&PWM_Motor);
 		DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDisable);
-
-		current_duty_cycle = duty_cycle;
 	} else {
 		DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDisable);
 	}
@@ -161,6 +120,16 @@ uint8_t get_driver_diag()
 	return spi_read_data;
 }
 
+void Adc_Measurement_Handler()
+{
+	DIGITAL_IO_ToggleOutput(&DIGITAL_IO_StatusLED);
+	XMC_VADC_RESULT_SIZE_t result = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_Channel_A);
+	uint32_t mv = (48000U / 4096U) * result;
+
+	temperature = mv / 100U;
+    return;
+}
+
 BaseType_t MotorManager_GetStatus(MotorStatus_t *status)
 {
 	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 500) == pdTRUE) {
@@ -188,7 +157,7 @@ BaseType_t MotorManager_GetDiagnosis(MotorDiagnosis_t *diagnosis)
 BaseType_t MotorManager_GetRequestedSpeed(MotorParameters_t *params)
 {
 	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 50) == pdTRUE) {
-		params->rpm = target_params.rpm;
+		params->duty_cycle = target_params.duty_cycle;
 		params->direction = target_params.direction;
 
 		xSemaphoreGive(xStatusSemaphore);
@@ -198,11 +167,17 @@ BaseType_t MotorManager_GetRequestedSpeed(MotorParameters_t *params)
 	return pdFALSE;
 }
 
-BaseType_t MotorManager_GetSpeed(MotorParameters_t *params)
+BaseType_t MotorManager_GetTemperature(uint16_t *temp)
+{
+	*temp = temperature;
+
+	return pdTRUE;
+}
+
+BaseType_t MotorManager_GetRPM(uint16_t *rpm)
 {
 	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 500) == pdTRUE) {
-		params->rpm = (MotorSpeed_t) actual_rpm;
-		params->direction = target_params.direction;
+		*rpm = actual_rpm;
 
 		xSemaphoreGive(xStatusSemaphore);
 		return pdTRUE;
@@ -211,12 +186,12 @@ BaseType_t MotorManager_GetSpeed(MotorParameters_t *params)
 	return pdFALSE;
 }
 
-BaseType_t MotorManager_SetSpeed(MotorSpeed_t rpm, MotorDirection_t direction, uint16_t revolutions)
+BaseType_t MotorManager_SetSpeed(MotorSpeed_t speed, MotorDirection_t direction, uint16_t revolutions)
 {
 	MotorCommand_t command;
 
 	command.type = COMMAND_START;
-	command.parameters.rpm = rpm;
+	command.parameters.duty_cycle = speed;
 	command.parameters.direction = direction;
 	command.revolutions = revolutions;
 
@@ -228,7 +203,7 @@ BaseType_t MotorManager_Stop(void)
 	MotorCommand_t command;
 
 	command.type = COMMAND_STOP;
-	command.parameters.rpm = 0U;
+	command.parameters.duty_cycle = 0U;
 	command.parameters.direction = 0U;
 	command.revolutions = 0U;
 
@@ -240,7 +215,7 @@ BaseType_t MotorManager_NotifyError(void)
 	MotorCommand_t command;
 
 	command.type = COMMAND_NOTIFY_ERROR;
-	command.parameters.rpm = 0U;
+	command.parameters.duty_cycle = 0U;
 	command.parameters.direction = 0U;
 	command.revolutions = 0U;
 
@@ -257,9 +232,7 @@ void MotorManager_Init(void)
 {
 	motor_status = STATUS_STOPPED;
 	target_params.direction = DIR_NONE;
-	target_params.rpm = 0U;
-	requested_rpm_changed = 0U;
-	duty_cycle_adjustment = 100L;
+	target_params.duty_cycle = 0U;
 
 	xStatusSemaphore = xSemaphoreCreateMutexStatic(&xStatusMutexBuffer);
 	xDiagnosticsSemaphore = xSemaphoreCreateMutexStatic(&xDiagnosticsMutexBuffer);
@@ -317,8 +290,8 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 
 		if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 100) == pdTRUE) {
 			if (STATUS_RUNNING == motor_status) {
-				if (0U == requested_rpm_changed && (MIN_RPM / 2U) > actual_rpm) {
-					mechanical_errors += 1L;
+				if (MIN_RPM > actual_rpm) {
+					//mechanical_errors += 1L;
 				} else {
 					mechanical_errors = 0L;
 				}
@@ -326,6 +299,8 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 				if (0L != open_load) {
 					driver_errors += 1L;
 				}
+
+				mechanical_errors = 0L;
 			}
 
 			xSemaphoreGive(xStatusSemaphore);
@@ -344,40 +319,13 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 
 void MotorManager_SpeedControllerTask(void *pvParameters)
 {
-	uint16_t target_rpm, rpm;
-	BaseType_t duty_cycle;
-	BaseType_t deviation;
+	uint16_t rpm;
 
 	while (1U) {
 		rpm = 3U * COUNTER_GetCurrentCount(&COUNTER_WheelRevolution);
 		COUNTER_ResetCounter(&COUNTER_WheelRevolution);
 
 		if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 50) == pdTRUE) {
-			if (0U == requested_rpm_changed) {
-				target_rpm = target_params.rpm;
-
-				if (STATUS_RUNNING == motor_status && 0U != target_rpm) {
-					duty_cycle = current_duty_cycle;
-
-					if (rpm != target_rpm) {
-						deviation = (target_rpm * 100U) / rpm;
-						duty_cycle = (duty_cycle * deviation) / 100L;
-
-						if (duty_cycle > max_duty_cycle) {
-							duty_cycle = max_duty_cycle;
-						}
-
-						PWM_SetFreqAndDutyCycle(&PWM_Motor, (uint32_t) PWM_FREQUENCY, (uint32_t) duty_cycle);
-
-						// Persist calibration
-						current_duty_cycle = duty_cycle;
-						duty_cycle_adjustment = (current_duty_cycle * 100L) / calculated_duty_cycle;
-					}
-				}
-			} else {
-				requested_rpm_changed = 0U;
-			}
-
 			actual_rpm = rpm;
 			xSemaphoreGive(xStatusSemaphore);
 		}
@@ -414,7 +362,7 @@ void MotorManager_MainTask(void *pvParameters)
 
 					set_motor_auto_stop(command.revolutions);
 					set_motor_direction(command.parameters.direction);
-					set_motor_speed(command.parameters.rpm);
+					set_motor_speed(command.parameters.duty_cycle);
 
 					break;
 				case COMMAND_STOP:

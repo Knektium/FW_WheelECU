@@ -73,6 +73,8 @@ extern const DIGITAL_IO_t DIGITAL_IO_MotorDirection;
 	
 extern const DIGITAL_IO_t DIGITAL_IO_MotorDisable; 
 	
+extern const DIGITAL_IO_t DIGITAL_IO_StatusLED; 
+	
  
 #endif  /* DIGITAL_IO_EXTERN_H */
 

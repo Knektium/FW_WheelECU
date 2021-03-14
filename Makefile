@@ -2,7 +2,7 @@ ifndef $(TOOLCHAIN_PATH)
   TOOLCHAIN_PATH := /usr/bin
 endif
 ifndef $(NODE_ID)
-  NODE_ID := 0x11
+  NODE_ID := 0x21
 endif
 CC := $(TOOLCHAIN_PATH)/arm-none-eabi-gcc
 OBJCOPY := $(TOOLCHAIN_PATH)/arm-none-eabi-objcopy
@@ -53,6 +53,7 @@ INCLUDE_PATHS := \
 DAVE_MODULES := \
 	. \
 	ADC_MEASUREMENT \
+	GLOBAL_ADC \
 	BUS_IO \
 	CLOCK_XMC1 \
 	CPU_CTRL_XMC1 \

@@ -23,15 +23,16 @@ TaskHandle_t xPeriodicTaskHandle = NULL;
 StaticTask_t xPeriodicTaskBuffer;
 StackType_t xPeriodicTaskStack[300U];
 
-
-void Handle_WheelControl_Received(WheelControl_t msg, uint8_t from_node_id, uint8_t to_node_id)
+void Handle_FanControl_Received(FanControl_t msg, uint8_t from_node_id, uint8_t to_node_id)
 {
+	MotorDirection_t motor_direction;
+	uint8_t motor_duty_cycle;
+
 	if (NODE_ID != to_node_id) {
 		return;
 	}
 
-	MotorDirection_t motor_direction;
-	uint16_t motor_speed = msg.Speed;
+	motor_duty_cycle = msg.DutyCycle;
 
 	switch (msg.Direction) {
 	case 2U:
@@ -49,7 +50,7 @@ void Handle_WheelControl_Received(WheelControl_t msg, uint8_t from_node_id, uint
 	if (DIR_NONE == motor_direction) {
 		MotorManager_Stop();
 	} else {
-		MotorManager_SetSpeed(motor_speed, motor_direction, msg.Revolutions);
+		MotorManager_SetSpeed(motor_duty_cycle, motor_direction, msg.Revolutions);
 	}
 }
 
@@ -70,30 +71,33 @@ void MessageManager_Init(void)
 
 void MessageManager_PeriodicTask(void *pvParameters)
 {
-	WheelStatus_t wheel_status;
+	FanStatus_t fan_status;
 	MotorStatus_t motor_status;
-	MotorParameters_t motor_params;
 	MotorParameters_t requested_motor_params;
 	MotorDiagnosis_t motor_diag;
+	uint16_t rpm, temperature;
 
 	while (1U) {
-		MotorManager_GetStatus(&motor_status);
-		MotorManager_GetDiagnosis(&motor_diag);
-		MotorManager_GetSpeed(&motor_params);
+		MotorManager_GetRPM(&rpm);
 		MotorManager_GetRequestedSpeed(&requested_motor_params);
+		MotorManager_GetDiagnosis(&motor_diag);
+		MotorManager_GetTemperature(&temperature);
+		MotorManager_GetStatus(&motor_status);
 
-		wheel_status.RequestedRevolutionsPerMinute = (uint16_t) requested_motor_params.rpm;
-		wheel_status.RevolutionsPerMinute = (uint16_t) motor_params.rpm;
-		wheel_status.Direction = motor_params.direction;
-		wheel_status.Status = motor_status;
+		fan_status.RevolutionsPerMinute = rpm;
+		fan_status.DutyCycle = requested_motor_params.duty_cycle;
+		fan_status.Direction = requested_motor_params.direction;
+		fan_status.Temperature = (uint8_t) temperature;
+		fan_status.Status = motor_status;
 
-		wheel_status.OvertemperatureShutdown = motor_diag.OvertemperatureShutdown;
-		wheel_status.CurrentLimitation = motor_diag.CurrentLimitation;
-		wheel_status.ShortCircuitCode = motor_diag.ShortCircuitCode;
-		wheel_status.OpenLoad = motor_diag.OpenLoad;
-		wheel_status.Undervoltage = motor_diag.Undervoltage;
+		fan_status.OvertemperatureShutdown = motor_diag.OvertemperatureShutdown;
+		fan_status.CurrentLimitation = motor_diag.CurrentLimitation;
+		fan_status.ShortCircuitCode = motor_diag.ShortCircuitCode;
+		fan_status.OpenLoad = motor_diag.OpenLoad;
+		fan_status.Undervoltage = motor_diag.Undervoltage;
 
-		Send_WheelStatus(&wheel_status, 0x00);
+		Send_FanStatus(&fan_status, 0x00);
+
 		vTaskDelay(500 / portTICK_PERIOD_MS);
 	}
 }

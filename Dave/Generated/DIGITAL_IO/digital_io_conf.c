@@ -101,3 +101,15 @@ const DIGITAL_IO_t DIGITAL_IO_MotorDisable =
   .hwctrl = XMC_GPIO_HWCTRL_DISABLED
 };
 		
+const DIGITAL_IO_t DIGITAL_IO_StatusLED =
+{
+  .gpio_port = XMC_GPIO_PORT4,
+  .gpio_pin = 11U,
+  .gpio_config = {
+    .mode = XMC_GPIO_MODE_OUTPUT_OPEN_DRAIN,
+    .output_level = XMC_GPIO_OUTPUT_LEVEL_LOW,
+
+  },
+  .hwctrl = XMC_GPIO_HWCTRL_DISABLED
+};
+		

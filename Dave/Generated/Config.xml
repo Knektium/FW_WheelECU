@@ -12,6 +12,16 @@
     <Generated_Files>
         <Source_Files>
             <Source_File>
+                <File_Name>adc_measurement.c</File_Name>
+                <Path>\Dave\Generated\ADC_MEASUREMENT\adc_measurement.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>adc_measurement_conf.c</File_Name>
+                <Path>\Dave\Generated\ADC_MEASUREMENT\adc_measurement_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
                 <File_Name>can_node.c</File_Name>
                 <Path>\Dave\Generated\CAN_NODE\can_node.c</Path>
                 <Type>C File</Type>
@@ -132,6 +142,16 @@
                 <Type>C File</Type>
             </Source_File>
             <Source_File>
+                <File_Name>global_adc.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_ADC\global_adc.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
+                <File_Name>global_adc_conf.c</File_Name>
+                <Path>\Dave\Generated\GLOBAL_ADC\global_adc_conf.c</Path>
+                <Type>C File</Type>
+            </Source_File>
+            <Source_File>
                 <File_Name>global_can.c</File_Name>
                 <Path>\Dave\Generated\GLOBAL_CAN\global_can.c</Path>
                 <Type>C File</Type>
@@ -203,6 +223,21 @@
             </Source_File>
         </Source_Files>
         <Header_Files>
+            <Header_File>
+                <File_Name>adc_measurement.h</File_Name>
+                <Path>\Dave\Generated\ADC_MEASUREMENT\adc_measurement.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>adc_measurement_conf.h</File_Name>
+                <Path>\Dave\Generated\ADC_MEASUREMENT\adc_measurement_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>adc_measurement_extern.h</File_Name>
+                <Path>\Dave\Generated\ADC_MEASUREMENT\adc_measurement_extern.h</Path>
+                <Type>H File</Type>
+            </Header_File>
             <Header_File>
                 <File_Name>can_node.h</File_Name>
                 <Path>\Dave\Generated\CAN_NODE\can_node.h</Path>
@@ -416,6 +451,21 @@
             <Header_File>
                 <File_Name>timers.h</File_Name>
                 <Path>\Dave\Generated\FREERTOS\timers.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_adc.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_ADC\global_adc.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_adc_conf.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_ADC\global_adc_conf.h</Path>
+                <Type>H File</Type>
+            </Header_File>
+            <Header_File>
+                <File_Name>global_adc_extern.h</File_Name>
+                <Path>\Dave\Generated\GLOBAL_ADC\global_adc_extern.h</Path>
                 <Type>H File</Type>
             </Header_File>
             <Header_File>

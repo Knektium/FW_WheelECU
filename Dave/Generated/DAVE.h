@@ -87,6 +87,12 @@
 
 #include "SPI_MASTER/spi_master.h"
   
+
+#include "GLOBAL_ADC/global_adc.h"
+  
+
+#include "ADC_MEASUREMENT/adc_measurement.h"
+  
 	
 
 /**********************************************************************************************************************

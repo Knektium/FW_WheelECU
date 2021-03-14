@@ -10,13 +10,13 @@ typedef struct {
 } Message_t;
 
 /* Message struct typedefs */
-typedef struct WheelControl_s {
-	uint16_t Speed;
+typedef struct FanControl_s {
+	uint8_t DutyCycle;
 	uint8_t Direction;
 	uint16_t Revolutions;
-} WheelControl_t;
+} FanControl_t;
 
-typedef struct WheelStatus_s {
+typedef struct FanStatus_s {
 	uint16_t RevolutionsPerMinute;
 	uint8_t OvertemperatureShutdown;
 	uint8_t CurrentLimitation;
@@ -25,12 +25,13 @@ typedef struct WheelStatus_s {
 	uint8_t ShortCircuitCode;
 	uint8_t Status;
 	uint8_t Direction;
-	uint16_t RequestedRevolutionsPerMinute;
-} WheelStatus_t;
+	uint8_t DutyCycle;
+	uint8_t Temperature;
+} FanStatus_t;
 
 void CAN_HandleReceivedMessage(Message_t message);
-extern void Handle_WheelControl_Received(WheelControl_t msg, uint8_t from_node_id, uint8_t to_node_id);
-void Send_WheelStatus(WheelStatus_t *s, uint32_t to_node);
+extern void Handle_FanControl_Received(FanControl_t msg, uint8_t from_node_id, uint8_t to_node_id);
+void Send_FanStatus(FanStatus_t *s, uint32_t to_node);
 
 
 #endif /* End of CAN_ROUTER_H */

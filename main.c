@@ -9,7 +9,7 @@
 
 void Time_Handler(void)
 {
-	// Empty
+	ADC_MEASUREMENT_StartConversion(&ADC_MEASUREMENT_Temperature);
 }
 
 void EventHandler_CanNode_0()
