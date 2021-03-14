@@ -50,7 +50,7 @@ void Handle_FanControl_Received(FanControl_t msg, uint8_t from_node_id, uint8_t 
 	if (DIR_NONE == motor_direction) {
 		MotorManager_Stop();
 	} else {
-		MotorManager_SetSpeed(motor_duty_cycle, motor_direction, msg.Revolutions);
+		MotorManager_SetParameters(motor_duty_cycle, motor_direction, msg.Revolutions);
 	}
 }
 
@@ -78,11 +78,11 @@ void MessageManager_PeriodicTask(void *pvParameters)
 	uint16_t rpm, temperature;
 
 	while (1U) {
-		MotorManager_GetRPM(&rpm);
-		MotorManager_GetRequestedSpeed(&requested_motor_params);
+		MotorManager_GetStatus(&motor_status);
 		MotorManager_GetDiagnosis(&motor_diag);
 		MotorManager_GetTemperature(&temperature);
-		MotorManager_GetStatus(&motor_status);
+		MotorManager_GetRPM(&rpm);
+		MotorManager_GetRequestedParameters(&requested_motor_params);
 
 		fan_status.RevolutionsPerMinute = rpm;
 		fan_status.DutyCycle = requested_motor_params.duty_cycle;

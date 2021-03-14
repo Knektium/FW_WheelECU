@@ -130,6 +130,12 @@ void Adc_Measurement_Handler()
     return;
 }
 
+void MotorManager_AutoStopHandler(void)
+{
+	MotorManager_Stop();
+	COUNTER_Stop(&COUNTER_AutoStop);
+}
+
 BaseType_t MotorManager_GetStatus(MotorStatus_t *status)
 {
 	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 500) == pdTRUE) {
@@ -154,7 +160,7 @@ BaseType_t MotorManager_GetDiagnosis(MotorDiagnosis_t *diagnosis)
 	return pdFALSE;
 }
 
-BaseType_t MotorManager_GetRequestedSpeed(MotorParameters_t *params)
+BaseType_t MotorManager_GetRequestedParameters(MotorParameters_t *params)
 {
 	if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 50) == pdTRUE) {
 		params->duty_cycle = target_params.duty_cycle;
@@ -186,12 +192,12 @@ BaseType_t MotorManager_GetRPM(uint16_t *rpm)
 	return pdFALSE;
 }
 
-BaseType_t MotorManager_SetSpeed(MotorSpeed_t speed, MotorDirection_t direction, uint16_t revolutions)
+BaseType_t MotorManager_SetParameters(MotorSpeed_t duty_cycle, MotorDirection_t direction, uint16_t revolutions)
 {
 	MotorCommand_t command;
 
 	command.type = COMMAND_START;
-	command.parameters.duty_cycle = speed;
+	command.parameters.duty_cycle = duty_cycle;
 	command.parameters.direction = direction;
 	command.revolutions = revolutions;
 
@@ -220,12 +226,6 @@ BaseType_t MotorManager_NotifyError(void)
 	command.revolutions = 0U;
 
 	return xQueueSend(xQueue_MotorCommands, &command, (TickType_t) 2000);
-}
-
-void MotorManager_AutoStopHandler(void)
-{
-	MotorManager_Stop();
-	COUNTER_Stop(&COUNTER_AutoStop);
 }
 
 void MotorManager_Init(void)
