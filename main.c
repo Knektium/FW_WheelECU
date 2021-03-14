@@ -2,7 +2,6 @@
 #include <FREERTOS/task.h>
 
 #include "Tasks/tasks.h"
-#include "Tasks/ModeManager.h"
 #include "Tasks/MotorManager.h"
 #include "Tasks/MessageManager.h"
 #include "CAN_Router.h"
@@ -49,23 +48,21 @@ void EventHandler_CanNode_0()
 			// Read the received Message object and stores the received data in the MO structure.
 			CAN_NODE_MO_Receive((void *) can_obj);
 
-			if (ModeManager_GetCurrentMode() == MODE_RUN) {
-				Message_t message;
-				uint8_t *can_data = mo->can_data_byte;
+			Message_t message;
+			uint8_t *can_data = mo->can_data_byte;
 
-				message.id = mo->can_identifier;
+			message.id = mo->can_identifier;
 
-				message.data[0] = can_data[0];
-				message.data[1] = can_data[1];
-				message.data[2] = can_data[2];
-				message.data[3] = can_data[3];
-				message.data[4] = can_data[4];
-				message.data[5] = can_data[5];
-				message.data[6] = can_data[6];
-				message.data[7] = can_data[7];
+			message.data[0] = can_data[0];
+			message.data[1] = can_data[1];
+			message.data[2] = can_data[2];
+			message.data[3] = can_data[3];
+			message.data[4] = can_data[4];
+			message.data[5] = can_data[5];
+			message.data[6] = can_data[6];
+			message.data[7] = can_data[7];
 
-				MessageManager_PushMessage(&message);
-			}
+			MessageManager_PushMessage(&message);
 		}
 	}
 }
@@ -84,7 +81,6 @@ int main(void)
 {
 	DAVE_STATUS_t status;
 
-	ModeManager_SetCurrentMode(MODE_STARTUP);
 	status = DAVE_Init();           /* Initialization of DAVE APPs  */
 
 	if (status != DAVE_STATUS_SUCCESS)
@@ -98,12 +94,9 @@ int main(void)
 		}
 	}
 
-	/* Create tasks */
-	ModeManager_Init();
+	/* Initiate tasks */
 	MotorManager_Init();
 	MessageManager_Init();
-
-	ModeManager_RequestMode(MODE_RUN);
 
 	vTaskStartScheduler();
 
