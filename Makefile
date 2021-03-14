@@ -158,4 +158,5 @@ cleanall: clean
 
 patch:
 	@git apply FreeRTOS_HeapSourceRemoval.patch
+	@git apply can_node_conf.patch
 
