@@ -120,13 +120,16 @@ uint8_t get_driver_diag()
 	return spi_read_data;
 }
 
-void Adc_Measurement_Handler()
+void MotorManager_TemperatureHandler(void)
 {
-	DIGITAL_IO_ToggleOutput(&DIGITAL_IO_StatusLED);
-	XMC_VADC_RESULT_SIZE_t result = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_Channel_A);
-	uint32_t mv = (48000U / 4096U) * result;
+	XMC_VADC_RESULT_SIZE_t result;
+	uint32_t millivolt;
 
-	temperature = mv / 100U;
+	result = ADC_MEASUREMENT_GetResult(&ADC_MEASUREMENT_Channel_A);
+	millivolt = (48000UL / 4096UL) * result;
+
+	temperature = millivolt / 100UL;
+
     return;
 }
 

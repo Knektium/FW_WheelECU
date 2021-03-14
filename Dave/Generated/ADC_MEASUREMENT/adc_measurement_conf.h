@@ -102,7 +102,7 @@
 
 #define ADC_MEASUREMENT_MAXCHANNELS (1U)
 
-#define Adc_Measurement_Handler IRQ_Hdlr_15
+#define MotorManager_TemperatureHandler IRQ_Hdlr_15
 #define ADC_MEASUREMENT_Channel_A (ADC_MEASUREMENT_Channel_A_handle)
 #define ADC_MEASUREMENT_Channel_A_RES (VADC_G1->RES[10])
 
