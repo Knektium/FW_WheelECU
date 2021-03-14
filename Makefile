@@ -39,7 +39,7 @@ OBJS :=
 DAVE_PATH := Dave/Generated
 LIB_PATH := Libraries
 STARTUP_PATH := Startup
-MEDDELA_CONFIG_PATH := ../Networking
+MEDDELA_CONFIG_PATH := ..
 MEDDELA_TEMPLATE_PATH := $(MEDDELA_CONFIG_PATH)/templates
 
 INCLUDE_PATHS := \
