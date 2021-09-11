@@ -132,6 +132,19 @@ void set_motor_auto_stop(uint16_t revolutions)
 	}
 }
 
+void start_speed_measurement(void)
+{
+	TIMER_Start(&TIMER_SpeedClock);
+	COUNTER_Start(&COUNTER_RotationTime);
+}
+
+void stop_speed_measurement(void)
+{
+	TIMER_Stop(&TIMER_SpeedClock);
+	COUNTER_Stop(&COUNTER_RotationTime);
+	COUNTER_ResetCounter(&COUNTER_RotationTime);
+}
+
 uint8_t get_driver_diag()
 {
 	const uint8_t RD_DIA = 0x00U;
@@ -333,22 +346,21 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 	}
 }
 
-void MotorManager_WheelSensor_TimeoutHandler(void)
+void MotorManager_RotationSensorTimeoutHandler(void)
 {
 	actual_rpm = 0U;
-	COUNTER_ResetCounter(&COUNTER_WheelRevolution);
+	COUNTER_ResetCounter(&COUNTER_RotationTime);
 }
 
-void MotorManager_WheelSensor_Handler(void)
+void MotorManager_RotationSensorHandler(void)
 {
 	uint16_t milliseconds, rpm;
 
-	milliseconds = COUNTER_GetCurrentCount(&COUNTER_WheelRevolution);
-	COUNTER_ResetCounter(&COUNTER_WheelRevolution);
+	rpm = 0U;
+	milliseconds = COUNTER_GetCurrentCount(&COUNTER_RotationTime);
+	COUNTER_ResetCounter(&COUNTER_RotationTime);
 
-	if (0U == milliseconds) {
-		rpm = 0U;
-	} else {
+	if (0U != milliseconds) {
 		rpm = (uint16_t) (60000U / ((milliseconds * 3) / (float) 9.33));
 	}
 
@@ -411,18 +423,13 @@ void MotorManager_MainTask(void *pvParameters)
 					set_motor_auto_stop(0U);
 					set_motor_speed(0U);
 					set_motor_direction(DIR_NONE);
-
-					TIMER_Stop(&TIMER_SpeedClock);
-					COUNTER_Stop(&COUNTER_WheelRevolution);
+					stop_speed_measurement();
 
 					break;
 				case COMMAND_START:
 					motor_status = STATUS_RUNNING;
 
-					TIMER_Start(&TIMER_SpeedClock);
-					COUNTER_ResetCounter(&COUNTER_WheelRevolution);
-					COUNTER_Start(&COUNTER_WheelRevolution);
-
+					start_speed_measurement();
 					set_motor_auto_stop(command.revolutions);
 					set_motor_direction(command.parameters.direction);
 					set_motor_speed(command.parameters.rpm);
@@ -435,9 +442,7 @@ void MotorManager_MainTask(void *pvParameters)
 					set_motor_auto_stop(0U);
 					set_motor_speed(0U);
 					set_motor_direction(DIR_NONE);
-
-					TIMER_Stop(&TIMER_SpeedClock);
-					COUNTER_Stop(&COUNTER_WheelRevolution);
+					stop_speed_measurement();
 
 					break;
 				}

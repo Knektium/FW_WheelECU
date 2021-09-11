@@ -84,7 +84,7 @@
 ***********************************************************************************************************************/
 
 
-extern COUNTER_t COUNTER_WheelRevolution;
+extern COUNTER_t COUNTER_RotationTime;
 
 
 

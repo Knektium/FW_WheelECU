@@ -61,6 +61,6 @@
 #define PIN_INTERRUPT_PATCH_VERSION (2U)
 
 /**< Mapped IRQ Node Number */
-#define MotorManager_WheelSensor_Handler IRQ_Hdlr_6  
+#define MotorManager_RotationSensorHandler IRQ_Hdlr_6  
 		
 #endif /* End of PIN_INTERRUPT_CONF_H */

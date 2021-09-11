@@ -55,7 +55,7 @@
 /**
 * @brief Contents entered via GUI
 */
-const PIN_INTERRUPT_t PIN_INTERRUPT_WheelSensor =
+const PIN_INTERRUPT_t PIN_INTERRUPT_RotationSensor =
 {
   .eru = XMC_ERU1,  /* ERU module 1 Mapped */
   .port = XMC_GPIO_PORT3,  /* PORT 3 Mapped */

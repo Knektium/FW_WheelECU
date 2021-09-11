@@ -60,7 +60,7 @@
 		
 #define MotorManager_AutoStopHandler IRQ_Hdlr_24
 		
-#define MotorManager_WheelSensor_TimeoutHandler IRQ_Hdlr_21
+#define MotorManager_RotationSensorTimeoutHandler IRQ_Hdlr_21
 		
 /***********************************************************************************************************************
  * EXTERN DECLARATIONS
@@ -70,7 +70,7 @@ extern const INTERRUPT_t INTERRUPT_0;
 	
 extern const INTERRUPT_t INTERRUPT_AutoStop; 
 	
-extern const INTERRUPT_t INTERRUPT_CounterRollover; 
+extern const INTERRUPT_t INTERRUPT_RotationSensorTimeout; 
 	
 #endif  /* INTERRUPT_EXTERN_H */
 

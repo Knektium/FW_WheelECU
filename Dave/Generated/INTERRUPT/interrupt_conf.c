@@ -92,7 +92,7 @@ const INTERRUPT_t INTERRUPT_AutoStop =
   .enable_at_init = true
 
 };
-const INTERRUPT_t INTERRUPT_CounterRollover =
+const INTERRUPT_t INTERRUPT_RotationSensorTimeout =
 {
 #if(UC_SERIES == XMC14)
  .irqctrl = (XMC_SCU_IRQCTRL_t)1U,

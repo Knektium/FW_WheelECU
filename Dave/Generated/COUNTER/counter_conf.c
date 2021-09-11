@@ -77,9 +77,9 @@
  * DATA STRUCTURES
  **********************************************************************************************************************/
 
-/************************************** COUNTER_WheelRevolution *********************************************/
-/* Event configuration for counter instance COUNTER_WheelRevolution */
-XMC_CCU4_SLICE_EVENT_CONFIG_t COUNTER_WheelRevolution_event0_config = 
+/************************************** COUNTER_RotationTime *********************************************/
+/* Event configuration for counter instance COUNTER_RotationTime */
+XMC_CCU4_SLICE_EVENT_CONFIG_t COUNTER_RotationTime_event0_config = 
 {
   .mapped_input = XMC_CCU4_SLICE_INPUT_BB,
   .edge         = XMC_CCU4_SLICE_EVENT_EDGE_SENSITIVITY_FALLING_EDGE,
@@ -89,13 +89,13 @@ XMC_CCU4_SLICE_EVENT_CONFIG_t COUNTER_WheelRevolution_event0_config =
 
 
 
-/*Configuration structure for CCU4 Counter for COUNTER_WheelRevolution */
-COUNTER_CCU4_CONFIG_t  COUNTER_WheelRevolution_ccu4_config =
+/*Configuration structure for CCU4 Counter for COUNTER_RotationTime */
+COUNTER_CCU4_CONFIG_t  COUNTER_RotationTime_ccu4_config =
 {
   .global_handle          = (GLOBAL_CCU4_t*) &GLOBAL_CCU4_0,
   .kernel_ptr             = (XMC_CCU4_MODULE_t*) (void*) CCU41_BASE,
   .slice_ptr              = (XMC_CCU4_SLICE_t*) (void*) CCU41_CC41,
-  .event0_config          = (XMC_CCU4_SLICE_EVENT_CONFIG_t*) &COUNTER_WheelRevolution_event0_config,
+  .event0_config          = (XMC_CCU4_SLICE_EVENT_CONFIG_t*) &COUNTER_RotationTime_event0_config,
   .count_dir_event_config = NULL,
   .gating_event_config    = NULL,
   .shadow_mask            = (uint32_t)XMC_CCU4_SHADOW_TRANSFER_SLICE_1,
@@ -118,11 +118,11 @@ COUNTER_CCU4_CONFIG_t  COUNTER_WheelRevolution_ccu4_config =
   .init_start             = (bool) true
 };
 
-/* App Handle for Instance COUNTER_WheelRevolution*/
-COUNTER_t COUNTER_WheelRevolution = 
+/* App Handle for Instance COUNTER_RotationTime*/
+COUNTER_t COUNTER_RotationTime = 
 {
   .counter_type = COUNTER_CCU4,
-  .ccu4_handle  = (COUNTER_CCU4_CONFIG_t*) &COUNTER_WheelRevolution_ccu4_config
+  .ccu4_handle  = (COUNTER_CCU4_CONFIG_t*) &COUNTER_RotationTime_ccu4_config
 };
 /*********************************************************************************************************************/
 

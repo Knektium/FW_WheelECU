@@ -88,8 +88,8 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of COUNTER APP instance COUNTER_WheelRevolution */
-	 init_status = (DAVE_STATUS_t)COUNTER_Init(&COUNTER_WheelRevolution); 
+	 /**  Initialization of COUNTER APP instance COUNTER_RotationTime */
+	 init_status = (DAVE_STATUS_t)COUNTER_Init(&COUNTER_RotationTime); 
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
@@ -133,13 +133,13 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of PIN_INTERRUPT APP instance PIN_INTERRUPT_WheelSensor */
-	 init_status = (DAVE_STATUS_t)PIN_INTERRUPT_Init(&PIN_INTERRUPT_WheelSensor); 
+	 /**  Initialization of PIN_INTERRUPT APP instance PIN_INTERRUPT_RotationSensor */
+	 init_status = (DAVE_STATUS_t)PIN_INTERRUPT_Init(&PIN_INTERRUPT_RotationSensor); 
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of INTERRUPT APP instance INTERRUPT_CounterRollover */
-	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_CounterRollover); 
+	 /**  Initialization of INTERRUPT APP instance INTERRUPT_RotationSensorTimeout */
+	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_RotationSensorTimeout); 
    }  
   return init_status;
 } /**  End of function DAVE_Init */

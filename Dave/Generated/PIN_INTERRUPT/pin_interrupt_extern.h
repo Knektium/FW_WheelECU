@@ -61,7 +61,7 @@
  * EXTERN DECLARATIONS
 ***********************************************************************************************************************/
 
-/* Extern declaration for PIN_INTERRUPT_WheelSensor */
-extern const PIN_INTERRUPT_t PIN_INTERRUPT_WheelSensor;
+/* Extern declaration for PIN_INTERRUPT_RotationSensor */
+extern const PIN_INTERRUPT_t PIN_INTERRUPT_RotationSensor;
 
 #endif /* End of PIN_INTERRUPT_EXTERN_H */
