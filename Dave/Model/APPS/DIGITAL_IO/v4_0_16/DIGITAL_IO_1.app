@@ -6,25 +6,17 @@
   <virtualSignals name="hardware pin control" URI="http://resources/4.0.16/app/DIGITAL_IO/1/vs_digital_io_hwsel" hwSignal="hw_o" hwResource="//@hwResources.0" required="false"/>
   <virtualSignals name="pin_signal" URI="http://resources/4.0.16/app/DIGITAL_IO/1/__pin_vs_digital_io_pad_pin" hwSignal="pin" hwResource="//@hwResources.1"/>
   <hwResources name="pin" URI="http://resources/4.0.16/app/DIGITAL_IO/1/hwres_port_pin" resourceGroupUri="port/p/sv0/pad/*" solverVariable="true" mResGrpUri="port/p/sv0/pad/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port3/port3_3.dd#//@provided.10"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/port1/port1_1.dd#//@provided.10"/>
     <solverVarMap index="2">
-      <value variableName="sv0" solverValue="3"/>
+      <value variableName="sv0" solverValue="1"/>
     </solverVarMap>
     <solverVarMap index="2">
-      <value variableName="sv0" solverValue="3"/>
+      <value variableName="sv0" solverValue="1"/>
     </solverVarMap>
   </hwResources>
-  <hwResources name="pin" URI="http://resources/4.0.16/app/DIGITAL_IO/1/__pin_hwres_port_pin" resourceGroupUri="devicepackage/0/36" constraintType="GLOBAL_RESOURCE" mResGrpUri="devicepackage/0/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/DEVICEPACKAGE/DEVICEPACKAGE_0.dd#//@provided.15"/>
+  <hwResources name="pin" URI="http://resources/4.0.16/app/DIGITAL_IO/1/__pin_hwres_port_pin" resourceGroupUri="devicepackage/0/*" mResGrpUri="devicepackage/0/*">
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/DEVICEPACKAGE/DEVICEPACKAGE_0.dd#//@provided.4"/>
   </hwResources>
   <connections URI="http://resources/4.0.16/app/DIGITAL_IO/1/http://resources/4.0.16/app/DIGITAL_IO/1/vs_digital_io_pad_pin/http://resources/4.0.16/app/DIGITAL_IO/1/__pin_vs_digital_io_pad_pin" systemDefined="true" sourceSignal="pin" targetSignal="pin_signal" srcVirtualSignal="//@virtualSignals.1" targetVirtualSignal="//@virtualSignals.3"/>
   <connections URI="http://resources/4.0.16/app/DIGITAL_IO/1/http://resources/4.0.16/app/DIGITAL_IO/1/__pin_vs_digital_io_pad_pin/http://resources/4.0.16/app/DIGITAL_IO/1/vs_digital_io_pad_pin" systemDefined="true" sourceSignal="pin_signal" targetSignal="pin" srcVirtualSignal="//@virtualSignals.3" targetVirtualSignal="//@virtualSignals.1"/>
-  <connections URI="http://resources/4.0.16/app/DIGITAL_IO/1/http://resources/4.0.16/app/DIGITAL_IO/1/vs_digital_io_pad_pin/http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_input_signal" sourceSignal="pin" targetSignal="counter_input" srcVirtualSignal="//@virtualSignals.1">
-    <downwardMapList xsi:type="ResourceModel:VirtualSignal" href="../../COUNTER/v4_1_10/COUNTER_0.app#//@virtualSignals.14"/>
-    <targetVirtualSignal href="../../COUNTER/v4_1_10/COUNTER_0.app#//@virtualSignals.14"/>
-  </connections>
-  <connections URI="http://resources/4.0.16/app/DIGITAL_IO/1/http://resources/4.0.16/app/DIGITAL_IO/1/vs_digital_io_pad_pin/http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_input_signal" sourceSignal="pin" targetSignal="counter_input" srcVirtualSignal="//@virtualSignals.1">
-    <downwardMapList xsi:type="ResourceModel:VirtualSignal" href="../../COUNTER/v4_1_10/COUNTER_1.app#//@virtualSignals.14"/>
-    <targetVirtualSignal href="../../COUNTER/v4_1_10/COUNTER_1.app#//@virtualSignals.14"/>
-  </connections>
 </ResourceModel:App>

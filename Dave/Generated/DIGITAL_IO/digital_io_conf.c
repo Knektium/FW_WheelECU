@@ -68,8 +68,8 @@ const DIGITAL_IO_t DIGITAL_IO_CANStandBy =
 		
 const DIGITAL_IO_t DIGITAL_IO_WheelSensor =
 {
-  .gpio_port = XMC_GPIO_PORT3,
-  .gpio_pin = 0U,
+  .gpio_port = XMC_GPIO_PORT1,
+  .gpio_pin = 4U,
   .gpio_config = {
     .mode = XMC_GPIO_MODE_INPUT_PULL_UP,
     .input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_LARGE

@@ -125,6 +125,21 @@ DAVE_STATUS_t DAVE_Init(void)
   {
 	 /**  Initialization of INTERRUPT APP instance INTERRUPT_AutoStop */
 	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_AutoStop); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of TIMER APP instance TIMER_SpeedClock */
+	 init_status = (DAVE_STATUS_t)TIMER_Init(&TIMER_SpeedClock); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of PIN_INTERRUPT APP instance PIN_INTERRUPT_WheelSensor */
+	 init_status = (DAVE_STATUS_t)PIN_INTERRUPT_Init(&PIN_INTERRUPT_WheelSensor); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of INTERRUPT APP instance INTERRUPT_CounterRollover */
+	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_CounterRollover); 
    }  
   return init_status;
 } /**  End of function DAVE_Init */

@@ -87,6 +87,12 @@
 
 #include "SPI_MASTER/spi_master.h"
   
+
+#include "TIMER/timer.h"
+  
+
+#include "PIN_INTERRUPT/pin_interrupt.h"
+  
 	
 
 /**********************************************************************************************************************

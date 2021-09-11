@@ -90,6 +90,21 @@
   <nodes xsi:type="ApplicationModel:AppNode">
     <resource xsi:type="ResourceModel:App" href="APPS/INTERRUPT/v4_0_8/INTERRUPT_1.app#/"/>
   </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/TIMER/v4_1_10/TIMER_0.app#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/PIN_INTERRUPT/v4_0_2/PIN_INTERRUPT_0.app#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PeripheralNode">
+    <resource xsi:type="ResourceModel:Peripheral" href="HW_RESOURCES/eru0/eru0_0.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PeripheralNode">
+    <resource xsi:type="ResourceModel:Peripheral" href="HW_RESOURCES/eru1/eru1_1.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/INTERRUPT/v4_0_8/INTERRUPT_2.app#/"/>
+  </nodes>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.0" target="//@nodes.1"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.2" target="//@nodes.0"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.8" target="//@nodes.7"/>
@@ -104,6 +119,9 @@
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.27" target="//@nodes.1"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.28" target="//@nodes.13"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.29" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.30" target="//@nodes.13"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.31" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.34" target="//@nodes.7"/>
   <hwConnections href="APPS/CLOCK_XMC1/v4_0_20/CLOCK_XMC1_0.app#//@connections.1"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.0"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.1"/>
@@ -120,7 +138,6 @@
   <hwConnections href="APPS/COUNTER/v4_1_10/COUNTER_0.app#//@connections.0"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.0"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.1"/>
-  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.2"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_3.app#//@connections.0"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_3.app#//@connections.1"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_4.app#//@connections.0"/>
@@ -157,6 +174,14 @@
   <hwConnections href="APPS/SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@connections.48"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.6"/>
   <hwConnections href="APPS/COUNTER/v4_1_10/COUNTER_1.app#//@connections.0"/>
-  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.3"/>
   <hwConnections href="APPS/COUNTER/v4_1_10/COUNTER_1.app#//@connections.2"/>
+  <hwConnections href="APPS/TIMER/v4_1_10/TIMER_0.app#//@connections.0"/>
+  <hwConnections href="APPS/PIN_INTERRUPT/v4_0_2/PIN_INTERRUPT_0.app#//@connections.0"/>
+  <hwConnections href="APPS/PIN_INTERRUPT/v4_0_2/PIN_INTERRUPT_0.app#//@connections.1"/>
+  <hwConnections href="APPS/PIN_INTERRUPT/v4_0_2/PIN_INTERRUPT_0.app#//@connections.2"/>
+  <hwConnections href="APPS/PIN_INTERRUPT/v4_0_2/PIN_INTERRUPT_0.app#//@connections.3"/>
+  <hwConnections href="APPS/PIN_INTERRUPT/v4_0_2/PIN_INTERRUPT_0.app#//@connections.4"/>
+  <hwConnections href="APPS/TIMER/v4_1_10/TIMER_0.app#//@connections.2"/>
+  <hwConnections href="APPS/COUNTER/v4_1_10/COUNTER_0.app#//@connections.2"/>
+  <hwConnections href="APPS/COUNTER/v4_1_10/COUNTER_0.app#//@connections.3"/>
 </ApplicationModel:ApplicationData>

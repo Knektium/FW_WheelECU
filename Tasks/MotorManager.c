@@ -8,13 +8,13 @@
 #define COMMAND_QUEUE_LENGTH		8U
 #define COMMAND_QUEUE_ITEM_SIZE		sizeof (MotorCommand_t)
 
-#define MAX_RPM						0x35U
-#define MIN_RPM						0x12U
+#define MAX_RPM						0x2000U
+#define MIN_RPM						0x0800U
 
 #define PWM_FREQUENCY				20000UL // 20 kHz
 
-const BaseType_t max_duty_cycle = 10000L; // 100 %
-const BaseType_t min_duty_cycle = 4000L; // 50 %
+const BaseType_t max_duty_cycle = 10000L;
+const BaseType_t min_duty_cycle = 2500L;
 
 typedef enum {
 	COMMAND_START, COMMAND_STOP, COMMAND_NOTIFY_ERROR
@@ -56,7 +56,6 @@ MotorParameters_t target_params;
 MotorDiagnosis_t motor_diag;
 
 // Speed adjustment
-BaseType_t duty_cycle_adjustment = 100L;
 uint32_t calculated_duty_cycle = 100UL;
 uint32_t current_duty_cycle = 100UL;
 uint16_t actual_rpm = 0U;
@@ -98,11 +97,6 @@ BaseType_t get_duty_cycle_from_rpm(MotorSpeed_t rpm)
 	return duty_cycle;
 }
 
-BaseType_t get_adjusted_duty_cycle(BaseType_t duty_cycle)
-{
-	return (duty_cycle * duty_cycle_adjustment) / 100L;
-}
-
 /* Make sure to take the xStatusSemaphore before calling this function */
 void set_motor_speed(MotorSpeed_t rpm)
 {
@@ -111,18 +105,16 @@ void set_motor_speed(MotorSpeed_t rpm)
 	PWM_Stop(&PWM_Motor);
 
 	duty_cycle = get_duty_cycle_from_rpm(rpm);
-
 	calculated_duty_cycle = duty_cycle;
 	requested_rpm_changed = 1U;
 	target_params.rpm = rpm;
 
 	if (duty_cycle > 0L) {
-		duty_cycle = get_adjusted_duty_cycle(duty_cycle);
-
 		PWM_SetFreqAndDutyCycle(&PWM_Motor, (uint32_t) PWM_FREQUENCY, (uint32_t) duty_cycle);
 		PWM_Start(&PWM_Motor);
 		DIGITAL_IO_SetOutputLow(&DIGITAL_IO_MotorDisable);
 
+		actual_rpm = rpm;
 		current_duty_cycle = duty_cycle;
 	} else {
 		DIGITAL_IO_SetOutputHigh(&DIGITAL_IO_MotorDisable);
@@ -259,7 +251,6 @@ void MotorManager_Init(void)
 	target_params.direction = DIR_NONE;
 	target_params.rpm = 0U;
 	requested_rpm_changed = 0U;
-	duty_cycle_adjustment = 100L;
 
 	xStatusSemaphore = xSemaphoreCreateMutexStatic(&xStatusMutexBuffer);
 	xDiagnosticsSemaphore = xSemaphoreCreateMutexStatic(&xDiagnosticsMutexBuffer);
@@ -342,6 +333,28 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 	}
 }
 
+void MotorManager_WheelSensor_TimeoutHandler(void)
+{
+	actual_rpm = 0U;
+	COUNTER_ResetCounter(&COUNTER_WheelRevolution);
+}
+
+void MotorManager_WheelSensor_Handler(void)
+{
+	uint16_t milliseconds, rpm;
+
+	milliseconds = COUNTER_GetCurrentCount(&COUNTER_WheelRevolution);
+	COUNTER_ResetCounter(&COUNTER_WheelRevolution);
+
+	if (0U == milliseconds) {
+		rpm = 0U;
+	} else {
+		rpm = (uint16_t) (60000U / ((milliseconds * 3) / (float) 9.33));
+	}
+
+	actual_rpm = (actual_rpm + rpm) / 2U;
+}
+
 void MotorManager_SpeedControllerTask(void *pvParameters)
 {
 	uint16_t target_rpm, rpm;
@@ -349,10 +362,9 @@ void MotorManager_SpeedControllerTask(void *pvParameters)
 	BaseType_t deviation;
 
 	while (1U) {
-		rpm = 3U * COUNTER_GetCurrentCount(&COUNTER_WheelRevolution);
-		COUNTER_ResetCounter(&COUNTER_WheelRevolution);
-
 		if (xSemaphoreTake(xStatusSemaphore, (TickType_t) 50) == pdTRUE) {
+			rpm = actual_rpm;
+
 			if (0U == requested_rpm_changed) {
 				target_rpm = target_params.rpm;
 
@@ -369,20 +381,16 @@ void MotorManager_SpeedControllerTask(void *pvParameters)
 
 						PWM_SetFreqAndDutyCycle(&PWM_Motor, (uint32_t) PWM_FREQUENCY, (uint32_t) duty_cycle);
 
-						// Persist calibration
 						current_duty_cycle = duty_cycle;
-						duty_cycle_adjustment = (current_duty_cycle * 100L) / calculated_duty_cycle;
 					}
 				}
 			} else {
 				requested_rpm_changed = 0U;
 			}
-
-			actual_rpm = rpm;
 			xSemaphoreGive(xStatusSemaphore);
 		}
 
-		vTaskDelay(333 / portTICK_PERIOD_MS);
+		vTaskDelay(250 / portTICK_PERIOD_MS);
 	}
 }
 
@@ -404,12 +412,15 @@ void MotorManager_MainTask(void *pvParameters)
 					set_motor_speed(0U);
 					set_motor_direction(DIR_NONE);
 
+					TIMER_Stop(&TIMER_SpeedClock);
 					COUNTER_Stop(&COUNTER_WheelRevolution);
 
 					break;
 				case COMMAND_START:
 					motor_status = STATUS_RUNNING;
 
+					TIMER_Start(&TIMER_SpeedClock);
+					COUNTER_ResetCounter(&COUNTER_WheelRevolution);
 					COUNTER_Start(&COUNTER_WheelRevolution);
 
 					set_motor_auto_stop(command.revolutions);
@@ -425,6 +436,7 @@ void MotorManager_MainTask(void *pvParameters)
 					set_motor_speed(0U);
 					set_motor_direction(DIR_NONE);
 
+					TIMER_Stop(&TIMER_SpeedClock);
 					COUNTER_Stop(&COUNTER_WheelRevolution);
 
 					break;

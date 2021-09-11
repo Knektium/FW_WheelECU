@@ -83,6 +83,20 @@ const INTERRUPT_t INTERRUPT_AutoStop =
 #if(UC_SERIES == XMC14)
  .irqctrl = (XMC_SCU_IRQCTRL_t)1U,
 #endif
+  .node = (IRQn_Type)24,
+  .priority = 3,  
+#if(UC_FAMILY == XMC4)  
+  .subpriority = 0,
+#endif  
+
+  .enable_at_init = true
+
+};
+const INTERRUPT_t INTERRUPT_CounterRollover =
+{
+#if(UC_SERIES == XMC14)
+ .irqctrl = (XMC_SCU_IRQCTRL_t)1U,
+#endif
   .node = (IRQn_Type)21,
   .priority = 3,  
 #if(UC_FAMILY == XMC4)  

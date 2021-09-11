@@ -54,3 +54,4 @@ void Send_WheelStatus(WheelStatus_t *s, uint32_t to_node)
 	CAN_NODE_MO_UpdateData(CAN_NODE_0.lmobj_ptr[CAN_MESSAGE_WHEELSTATUS_INDEX], (uint8_t *) data);
 	CAN_NODE_MO_Transmit(CAN_NODE_0.lmobj_ptr[CAN_MESSAGE_WHEELSTATUS_INDEX]);
 }
+

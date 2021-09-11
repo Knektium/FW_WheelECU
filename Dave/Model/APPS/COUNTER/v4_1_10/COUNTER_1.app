@@ -15,9 +15,7 @@
   <virtualSignals name="event_gating_level_detection" URI="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_cdir_gate_event" hwSignal="e1as" hwResource="//@hwResources.1" required="false"/>
   <virtualSignals name="event_gating_level_detection" URI="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_gating_event" hwSignal="e2as" hwResource="//@hwResources.0" required="false"/>
   <virtualSignals name="event_gating_level_detection" URI="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_gating_event" hwSignal="e2as" hwResource="//@hwResources.1" required="false"/>
-  <virtualSignals name="counter_input" URI="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_input_signal" hwSignal="gp0_unsync" hwResource="//@hwResources.0" visible="true">
-    <upwardMapList xsi:type="ResourceModel:Connections" href="../../DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.3"/>
-  </virtualSignals>
+  <virtualSignals name="counter_input" URI="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_input_signal" hwSignal="gp0_unsync" hwResource="//@hwResources.0" visible="true"/>
   <virtualSignals name="counter_input" URI="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_input_signal" hwSignal="gp0_unsync" hwResource="//@hwResources.1" required="false" visible="true"/>
   <virtualSignals name="gating_input" URI="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_event2_input" hwSignal="gp2_unsync" hwResource="//@hwResources.0" required="false" visible="true"/>
   <virtualSignals name="gating_input" URI="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_event2_input" hwSignal="gp2_unsync" hwResource="//@hwResources.1" required="false" visible="true"/>
@@ -28,7 +26,7 @@
   </requiredApps>
   <requiredApps URI="http://resources/4.1.10/app/COUNTER/1/appres_ccu8_global" requiredAppName="GLOBAL_CCU8" required="false" requiringMode="SHARABLE"/>
   <hwResources name="CCU4 Slice" URI="http://resources/4.1.10/app/COUNTER/1/hwres_ccu4_slice" resourceGroupUri="peripheral/ccu4/*/cc4/*" mResGrpUri="peripheral/ccu4/*/cc4/*">
-    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/ccu41/ccu41_1.dd#//@provided.11"/>
+    <downwardMapList xsi:type="ResourceModel:ResourceGroup" href="../../../HW_RESOURCES/ccu41/ccu41_1.dd#//@provided.40"/>
   </hwResources>
   <hwResources name="CCU8 Slice" URI="http://resources/4.1.10/app/COUNTER/1/hwres_ccu8_slice" resourceGroupUri="" required="false" mResGrpUri="peripheral/ccu8/*/cc8/*"/>
   <connections URI="http://resources/4.1.10/app/COUNTER/1/http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_global/http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_global_signal" systemDefined="true" sourceSignal="ccu4_global" targetSignal="global_signal" targetVirtualSignal="//@virtualSignals.0" proxySrcVirtualSignalUri="http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_global_ccu4_globalsignal" containingProxySignal="true">

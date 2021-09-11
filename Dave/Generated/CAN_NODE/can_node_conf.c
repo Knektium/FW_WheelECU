@@ -93,8 +93,6 @@
  **********************************************************************************************************************/
 
 #include "can_node.h"
-#include "Can_Config.h"
-#include "Can_Config_XMC1400.h"
 
 
 
@@ -320,11 +318,75 @@ const CAN_NODE_t  CAN_NODE_0 = {
 
   .node_sr_ptr       = (CAN_NODE_SR_t*)&CAN_NODE_0_sr,
 
-  .lmobj_ptr         = CAN_MESSAGE_CONFIGS,
+  .lmobj_ptr         = { 
+
+      (CAN_NODE_LMO_t*)&CAN_NODE_0_LMO_01_Config, 
+
+      (CAN_NODE_LMO_t*)&CAN_NODE_0_LMO_02_Config,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL,  
+
+      NULL },
 
   .node_num          = 1U,
 
-  .mo_count          = NUMBER_OF_CAN_MESSAGE_CONFIGS,
+  .mo_count          = 2U,
 
   .loopback_enable         = false, 
 
