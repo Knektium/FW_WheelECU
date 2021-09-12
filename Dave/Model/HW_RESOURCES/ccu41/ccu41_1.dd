@@ -784,7 +784,6 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Forward to CC4ySR3"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="3" URI="http://resources/14.0.1/peripheral/ccu4/1/cc4/3">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/COUNTER/v4_1_10/COUNTER_1.app#//@hwResources.0"/>
     <resourcesList name="stc" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc43_stc"/>
     <resourcesList name="c0v" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc43_c0v"/>
     <resourcesList name="c1v" requiredResourceUri="http://resources/14.0.1/peripheral/ccu4/1/cc43_c1v"/>

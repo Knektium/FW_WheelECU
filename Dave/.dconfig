@@ -6,7 +6,6 @@
             <BindMap MUri="peripheral/cpu/0/nvic/interrupt/2" Proxy="app/GLOBAL_SCU_XMC1/0/hwres_sr2_scunode"/>
             <BindMap MUri="port/p/0/pad/15" Proxy="app/CPU_CTRL_XMC1/0/hwres_swd0_1"/>
             <BindMap MUri="devicepackage/0/9" Proxy="app/SPI_MASTER/0/__pin_hwres_port_pad_spi_sclkout"/>
-            <BindMap MUri="peripheral/cpu/0/nvic/interrupt/24" Proxy="app/INTERRUPT/1/hwres_nvicnode"/>
             <BindMap MUri="port/p/4/pad/4" Proxy="app/PWM/1/hwres_port_pad_pwm_out"/>
             <BindMap MUri="port/p/0/pad/14" Proxy="app/CPU_CTRL_XMC1/0/hwres_swd0_0"/>
             <BindMap MUri="port/p/4/pad/3" Proxy="app/DIGITAL_IO/4/hwres_port_pin"/>
@@ -28,7 +27,6 @@
             <BindMap MUri="peripheral/eru/1/ers_etl/0" Proxy="app/PIN_INTERRUPT/0/hwres_eru_ers_etl"/>
             <BindMap MUri="devicepackage/0/64" Proxy="app/DIGITAL_IO/3/__pin_hwres_port_pin"/>
             <BindMap MUri="port/p/2/pad/0" Proxy="app/SPI_MASTER/0/hwres_port_pad_spi_sclkout"/>
-            <BindMap MUri="peripheral/ccu4/1/cc4/3" Proxy="app/COUNTER/1/hwres_ccu4_slice"/>
             <BindMap MUri="peripheral/eru/1/ogu/3" Proxy="app/PIN_INTERRUPT/0/hwres_eru_ogu"/>
             <BindMap MUri="peripheral/cpu/0/nvic/interrupt/6" Proxy="app/PIN_INTERRUPT/0/hwres_interrupt"/>
             <BindMap MUri="peripheral/can/0/global" Proxy="app/GLOBAL_CAN/0/hwres_can_global"/>

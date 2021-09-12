@@ -408,7 +408,6 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#11" description="Select source A or B"/>
   </provided>
   <provided xsi:type="ResourceModel:ResourceGroup" name="IRQ24_Handler" URI="http://resources/14.0.1/peripheral/cpu/0/nvic/interrupt/24">
-    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/INTERRUPT/v4_0_8/INTERRUPT_1.app#//@hwResources.0"/>
     <resourcesList name="iser_setena" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_iser/setena24"/>
     <resourcesList name="icer_clrena" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_icer/clrena24"/>
     <resourcesList name="ispr_setpend" requiredResourceUri="http://resources/14.0.1/peripheral/cpu/0/nvic_ispr/setpend24"/>

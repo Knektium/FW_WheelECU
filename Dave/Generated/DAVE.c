@@ -118,16 +118,6 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of COUNTER APP instance COUNTER_AutoStop */
-	 init_status = (DAVE_STATUS_t)COUNTER_Init(&COUNTER_AutoStop); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
-	 /**  Initialization of INTERRUPT APP instance INTERRUPT_AutoStop */
-	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_AutoStop); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
 	 /**  Initialization of TIMER APP instance TIMER_SpeedClock */
 	 init_status = (DAVE_STATUS_t)TIMER_Init(&TIMER_SpeedClock); 
    } 

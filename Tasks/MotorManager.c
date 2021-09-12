@@ -60,6 +60,8 @@ uint32_t calculated_duty_cycle = 100UL;
 uint32_t current_duty_cycle = 100UL;
 uint16_t actual_rpm = 0U;
 uint16_t requested_rpm_changed;
+uint32_t revs_left = 0U; // Hundreds of a revolution
+BaseType_t is_auto_stop_set = pdFALSE;
 
 /* Make sure to take the xStatusSemaphore before calling this function */
 void set_motor_direction(MotorDirection_t direction)
@@ -121,14 +123,14 @@ void set_motor_speed(MotorSpeed_t rpm)
 	}
 }
 
-void set_motor_auto_stop(uint16_t revolutions)
+void set_motor_auto_stop(uint32_t revolutions)
 {
-	COUNTER_Stop(&COUNTER_AutoStop);
+	revs_left = revolutions * 100U;
 
 	if (revolutions > 0U) {
-		COUNTER_ResetCounter(&COUNTER_AutoStop);
-		COUNTER_SetCountMatch(&COUNTER_AutoStop, revolutions);
-		COUNTER_Start(&COUNTER_AutoStop);
+		is_auto_stop_set = pdTRUE;
+	} else {
+		is_auto_stop_set = pdFALSE;
 	}
 }
 
@@ -252,10 +254,46 @@ BaseType_t MotorManager_NotifyError(void)
 	return xQueueSend(xQueue_MotorCommands, &command, (TickType_t) 2000);
 }
 
-void MotorManager_AutoStopHandler(void)
+void MotorManager_RotationSensorHandler(void)
 {
-	MotorManager_Stop();
-	COUNTER_Stop(&COUNTER_AutoStop);
+	uint16_t milliseconds, rpm;
+
+	rpm = 0U;
+	milliseconds = COUNTER_GetCurrentCount(&COUNTER_RotationTime);
+	COUNTER_ResetCounter(&COUNTER_RotationTime);
+
+	if (0U != milliseconds) {
+		rpm = (uint16_t) (60000U / ((milliseconds * 3) / (float) 9.33));
+	}
+
+	actual_rpm = (actual_rpm + rpm) / 2U;
+
+	if (pdTRUE == is_auto_stop_set) {
+		if (revs_left >= 311) {
+			revs_left -= 311;
+		} else {
+			revs_left = 0U;
+		}
+
+		if (revs_left < 311) {
+			MotorCommand_t command;
+
+			revs_left = 0U;
+
+			command.type = COMMAND_STOP;
+			command.parameters.rpm = 0U;
+			command.parameters.direction = 0U;
+			command.revolutions = 0U;
+
+			xQueueSendFromISR(xQueue_MotorCommands, &command, NULL);
+		}
+	}
+}
+
+void MotorManager_RotationSensorTimeoutHandler(void)
+{
+	actual_rpm = 0U;
+	COUNTER_ResetCounter(&COUNTER_RotationTime);
 }
 
 void MotorManager_Init(void)
@@ -344,27 +382,6 @@ void MotorManager_DiagnosticsTask(void *pvParameters)
 
 		vTaskDelay(333 / portTICK_PERIOD_MS);
 	}
-}
-
-void MotorManager_RotationSensorTimeoutHandler(void)
-{
-	actual_rpm = 0U;
-	COUNTER_ResetCounter(&COUNTER_RotationTime);
-}
-
-void MotorManager_RotationSensorHandler(void)
-{
-	uint16_t milliseconds, rpm;
-
-	rpm = 0U;
-	milliseconds = COUNTER_GetCurrentCount(&COUNTER_RotationTime);
-	COUNTER_ResetCounter(&COUNTER_RotationTime);
-
-	if (0U != milliseconds) {
-		rpm = (uint16_t) (60000U / ((milliseconds * 3) / (float) 9.33));
-	}
-
-	actual_rpm = (actual_rpm + rpm) / 2U;
 }
 
 void MotorManager_SpeedControllerTask(void *pvParameters)

@@ -88,10 +88,6 @@ extern COUNTER_t COUNTER_RotationTime;
 
 
 
-extern COUNTER_t COUNTER_AutoStop;
-
-
-
 #endif /* COUNTERCONF_H_ */
 
 /*CODE_BLOCK_END*/

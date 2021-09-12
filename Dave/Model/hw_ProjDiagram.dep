@@ -1069,7 +1069,7 @@
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="uri" value="http://resources/4.0.8/app/INTERRUPT/0"/>
     <properties key="APP_NAME_ID" value="INTERRUPT/0"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="171" height="71" x="340" y="1153">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="171" height="71" x="340" y="1318">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="2" transparency="0.0" width="131" height="71" x="20" style="//@styles.0/@styles.3" cornerHeight="5" cornerWidth="5"/>
     </graphicsAlgorithm>
     <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.2" referencedGraphicsAlgorithm="//@children.2/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
@@ -1113,7 +1113,7 @@
     <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="261" height="91" x="20" y="2586">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="2" transparency="0.0" width="221" height="91" x="20" style="//@styles.0/@styles.3" cornerHeight="5" cornerWidth="5"/>
     </graphicsAlgorithm>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.0 //@connections.1 //@connections.3 //@connections.5" referencedGraphicsAlgorithm="//@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.0 //@connections.1 //@connections.3" referencedGraphicsAlgorithm="//@children.3/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="ccu4_global"/>
       <properties key="uri" value="http://resources/4.1.12/app/GLOBAL_CCU4/0/vs_global_ccu4_globalsignal"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.4" lineStyle="UNSPECIFIED" width="20" height="10" x="220" y="50"/>
@@ -1179,7 +1179,7 @@
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="uri" value="http://resources/4.1.10/app/PWM/1"/>
     <properties key="APP_NAME_ID" value="PWM/1"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="271" height="221" x="340" y="1285">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="271" height="221" x="340" y="1450">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="2" transparency="0.0" width="231" height="221" x="20" style="//@styles.0/@styles.3" cornerHeight="5" cornerWidth="5"/>
     </graphicsAlgorithm>
     <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.4/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
@@ -1401,7 +1401,7 @@
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0"/>
     <properties key="APP_NAME_ID" value="COUNTER/0"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="271" height="291" x="650" y="1354">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="271" height="291" x="650" y="1410">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="2" transparency="0.0" width="231" height="291" x="20" style="//@styles.0/@styles.3" cornerHeight="5" cornerWidth="5"/>
     </graphicsAlgorithm>
     <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.1" referencedGraphicsAlgorithm="//@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
@@ -1424,7 +1424,7 @@
       <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu8_timer_status"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="75"/>
     </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.7" referencedGraphicsAlgorithm="//@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.5" referencedGraphicsAlgorithm="//@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="event_rollover"/>
       <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_rollover_event"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.4" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="95"/>
@@ -1434,7 +1434,7 @@
       <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu8_rollover_event"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="115"/>
     </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.8" referencedGraphicsAlgorithm="//@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.6" referencedGraphicsAlgorithm="//@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="event_count_match"/>
       <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_count_match"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="135"/>
@@ -1464,7 +1464,7 @@
       <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu8_gating_event"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="270"/>
     </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.6" referencedGraphicsAlgorithm="//@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.4" referencedGraphicsAlgorithm="//@children.6/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="counter_input"/>
       <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_input_signal"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="95"/>
@@ -2261,375 +2261,27 @@
     </children>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
-    <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1"/>
-    <properties key="APP_NAME_ID" value="COUNTER/1"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="271" height="291" x="340" y="1667">
-      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="2" transparency="0.0" width="231" height="291" x="20" style="//@styles.0/@styles.3" cornerHeight="5" cornerWidth="5"/>
-    </graphicsAlgorithm>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.3" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="global_signal"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_global_signal"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.4" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="55"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="global_signal"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_global_signal"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="75"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="counter_output"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_timer_status"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="55"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="counter_output"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_timer_status"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="75"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_rollover"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_rollover_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="95"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_rollover"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_rollover_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="115"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.4" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_count_match"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_count_match"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="135"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_count_match"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_count_match"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="155"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_edge_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_edge_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="175"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_edge_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_edge_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="195"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_gating_level_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_gating_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="250"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_gating_level_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_gating_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="270"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="counter_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_input_signal"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="95"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="counter_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_input_signal"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="115"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="gating_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_event1_input"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="135"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="gating_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_event1_input"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="155"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_gating_level_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_cdir_gate_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="215"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="event_gating_level_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_cdir_gate_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="230" y="235"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="gating_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_event2_input"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="175"/>
-    </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="gating_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_event2_input"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="195"/>
-    </anchors>
-    <children visible="true">
-      <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.0">
-        <points x="20" y="40"/>
-        <points x="251" y="40"/>
-      </graphicsAlgorithm>
-    </children>
-    <children xsi:type="pi:ContainerShape" visible="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="231" height="20" x="20"/>
-      <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="229" height="20" x="2" style="//@styles.0/@styles.0" horizontalAlignment="ALIGNMENT_CENTER" value="COUNTER"/>
-      </children>
-    </children>
-    <children xsi:type="pi:ContainerShape" visible="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="231" height="20" x="20" y="20"/>
-      <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="229" height="20" x="2" style="//@styles.0/@styles.1" horizontalAlignment="ALIGNMENT_CENTER" value="COUNTER_AutoStop">
-          <properties key="AppInstanceLabel" value="COUNTER_0"/>
-        </graphicsAlgorithm>
-      </children>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="global_signal"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_global_signal"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="35"/>
-    </children>
-    <children visible="true">
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_global_signal"/>
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.3" lineStyle="UNSPECIFIED" width="96" height="20" x="25" y="50" style="//@styles.0/@styles.2" value="global_signal"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="global_signal"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_global_signal"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="55"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_global_signal"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="96" height="20" x="25" y="70" value="global_signal"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="counter_output"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_timer_status"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="35"/>
-    </children>
-    <children visible="true">
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_timer_status"/>
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineStyle="UNSPECIFIED" width="105" height="20" x="140" y="50" style="//@styles.0/@styles.2" horizontalAlignment="ALIGNMENT_RIGHT" value="counter_output"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="counter_output"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_timer_status"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="55"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_timer_status"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="105" height="20" x="140" y="70" horizontalAlignment="ALIGNMENT_RIGHT" value="counter_output"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_rollover"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_rollover_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="75"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_rollover_event"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="105" height="20" x="140" y="90" horizontalAlignment="ALIGNMENT_RIGHT" value="event_rollover"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_rollover"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_rollover_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="95"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_rollover_event"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="105" height="20" x="140" y="110" horizontalAlignment="ALIGNMENT_RIGHT" value="event_rollover"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_count_match"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_count_match"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="115"/>
-    </children>
-    <children visible="true">
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_count_match"/>
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineStyle="UNSPECIFIED" width="105" height="20" x="140" y="130" style="//@styles.0/@styles.2" horizontalAlignment="ALIGNMENT_RIGHT" value="event_count_match"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_count_match"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_count_match"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="135"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_count_match"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="105" height="20" x="140" y="150" horizontalAlignment="ALIGNMENT_RIGHT" value="event_count_match"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_edge_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_edge_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="155"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_edge_event"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="135" height="20" x="110" y="170" horizontalAlignment="ALIGNMENT_RIGHT" value="event_edge_detection"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_edge_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_edge_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="175"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_edge_event"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="135" height="20" x="110" y="190" horizontalAlignment="ALIGNMENT_RIGHT" value="event_edge_detection"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_gating_level_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_gating_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="230"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_gating_event"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="155" height="20" x="90" y="245" horizontalAlignment="ALIGNMENT_RIGHT" value="event_gating_level_detection"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_gating_level_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_gating_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="250"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_gating_event"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="155" height="20" x="90" y="265" horizontalAlignment="ALIGNMENT_RIGHT" value="event_gating_level_detection"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="counter_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_input_signal"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="75"/>
-    </children>
-    <children visible="true">
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_input_signal"/>
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineStyle="UNSPECIFIED" width="96" height="20" x="25" y="90" style="//@styles.0/@styles.2" value="counter_input"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="counter_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_input_signal"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="95"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_input_signal"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="96" height="20" x="25" y="110" value="counter_input"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="gating_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_event1_input"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="115"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_event1_input"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="116" height="20" x="25" y="130" value="gating_input"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="gating_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_event1_input"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="135"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_event1_input"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="116" height="20" x="25" y="150" value="gating_input"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_gating_level_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_cdir_gate_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="195"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_cdir_gate_event"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="165" height="20" x="80" y="210" horizontalAlignment="ALIGNMENT_RIGHT" value="event_gating_level_detection"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="event_gating_level_detection"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_cdir_gate_event"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="215"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_cdir_gate_event"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="165" height="20" x="80" y="230" horizontalAlignment="ALIGNMENT_RIGHT" value="event_gating_level_detection"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="gating_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_event2_input"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="155"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_event2_input"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="86" height="20" x="25" y="170" value="gating_input"/>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="gating_input"/>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_event2_input"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="175"/>
-    </children>
-    <children>
-      <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu8_event2_input"/>
-      <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="86" height="20" x="25" y="190" value="gating_input"/>
-    </children>
-  </children>
-  <children xsi:type="pi:ContainerShape" visible="true" active="true">
-    <properties key="uri" value="http://resources/4.0.8/app/INTERRUPT/1"/>
-    <properties key="APP_NAME_ID" value="INTERRUPT/1"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="171" height="71" x="650" y="1685">
-      <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="2" transparency="0.0" width="131" height="71" x="20" style="//@styles.0/@styles.3" cornerHeight="5" cornerWidth="5"/>
-    </graphicsAlgorithm>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.4" referencedGraphicsAlgorithm="//@children.13/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
-      <properties key="SignalName" value="sr_irq"/>
-      <properties key="uri" value="http://resources/4.0.8/app/INTERRUPT/1/vs_nvic_signal_in"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="50"/>
-    </anchors>
-    <children visible="true">
-      <graphicsAlgorithm xsi:type="al:Polyline" lineStyle="UNSPECIFIED" style="//@styles.0">
-        <points x="20" y="40"/>
-        <points x="151" y="40"/>
-      </graphicsAlgorithm>
-    </children>
-    <children xsi:type="pi:ContainerShape" visible="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="131" height="20" x="20"/>
-      <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="129" height="20" x="2" style="//@styles.0/@styles.0" horizontalAlignment="ALIGNMENT_CENTER" value="INTERRUPT"/>
-      </children>
-    </children>
-    <children xsi:type="pi:ContainerShape" visible="true">
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="131" height="20" x="20" y="20"/>
-      <children visible="true">
-        <graphicsAlgorithm xsi:type="al:Text" lineStyle="UNSPECIFIED" width="129" height="20" x="2" style="//@styles.0/@styles.1" horizontalAlignment="ALIGNMENT_CENTER" value="INTERRUPT_AutoStop">
-          <properties key="AppInstanceLabel" value="INTERRUPT_1"/>
-        </graphicsAlgorithm>
-      </children>
-    </children>
-    <children visible="true" active="true">
-      <properties key="SignalName" value="sr_irq"/>
-      <properties key="uri" value="http://resources/4.0.8/app/INTERRUPT/1/vs_nvic_signal_in"/>
-      <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="20" height="10" x="-20" y="30"/>
-    </children>
-    <children visible="true">
-      <properties key="uri" value="http://resources/4.0.8/app/INTERRUPT/1/vs_nvic_signal_in"/>
-      <graphicsAlgorithm xsi:type="al:Text" foreground="//@colors.2" lineStyle="UNSPECIFIED" width="96" height="20" x="25" y="45" style="//@styles.0/@styles.2" value="sr_irq"/>
-    </children>
-  </children>
-  <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="uri" value="http://resources/4.1.10/app/TIMER/0"/>
     <properties key="APP_NAME_ID" value="TIMER/0"/>
-    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="261" height="81" x="350" y="1546">
+    <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="261" height="81" x="350" y="1711">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="2" transparency="0.0" width="221" height="81" x="20" style="//@styles.0/@styles.3" cornerHeight="5" cornerWidth="5"/>
     </graphicsAlgorithm>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.6" referencedGraphicsAlgorithm="//@children.14/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" outgoingConnections="//@connections.4" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="event_time_interval"/>
       <properties key="uri" value="http://resources/4.1.10/app/TIMER/0/vs_timer_ccu4_period_match_interrupt"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="220" y="50"/>
     </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.14/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="event_time_interval"/>
       <properties key="uri" value="http://resources/4.1.10/app/TIMER/0/vs_timer_ccu8_period_match_interrupt"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="220" y="65"/>
     </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.5" referencedGraphicsAlgorithm="//@children.14/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.3" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="global_enable"/>
       <properties key="uri" value="http://resources/4.1.10/app/TIMER/0/vs_timer_ccu4_global_enable"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.4" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="50"/>
     </anchors>
-    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.14/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" active="true" referencedGraphicsAlgorithm="//@children.12/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="global_enable"/>
       <properties key="uri" value="http://resources/4.1.10/app/TIMER/0/vs_timer_ccu8_global_enable"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="65"/>
@@ -2724,7 +2376,7 @@
     <graphicsAlgorithm xsi:type="al:Rectangle" lineWidth="1" filled="false" lineVisible="false" transparency="0.0" width="171" height="71" x="960" y="1520">
       <graphicsAlgorithmChildren xsi:type="al:RoundedRectangle" lineWidth="2" transparency="0.0" width="131" height="71" x="20" style="//@styles.0/@styles.3" cornerHeight="5" cornerWidth="5"/>
     </graphicsAlgorithm>
-    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.7 //@connections.8" referencedGraphicsAlgorithm="//@children.16/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
+    <anchors xsi:type="pi:BoxRelativeAnchor" visible="true" active="true" incomingConnections="//@connections.5 //@connections.6" referencedGraphicsAlgorithm="//@children.14/@graphicsAlgorithm/@graphicsAlgorithmChildren.0">
       <properties key="SignalName" value="sr_irq"/>
       <properties key="uri" value="http://resources/4.0.8/app/INTERRUPT/2/vs_nvic_signal_in"/>
       <graphicsAlgorithm xsi:type="al:Rectangle" background="//@colors.2" lineStyle="UNSPECIFIED" width="20" height="10" x="-20" y="50"/>
@@ -2761,25 +2413,19 @@
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="junctionPoint"/>
-    <graphicsAlgorithm xsi:type="al:Ellipse" lineStyle="UNSPECIFIED" width="6" height="6" x="317" y="1361">
+    <graphicsAlgorithm xsi:type="al:Ellipse" lineStyle="UNSPECIFIED" width="6" height="6" x="317" y="1527">
       <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.6" foreground="//@colors.6" lineWidth="1" transparency="0.0" width="5" height="5"/>
     </graphicsAlgorithm>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="junctionPoint"/>
-    <graphicsAlgorithm xsi:type="al:Ellipse" lineStyle="UNSPECIFIED" width="6" height="6" x="317" y="1723">
+    <graphicsAlgorithm xsi:type="al:Ellipse" lineStyle="UNSPECIFIED" width="6" height="6" x="317" y="1763">
       <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.6" foreground="//@colors.6" lineWidth="1" transparency="0.0" width="5" height="5"/>
     </graphicsAlgorithm>
   </children>
   <children xsi:type="pi:ContainerShape" visible="true" active="true">
     <properties key="junctionPoint"/>
-    <graphicsAlgorithm xsi:type="al:Ellipse" lineStyle="UNSPECIFIED" width="6" height="6" x="317" y="1597">
-      <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.6" foreground="//@colors.6" lineWidth="1" transparency="0.0" width="5" height="5"/>
-    </graphicsAlgorithm>
-  </children>
-  <children xsi:type="pi:ContainerShape" visible="true" active="true">
-    <properties key="junctionPoint"/>
-    <graphicsAlgorithm xsi:type="al:Ellipse" lineStyle="UNSPECIFIED" width="6" height="6" x="937" y="1491">
+    <graphicsAlgorithm xsi:type="al:Ellipse" lineStyle="UNSPECIFIED" width="6" height="6" x="937" y="1546">
       <graphicsAlgorithmChildren xsi:type="al:Ellipse" background="//@colors.5" foreground="//@colors.5" lineWidth="1" transparency="0.0" width="5" height="5"/>
     </graphicsAlgorithm>
   </children>
@@ -2987,7 +2633,7 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <bendpoints x="320" y="2641"/>
-    <bendpoints x="320" y="1365"/>
+    <bendpoints x="320" y="1530"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.0" end="//@children.6/@anchors.0">
     <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_global/http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_global_signal"/>
@@ -3000,9 +2646,9 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <bendpoints x="320" y="2641"/>
-    <bendpoints x="320" y="1264"/>
-    <bendpoints x="630" y="1264"/>
-    <bendpoints x="630" y="1414"/>
+    <bendpoints x="320" y="1429"/>
+    <bendpoints x="630" y="1429"/>
+    <bendpoints x="630" y="1470"/>
   </connections>
   <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.1/@anchors.40" end="//@children.2/@anchors.0">
     <properties key="uri" value="http://resources/4.1.14/app/CAN_NODE/0/http://resources/4.1.14/app/CAN_NODE/0/vs_message1_rxinp/http://resources/4.0.8/app/INTERRUPT/0/vs_nvic_signal_in"/>
@@ -3015,35 +2661,9 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <bendpoints x="300" y="1910"/>
-    <bendpoints x="300" y="1208"/>
+    <bendpoints x="300" y="1373"/>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.0" end="//@children.12/@anchors.0">
-    <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_global/http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_global_signal"/>
-    <graphicsAlgorithm xsi:type="al:Polyline" background="//@colors.6" foreground="//@colors.6" lineStyle="UNSPECIFIED" style="//@styles.0/@styles.3"/>
-    <connectionDecorators visible="true" locationRelative="true" location="1.0">
-      <graphicsAlgorithm xsi:type="al:Polyline" background="//@colors.6" foreground="//@colors.6" lineStyle="UNSPECIFIED" style="//@styles.0/@styles.3">
-        <points x="-10" y="5"/>
-        <points/>
-        <points x="-10" y="-5"/>
-      </graphicsAlgorithm>
-    </connectionDecorators>
-    <bendpoints x="320" y="2641"/>
-    <bendpoints x="320" y="1727"/>
-  </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.12/@anchors.6" end="//@children.13/@anchors.0">
-    <properties key="uri" value="http://resources/4.1.10/app/COUNTER/1/http://resources/4.1.10/app/COUNTER/1/vs_counter_ccu4_count_match/http://resources/4.0.8/app/INTERRUPT/1/vs_nvic_signal_in"/>
-    <graphicsAlgorithm xsi:type="al:Polyline" background="//@colors.5" foreground="//@colors.5" lineStyle="UNSPECIFIED" style="//@styles.0/@styles.3"/>
-    <connectionDecorators visible="true" locationRelative="true" location="1.0">
-      <graphicsAlgorithm xsi:type="al:Polyline" background="//@colors.5" foreground="//@colors.5" lineStyle="UNSPECIFIED" style="//@styles.0/@styles.3">
-        <points x="-10" y="5"/>
-        <points/>
-        <points x="-10" y="-5"/>
-      </graphicsAlgorithm>
-    </connectionDecorators>
-    <bendpoints x="630" y="1807"/>
-    <bendpoints x="630" y="1740"/>
-  </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.0" end="//@children.14/@anchors.2">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.3/@anchors.0" end="//@children.12/@anchors.2">
     <properties key="uri" value="http://resources/4.1.10/app/TIMER/0/http://resources/4.1.10/app/TIMER/0/vs_global_ccu4_enable/http://resources/4.1.10/app/TIMER/0/vs_timer_ccu4_global_enable"/>
     <graphicsAlgorithm xsi:type="al:Polyline" background="//@colors.6" foreground="//@colors.6" lineStyle="UNSPECIFIED" style="//@styles.0/@styles.3"/>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
@@ -3054,9 +2674,9 @@
       </graphicsAlgorithm>
     </connectionDecorators>
     <bendpoints x="320" y="2641"/>
-    <bendpoints x="320" y="1601"/>
+    <bendpoints x="320" y="1766"/>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.14/@anchors.0" end="//@children.6/@anchors.12">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.12/@anchors.0" end="//@children.6/@anchors.12">
     <properties key="uri" value="http://resources/4.1.10/app/TIMER/0/http://resources/4.1.10/app/TIMER/0/vs_timer_ccu4_period_match_interrupt/http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_input_signal"/>
     <graphicsAlgorithm xsi:type="al:Polyline" background="//@colors.5" foreground="//@colors.5" lineStyle="UNSPECIFIED" style="//@styles.0/@styles.3"/>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
@@ -3066,10 +2686,10 @@
         <points x="-10" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <bendpoints x="630" y="1601"/>
-    <bendpoints x="630" y="1454"/>
+    <bendpoints x="630" y="1766"/>
+    <bendpoints x="630" y="1510"/>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.6/@anchors.4" end="//@children.16/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.6/@anchors.4" end="//@children.14/@anchors.0">
     <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_rollover_event/http://resources/4.0.8/app/INTERRUPT/2/vs_nvic_signal_in"/>
     <graphicsAlgorithm xsi:type="al:Polyline" background="//@colors.5" foreground="//@colors.5" lineStyle="UNSPECIFIED" style="//@styles.0/@styles.3"/>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
@@ -3079,10 +2699,10 @@
         <points x="-10" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <bendpoints x="940" y="1454"/>
+    <bendpoints x="940" y="1510"/>
     <bendpoints x="940" y="1575"/>
   </connections>
-  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.6/@anchors.6" end="//@children.16/@anchors.0">
+  <connections xsi:type="pi:FreeFormConnection" visible="true" active="true" start="//@children.6/@anchors.6" end="//@children.14/@anchors.0">
     <properties key="uri" value="http://resources/4.1.10/app/COUNTER/0/http://resources/4.1.10/app/COUNTER/0/vs_counter_ccu4_count_match/http://resources/4.0.8/app/INTERRUPT/2/vs_nvic_signal_in"/>
     <graphicsAlgorithm xsi:type="al:Polyline" background="//@colors.5" foreground="//@colors.5" lineStyle="UNSPECIFIED" style="//@styles.0/@styles.3"/>
     <connectionDecorators visible="true" locationRelative="true" location="1.0">
@@ -3092,7 +2712,7 @@
         <points x="-10" y="-5"/>
       </graphicsAlgorithm>
     </connectionDecorators>
-    <bendpoints x="940" y="1494"/>
+    <bendpoints x="940" y="1550"/>
     <bendpoints x="940" y="1575"/>
   </connections>
   <colors red="227" green="238" blue="249"/>

@@ -49,6 +49,7 @@ BaseType_t MotorManager_Stop(void);
 BaseType_t MotorManager_NotifyError(void);
 
 // Interrupt handlers
-void MotorManager_AutoStopHandler(void);
+void MotorManager_RotationSensorHandler(void);
+void MotorManager_RotationSensorTimeoutHandler(void);
 
 #endif /* TASKS_MOTORMANAGER_H_ */

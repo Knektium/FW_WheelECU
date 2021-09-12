@@ -88,12 +88,8 @@
 #define COUNTER_RotationTime_SLICE_PTR ((XMC_CCU4_SLICE_t*) (void*) CCU41_CC41)
 #define COUNTER_RotationTime_SLICE_SH_MSK  XMC_CCU4_SHADOW_TRANSFER_SLICE_1
 
-#define COUNTER_AutoStop_KERNEL_PTR ((XMC_CCU4_MODULE_t*) (void*) CCU41_BASE)
-#define COUNTER_AutoStop_SLICE_PTR ((XMC_CCU4_SLICE_t*) (void*) CCU41_CC43)
-#define COUNTER_AutoStop_SLICE_SH_MSK  XMC_CCU4_SHADOW_TRANSFER_SLICE_3
-
 /*Macro specifying the number of NVIC handles */
-#define COUNTER_NUM_APPINSTANCES   (2U)
+#define COUNTER_NUM_APPINSTANCES   (1U)
 
 #define COUNTER_MAJOR_VERSION (4) /**< Major version number of COUNTER APP*/
 #define COUNTER_MINOR_VERSION (1) /**< Minor version number of COUNTER APP*/
