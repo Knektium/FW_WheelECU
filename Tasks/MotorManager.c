@@ -137,14 +137,8 @@ void set_motor_auto_stop(uint32_t revolutions)
 void start_speed_measurement(void)
 {
 	TIMER_Start(&TIMER_SpeedClock);
-	COUNTER_Start(&COUNTER_RotationTime);
-}
-
-void stop_speed_measurement(void)
-{
-	TIMER_Stop(&TIMER_SpeedClock);
-	COUNTER_Stop(&COUNTER_RotationTime);
 	COUNTER_ResetCounter(&COUNTER_RotationTime);
+	COUNTER_Start(&COUNTER_RotationTime);
 }
 
 uint8_t get_driver_diag()
@@ -429,6 +423,7 @@ void MotorManager_MainTask(void *pvParameters)
 
 	set_motor_speed(0U);
 	set_motor_direction(DIR_NONE);
+	start_speed_measurement();
 
 	while (1U) {
 		if (xQueueReceive(xQueue_MotorCommands, &command, (TickType_t) 2000)) {
@@ -440,13 +435,11 @@ void MotorManager_MainTask(void *pvParameters)
 					set_motor_auto_stop(0U);
 					set_motor_speed(0U);
 					set_motor_direction(DIR_NONE);
-					stop_speed_measurement();
 
 					break;
 				case COMMAND_START:
 					motor_status = STATUS_RUNNING;
 
-					start_speed_measurement();
 					set_motor_auto_stop(command.revolutions);
 					set_motor_direction(command.parameters.direction);
 					set_motor_speed(command.parameters.rpm);
@@ -459,7 +452,6 @@ void MotorManager_MainTask(void *pvParameters)
 					set_motor_auto_stop(0U);
 					set_motor_speed(0U);
 					set_motor_direction(DIR_NONE);
-					stop_speed_measurement();
 
 					break;
 				}
