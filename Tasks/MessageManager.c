@@ -3,6 +3,7 @@
 #include "tasks.h"
 #include "MessageManager.h"
 #include "MotorManager.h"
+#include "TemperatureManager.h"
 #include "CAN_Config.h"
 #include "CAN_Router.h"
 
@@ -75,12 +76,14 @@ void MessageManager_PeriodicTask(void *pvParameters)
 	MotorParameters_t motor_params;
 	MotorParameters_t requested_motor_params;
 	MotorDiagnosis_t motor_diag;
+	BaseType_t temperature;
 
 	while (1U) {
 		MotorManager_GetStatus(&motor_status);
 		MotorManager_GetDiagnosis(&motor_diag);
 		MotorManager_GetSpeed(&motor_params);
 		MotorManager_GetRequestedSpeed(&requested_motor_params);
+		TemperatureManager_GetTemperature(&temperature);
 
 		wheel_status.RequestedRevolutionsPerMinute = (uint16_t) requested_motor_params.rpm;
 		wheel_status.RevolutionsPerMinute = (uint16_t) motor_params.rpm;
@@ -92,6 +95,8 @@ void MessageManager_PeriodicTask(void *pvParameters)
 		wheel_status.ShortCircuitCode = motor_diag.ShortCircuitCode;
 		wheel_status.OpenLoad = motor_diag.OpenLoad;
 		wheel_status.Undervoltage = motor_diag.Undervoltage;
+
+		wheel_status.Temperature = (uint8_t) temperature;
 
 		Send_WheelStatus(&wheel_status, 0x00);
 		vTaskDelay(500 / portTICK_PERIOD_MS);

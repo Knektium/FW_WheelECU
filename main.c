@@ -5,11 +5,12 @@
 #include "Tasks/ModeManager.h"
 #include "Tasks/MotorManager.h"
 #include "Tasks/MessageManager.h"
+#include "Tasks/TemperatureManager.h"
 #include "CAN_Router.h"
 
 void Time_Handler(void)
 {
-	// Empty
+	DIGITAL_IO_ToggleOutput(&DIGITAL_IO_StatusLED);
 }
 
 void EventHandler_CanNode_0()
@@ -87,6 +88,8 @@ int main(void)
 	ModeManager_SetCurrentMode(MODE_STARTUP);
 	status = DAVE_Init();           /* Initialization of DAVE APPs  */
 
+	DIGITAL_IO_SetOutputLow(&DIGITAL_IO_StatusLED);
+
 	if (status != DAVE_STATUS_SUCCESS)
 	{
 		/* Placeholder for error handler code. The while loop below can be replaced with an user error handler. */
@@ -101,6 +104,7 @@ int main(void)
 	/* Create tasks */
 	ModeManager_Init();
 	MotorManager_Init();
+	TemperatureManager_Init();
 	MessageManager_Init();
 
 	ModeManager_RequestMode(MODE_RUN);

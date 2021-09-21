@@ -51,6 +51,8 @@ void Send_WheelStatus(WheelStatus_t *s, uint32_t to_node)
 	data[4U] |= ((uint8_t) (s->RequestedRevolutionsPerMinute >> 0U) << 0U) & 255U;
 	data[5U] |= ((uint8_t) (s->RequestedRevolutionsPerMinute >> 8U) << 0U) & 255U;
 	
+	data[6U] |= ((uint8_t) (s->Temperature >> 0U) << 0U) & 255U;
+	
 	CAN_NODE_MO_UpdateData(CAN_NODE_0.lmobj_ptr[CAN_MESSAGE_WHEELSTATUS_INDEX], (uint8_t *) data);
 	CAN_NODE_MO_Transmit(CAN_NODE_0.lmobj_ptr[CAN_MESSAGE_WHEELSTATUS_INDEX]);
 }

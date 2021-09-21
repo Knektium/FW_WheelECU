@@ -5,6 +5,7 @@
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../GLOBAL_CCU4/v4_1_12/GLOBAL_CCU4_0.app#//@requiredApps.0"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../RTC/v4_1_14/RTC_0.app#//@requiredApps.0"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@requiredApps.0"/>
+  <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../GLOBAL_ADC/v4_0_18/GLOBAL_ADC_0.app#//@requiredApps.0"/>
   <properties singleton="true" provideInit="true" sharable="true"/>
   <virtualSignals name="clk_dco2_output" URI="http://resources/4.0.20/app/CLOCK_XMC1/0/vs_dco_clkout" hwSignal="clkout" hwResource="//@hwResources.0" required="false"/>
   <virtualSignals name="clk_rtc" URI="http://resources/4.0.20/app/CLOCK_XMC1/0/vs_frtc" hwSignal="frtc" hwResource="//@hwResources.1"/>

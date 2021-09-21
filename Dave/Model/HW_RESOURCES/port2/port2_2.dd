@@ -372,6 +372,7 @@
   <provided xsi:type="ResourceModel:BitField" name="PC2_1_0" URI="http://resources/14.0.1/port/p/2/iocr0/pc2_1_0" value="0" toolTipHelpDescription="Port Control for Port n Pin 0 to 3" defaultValue="0" startPos="18" stopPos="21" accessPermission="rw" maxValue="15" minValue="0"/>
   <provided xsi:type="ResourceModel:BitField" name="PC2_4" URI="http://resources/14.0.1/port/p/2/iocr0/pc2_5" value="0" toolTipHelpDescription="Port Control for Port n Pin 0 to 3" defaultValue="0" startPos="23" stopPos="23" accessPermission="rw" maxValue="1" minValue="0"/>
   <provided xsi:type="ResourceModel:ResourceGroup" name="P2.7 / #16" URI="http://resources/14.0.1/port/p/2/pad/7">
+    <upwardMapList xsi:type="ResourceModel:HWResource" href="../../APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@hwResources.2"/>
     <resourcesList name="hwsel_hw" requiredResourceUri="http://resources/14.0.1/port/p/2/hwsel/hw7"/>
     <resourcesList name="in_p" requiredResourceUri="http://resources/14.0.1/port/p/2/in/p7"/>
     <resourcesList name="iocr_oe" requiredResourceUri="http://resources/14.0.1/port/p/2/iocr4/pc7_5"/>
@@ -417,5 +418,37 @@
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="HW0 control path can override the software configuration."/>
     <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="HW1 control path can override the software configuration."/>
   </provided>
+  <provided xsi:type="ResourceModel:ResourceGroup" name="P2.8 / #17" URI="http://resources/14.0.1/port/p/2/pad/8">
+    <resourcesList name="hwsel_hw" requiredResourceUri="http://resources/14.0.1/port/p/2/hwsel/hw8"/>
+    <resourcesList name="in_p" requiredResourceUri="http://resources/14.0.1/port/p/2/in/p8"/>
+    <resourcesList name="iocr_oe" requiredResourceUri="http://resources/14.0.1/port/p/2/iocr8/pc8_5"/>
+    <resourcesList name="iocr_pcr" requiredResourceUri="http://resources/14.0.1/port/p/2/iocr8/pc8_1_0"/>
+    <resourcesList name="iocr_po" requiredResourceUri="http://resources/14.0.1/port/p/2/iocr8/pc8_4"/>
+    <resourcesList name="omr_pr" requiredResourceUri="http://resources/14.0.1/port/p/2/omr/pr8"/>
+    <resourcesList name="omr_ps" requiredResourceUri="http://resources/14.0.1/port/p/2/omr/ps8"/>
+    <resourcesList name="out_p" requiredResourceUri="http://resources/14.0.1/port/p/2/out/p8"/>
+    <resourcesList name="pdisc_pdis" requiredResourceUri="http://resources/14.0.1/port/p/2/pdisc/pdis8"/>
+    <resourcesList name="phcr_ph" requiredResourceUri="http://resources/14.0.1/port/p/2/phcr1/ph8"/>
+    <resourcesList name="pps_pps" requiredResourceUri="http://resources/14.0.1/port/p/2/pps/pps8"/>
+    <resourcesList name="pad" requiredResourceUri="http://resources/14.0.1/port/p/2/pad8/pad"/>
+    <resourcesList name="analogin" requiredResourceUri="http://resources/14.0.1/port/p/2/pad8/analogin"/>
+    <resourcesList name="altin" requiredResourceUri="http://resources/14.0.1/port/p/2/pad8/altin"/>
+    <resourcesList name="hw0_out" requiredResourceUri="http://resources/14.0.1/port/p/2/pad8/hw0_out"/>
+    <resourcesList name="hw1_out" requiredResourceUri="http://resources/14.0.1/port/p/2/pad8/hw1_out"/>
+    <resourcesList name="hw0_p" requiredResourceUri="http://resources/14.0.1/port/p/2/pad8/hw0_p"/>
+    <resourcesList name="hw1_p" requiredResourceUri="http://resources/14.0.1/port/p/2/pad8/hw1_p"/>
+    <resourcesList name="analogout" requiredResourceUri="http://resources/14.0.1/port/p/2/pad8/analogout"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="PDIS8" URI="http://resources/14.0.1/port/p/2/pdisc/pdis8" value="0x00000000" toolTipHelpDescription="Pad Disable for Port 2 Pin 8" defaultValue="0x00000000" startPos="8" stopPos="8" accessPermission="rw" maxValue="1" minValue="0">
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#0" description="Digital Pad input is enabled. Analog and digital input path active."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#1" description="Digital Pad input is disabled. Analog input path active. (default)"/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="HW8" URI="http://resources/14.0.1/port/p/2/hwsel/hw8" value="0x00000000" toolTipHelpDescription="Port 2 Pin Hardware Select Bit 8" defaultValue="0x00000000" startPos="16" stopPos="17" accessPermission="rw" maxValue="3" minValue="0">
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#00" description="Software control only."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#01" description="HW0 control path can override the software configuration."/>
+    <enumValues xsi:type="ResourceModel:RegEnumValue" value="#10" description="HW1 control path can override the software configuration."/>
+  </provided>
+  <provided xsi:type="ResourceModel:BitField" name="pc8_1_0" URI="http://resources/14.0.1/port/p/2/iocr8/pc8_1_0" value="0" toolTipHelpDescription="Port Control for Port n Pin 0 to 3" defaultValue="0" startPos="2" stopPos="5" accessPermission="rw" maxValue="15" minValue="0"/>
+  <provided xsi:type="ResourceModel:BitField" name="pc8_5" URI="http://resources/14.0.1/port/p/2/iocr8/pc8_5" value="0" toolTipHelpDescription="Port Control for Port n Pin 0 to 3" defaultValue="0" startPos="7" stopPos="7" accessPermission="rw" maxValue="1" minValue="0"/>
   <addressBlock offset="0x0" size="0x0100" usage="registers"/>
 </ResourceModel:Peripheral>

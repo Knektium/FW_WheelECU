@@ -96,7 +96,7 @@ TIMER_t TIMER_SpeedClock =
   .ccu4_period_match_node = XMC_CCU4_SLICE_SR_ID_1,
   .timer_module           = TIMER_MODULE_CCU4,
   .period_value           = 47999U,
-  .start_control          = false,
+  .start_control          = true,
   .period_match_enable    = true,
   .initialized            = false
 };

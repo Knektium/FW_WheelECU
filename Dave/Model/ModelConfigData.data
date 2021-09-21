@@ -64,9 +64,6 @@
     <resource xsi:type="ResourceModel:App" href="APPS/COUNTER/v4_1_10/COUNTER_0.app#/"/>
   </nodes>
   <nodes xsi:type="ApplicationModel:AppNode">
-    <resource xsi:type="ResourceModel:App" href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#/"/>
-  </nodes>
-  <nodes xsi:type="ApplicationModel:AppNode">
     <resource xsi:type="ResourceModel:App" href="APPS/RTC/v4_1_14/RTC_0.app#/"/>
   </nodes>
   <nodes xsi:type="ApplicationModel:AppNode">
@@ -99,6 +96,18 @@
   <nodes xsi:type="ApplicationModel:AppNode">
     <resource xsi:type="ResourceModel:App" href="APPS/INTERRUPT/v4_0_8/INTERRUPT_2.app#/"/>
   </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/GLOBAL_ADC/v4_0_18/GLOBAL_ADC_0.app#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:PeripheralNode">
+    <resource xsi:type="ResourceModel:Peripheral" href="HW_RESOURCES/vadc/vadc_0.dd#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_5.app#/"/>
+  </nodes>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.0" target="//@nodes.1"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.2" target="//@nodes.0"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.8" target="//@nodes.7"/>
@@ -107,13 +116,15 @@
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.13" target="//@nodes.1"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.15" target="//@nodes.13"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.20" target="//@nodes.13"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.22" target="//@nodes.1"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.22" target="//@nodes.23"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.23" target="//@nodes.7"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.27" target="//@nodes.1"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.28" target="//@nodes.13"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.29" target="//@nodes.7"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.32" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.21" target="//@nodes.1"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.21" target="//@nodes.22"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.22" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.26" target="//@nodes.1"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.27" target="//@nodes.13"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.28" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.31" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.32" target="//@nodes.1"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.33" target="//@nodes.32"/>
   <hwConnections href="APPS/CLOCK_XMC1/v4_0_20/CLOCK_XMC1_0.app#//@connections.1"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.0"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.1"/>
@@ -128,8 +139,6 @@
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_0.app#//@connections.0"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_0.app#//@connections.1"/>
   <hwConnections href="APPS/COUNTER/v4_1_10/COUNTER_0.app#//@connections.0"/>
-  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.0"/>
-  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_1.app#//@connections.1"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_3.app#//@connections.0"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_3.app#//@connections.1"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_4.app#//@connections.0"/>
@@ -174,4 +183,61 @@
   <hwConnections href="APPS/TIMER/v4_1_10/TIMER_0.app#//@connections.2"/>
   <hwConnections href="APPS/COUNTER/v4_1_10/COUNTER_0.app#//@connections.2"/>
   <hwConnections href="APPS/COUNTER/v4_1_10/COUNTER_0.app#//@connections.3"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.0"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.1"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.2"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.3"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.4"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.5"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.6"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.7"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.8"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.9"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.10"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.11"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.12"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.13"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.14"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.15"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.16"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.17"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.18"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.19"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.20"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.21"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.22"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.23"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.24"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.25"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.26"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.27"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.28"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.29"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.30"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.31"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.32"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.33"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.34"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.35"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.36"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.37"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.38"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.39"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.40"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.41"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.42"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.43"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.44"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.45"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.46"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.47"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.48"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.49"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.50"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.51"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.53"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.54"/>
+  <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.106"/>
+  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_5.app#//@connections.0"/>
+  <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_5.app#//@connections.1"/>
 </ApplicationModel:ApplicationData>

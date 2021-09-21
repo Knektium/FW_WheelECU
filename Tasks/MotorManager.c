@@ -33,16 +33,16 @@ QueueHandle_t xQueue_MotorCommands;
 
 // Task handles, buffers and stacks
 TaskHandle_t xMotorManager_MainTask_Handle = NULL;
-StaticTask_t xMainTask_Buffer;
-StackType_t xMainTask_Stack[300U];
+StaticTask_t xMotorManager_MainTask_Buffer;
+StackType_t xMotorManager_MainTask_Stack[300U];
 
 TaskHandle_t xMotorManager_SpeedControllerTask_Handle = NULL;
-StaticTask_t xSpeedControllerTask_Buffer;
-StackType_t xSpeedControllerTask_Stack[300U];
+StaticTask_t xMotorManager_SpeedControllerTask_Buffer;
+StackType_t xMotorManager_SpeedControllerTask_Stack[300U];
 
 TaskHandle_t xMotorManager_DiagnosticsTask_Handle = NULL;
-StaticTask_t xDiagnosticsTask_Buffer;
-StackType_t xDiagnosticsTask_Stack[300U];
+StaticTask_t xMotorManager_DiagnosticsTask_Buffer;
+StackType_t xMotorManager_DiagnosticsTask_Stack[300U];
 
 // Semaphores
 SemaphoreHandle_t xStatusSemaphore = NULL;
@@ -314,9 +314,9 @@ void MotorManager_Init(void)
 
 	xQueue_MotorCommands = xQueueCreateStatic(COMMAND_QUEUE_LENGTH, COMMAND_QUEUE_ITEM_SIZE, ucMotorCommandsQueueStorageArea, &xMotorCommandsStaticQueue);
 
-	xMotorManager_MainTask_Handle = xTaskCreateStatic(MotorManager_MainTask, "MotorManager_Main", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xMainTask_Stack, &xMainTask_Buffer);
-	xMotorManager_SpeedControllerTask_Handle = xTaskCreateStatic(MotorManager_SpeedControllerTask, "MotorManager_SpeedController", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xSpeedControllerTask_Stack, &xSpeedControllerTask_Buffer);
-	xMotorManager_DiagnosticsTask_Handle = xTaskCreateStatic(MotorManager_DiagnosticsTask, "MotorManager_Diagnostics", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xDiagnosticsTask_Stack, &xDiagnosticsTask_Buffer);
+	xMotorManager_MainTask_Handle = xTaskCreateStatic(MotorManager_MainTask, "MotorManager_Main", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xMotorManager_MainTask_Stack, &xMotorManager_MainTask_Buffer);
+	xMotorManager_SpeedControllerTask_Handle = xTaskCreateStatic(MotorManager_SpeedControllerTask, "MotorManager_SpeedController", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xMotorManager_SpeedControllerTask_Stack, &xMotorManager_SpeedControllerTask_Buffer);
+	xMotorManager_DiagnosticsTask_Handle = xTaskCreateStatic(MotorManager_DiagnosticsTask, "MotorManager_Diagnostics", MOTOR_MANAGER_STACK_DEPTH, NULL, (tskIDLE_PRIORITY + 3), xMotorManager_DiagnosticsTask_Stack, &xMotorManager_DiagnosticsTask_Buffer);
 }
 
 void MotorManager_DiagnosticsTask(void *pvParameters)

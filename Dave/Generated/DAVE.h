@@ -93,6 +93,12 @@
 
 #include "PIN_INTERRUPT/pin_interrupt.h"
   
+
+#include "GLOBAL_ADC/global_adc.h"
+  
+
+#include "ADC_MEASUREMENT/adc_measurement.h"
+  
 	
 
 /**********************************************************************************************************************

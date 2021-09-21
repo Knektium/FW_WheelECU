@@ -93,11 +93,6 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of DIGITAL_IO APP instance DIGITAL_IO_WheelSensor */
-	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_WheelSensor); 
-   } 
-  if (init_status == DAVE_STATUS_SUCCESS)
-  {
 	 /**  Initialization of RTC APP instance RTC_0 */
 	 init_status = (DAVE_STATUS_t)RTC_Init(&RTC_0); 
    } 
@@ -130,6 +125,16 @@ DAVE_STATUS_t DAVE_Init(void)
   {
 	 /**  Initialization of INTERRUPT APP instance INTERRUPT_RotationSensorTimeout */
 	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_RotationSensorTimeout); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of ADC_MEASUREMENT APP instance ADC_MEASUREMENT_Temperature */
+	 init_status = (DAVE_STATUS_t)ADC_MEASUREMENT_Init(&ADC_MEASUREMENT_Temperature); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of DIGITAL_IO APP instance DIGITAL_IO_StatusLED */
+	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_StatusLED); 
    }  
   return init_status;
 } /**  End of function DAVE_Init */

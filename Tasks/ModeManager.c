@@ -5,6 +5,7 @@
 #include "ModeManager.h"
 #include "MessageManager.h"
 #include "MotorManager.h"
+#include "TemperatureManager.h"
 
 StaticQueue_t xModeRequestStaticQueue;
 uint8_t ucModeRequestQueueStorageArea[5 * sizeof (ApplicationMode)];
