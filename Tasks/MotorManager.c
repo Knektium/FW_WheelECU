@@ -12,6 +12,7 @@
 #define MIN_RPM						0x0800U
 
 #define PWM_FREQUENCY				20000UL // 20 kHz
+#define CALIBRATION_COUNT			10U
 
 const BaseType_t max_duty_cycle = 10000L;
 const BaseType_t min_duty_cycle = 2500L;
@@ -63,6 +64,12 @@ uint32_t revs_left = 0U; // Hundreds of a revolution
 BaseType_t new_speed_measurement;
 BaseType_t is_auto_stop_set;
 
+struct {
+	MotorSpeed_t rpm;
+	BaseType_t duty_cycle;
+	BaseType_t count;
+} calibrated_values[CALIBRATION_COUNT];
+
 /* Make sure to take the xStatusSemaphore before calling this function */
 void set_motor_direction(MotorDirection_t direction)
 {
@@ -80,9 +87,66 @@ void set_motor_direction(MotorDirection_t direction)
 	target_params.direction = direction;
 }
 
+void clear_calibration(void)
+{
+	for (uint8_t i = 0U; i < CALIBRATION_COUNT; i++) {
+		calibrated_values[i].rpm = 0U;
+		calibrated_values[i].duty_cycle = -1;
+		calibrated_values[i].count = 0;
+	}
+}
+
+BaseType_t get_calibrated_duty_cycle(MotorSpeed_t rpm)
+{
+	uint8_t i = 0U;
+	BaseType_t duty_cycle = -1;
+
+	while (i < CALIBRATION_COUNT) {
+		if (rpm == calibrated_values[i].rpm) {
+			duty_cycle = calibrated_values[i].duty_cycle;
+			calibrated_values[i].count += 1;
+			break;
+		}
+
+		i++;
+	}
+
+	return duty_cycle;
+}
+
+void set_calibrated_duty_cycle(MotorSpeed_t rpm, uint32_t duty_cycle)
+{
+	uint8_t i = 0U;
+	uint8_t least_used_index = 0U;
+
+	for (i = 0U; i < CALIBRATION_COUNT; i++) {
+		if (rpm == calibrated_values[i].rpm) {
+			calibrated_values[i].duty_cycle = duty_cycle;
+			return;
+		}
+	}
+
+	for (i = 0U; i < CALIBRATION_COUNT; i++) {
+		if (0U == calibrated_values[i].rpm) {
+			calibrated_values[i].duty_cycle = duty_cycle;
+			return;
+		}
+	}
+
+	for (i = 0U; i < CALIBRATION_COUNT; i++) {
+		if (calibrated_values[least_used_index].count < calibrated_values[i].count) {
+			least_used_index = i;
+		}
+	}
+
+	calibrated_values[least_used_index].rpm = rpm;
+	calibrated_values[least_used_index].duty_cycle = duty_cycle;
+	calibrated_values[least_used_index].count = 0U;
+}
+
 BaseType_t get_duty_cycle_from_rpm(MotorSpeed_t rpm)
 {
-	BaseType_t duty_cycle = 0L; // Duty cycle in 1/10000
+	BaseType_t duty_cycle; // Duty cycle in 1/10000
 
 	if (0U == rpm) {
 		duty_cycle = 0L;
@@ -91,9 +155,12 @@ BaseType_t get_duty_cycle_from_rpm(MotorSpeed_t rpm)
 	} else if (MAX_RPM <= rpm) {
 		duty_cycle = max_duty_cycle;
 	} else {
-		BaseType_t percentage = ((rpm - MIN_RPM) * 100L) / (MAX_RPM - MIN_RPM);
+		duty_cycle = get_calibrated_duty_cycle(rpm);
 
-		duty_cycle = min_duty_cycle + ((max_duty_cycle - min_duty_cycle) * percentage) / 100L;
+		if (duty_cycle == -1) {
+			BaseType_t percentage = ((rpm - MIN_RPM) * 100L) / (MAX_RPM - MIN_RPM);
+			duty_cycle = min_duty_cycle + ((max_duty_cycle - min_duty_cycle) * percentage) / 100L;
+		}
 	}
 
 	return duty_cycle;
@@ -413,6 +480,8 @@ void MotorManager_SpeedControllerTask(void *pvParameters)
 
 					PWM_SetFreqAndDutyCycle(&PWM_Motor, (uint32_t) PWM_FREQUENCY, (uint32_t) duty_cycle);
 					current_duty_cycle = duty_cycle;
+
+					set_calibrated_duty_cycle(target_rpm, duty_cycle);
 				}
 			}
 
@@ -427,6 +496,7 @@ void MotorManager_MainTask(void *pvParameters)
 {
 	MotorCommand_t command;
 
+	clear_calibration();
 	set_motor_speed(0U);
 	set_motor_direction(DIR_NONE);
 	start_speed_measurement();
