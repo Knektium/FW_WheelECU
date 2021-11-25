@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<Project MotherSystem_Version="" Name="WheelECU" Path="C:\Users\Jack\Projects\Wolley\Wolley\FW_StandardWheelECU">
+<Project MotherSystem_Version="" Name="WheelECU" Path="C:\Users\Jack\Projects\Wolley\Wolley\FW_WheelECU">
     <COMPILER>
         <Name>ARM_GCC_HOME</Name>
         <Version/>
