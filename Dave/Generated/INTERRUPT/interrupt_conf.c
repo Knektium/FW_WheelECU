@@ -64,12 +64,12 @@
  * DATA STRUCTURES
  **********************************************************************************************************************/
 
-const INTERRUPT_t INTERRUPT_0 =
+const INTERRUPT_t INTERRUPT_CAN_NODE_0_Error =
 {
 #if(UC_SERIES == XMC14)
  .irqctrl = (XMC_SCU_IRQCTRL_t)2U,
 #endif
-  .node = (IRQn_Type)3,
+  .node = (IRQn_Type)5,
   .priority = 3,  
 #if(UC_FAMILY == XMC4)  
   .subpriority = 0,
@@ -84,6 +84,34 @@ const INTERRUPT_t INTERRUPT_RotationSensorTimeout =
  .irqctrl = (XMC_SCU_IRQCTRL_t)1U,
 #endif
   .node = (IRQn_Type)21,
+  .priority = 3,  
+#if(UC_FAMILY == XMC4)  
+  .subpriority = 0,
+#endif  
+
+  .enable_at_init = true
+
+};
+const INTERRUPT_t INTERRUPT_CAN_NODE_0_Receive =
+{
+#if(UC_SERIES == XMC14)
+ .irqctrl = (XMC_SCU_IRQCTRL_t)2U,
+#endif
+  .node = (IRQn_Type)4,
+  .priority = 3,  
+#if(UC_FAMILY == XMC4)  
+  .subpriority = 0,
+#endif  
+
+  .enable_at_init = true
+
+};
+const INTERRUPT_t INTERRUPT_CAN_NODE_0_Transmit =
+{
+#if(UC_SERIES == XMC14)
+ .irqctrl = (XMC_SCU_IRQCTRL_t)2U,
+#endif
+  .node = (IRQn_Type)3,
   .priority = 3,  
 #if(UC_FAMILY == XMC4)  
   .subpriority = 0,

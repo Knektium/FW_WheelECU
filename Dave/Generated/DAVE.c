@@ -73,8 +73,8 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of INTERRUPT APP instance INTERRUPT_0 */
-	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_0); 
+	 /**  Initialization of INTERRUPT APP instance INTERRUPT_CAN_NODE_0_Error */
+	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_CAN_NODE_0_Error); 
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
@@ -135,6 +135,16 @@ DAVE_STATUS_t DAVE_Init(void)
   {
 	 /**  Initialization of DIGITAL_IO APP instance DIGITAL_IO_StatusLED */
 	 init_status = (DAVE_STATUS_t)DIGITAL_IO_Init(&DIGITAL_IO_StatusLED); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of INTERRUPT APP instance INTERRUPT_CAN_NODE_0_Receive */
+	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_CAN_NODE_0_Receive); 
+   } 
+  if (init_status == DAVE_STATUS_SUCCESS)
+  {
+	 /**  Initialization of INTERRUPT APP instance INTERRUPT_CAN_NODE_0_Transmit */
+	 init_status = (DAVE_STATUS_t)INTERRUPT_Init(&INTERRUPT_CAN_NODE_0_Transmit); 
    }  
   return init_status;
 } /**  End of function DAVE_Init */

@@ -80,13 +80,13 @@ LIB_MODULES := \
 	Newlib
 
 MEDDELA_SOURCE_FILES := \
-	CAN_Config_XMC1400.c \
-	Can_Router.c
+	Tasks/MessageManager.c \
+	CAN_Config_XMC1400.c
 
 MEDDELA_HEADER_FILES := \
+	Tasks/MessageManager.h \
 	CAN_Config_XMC1400.h \
-	CAN_Config.h \
-	Can_Router.h
+	CAN_Config.h
 
 .PHONY: all clean cleanall
 
@@ -158,5 +158,4 @@ cleanall: clean
 	-$(RM) $(MEDDELA_SOURCE_FILES) $(MEDDELA_HEADER_FILES)
 
 patch:
-	@git apply FreeRTOS_HeapSourceRemoval.patch
 	@git apply can_node_conf.patch

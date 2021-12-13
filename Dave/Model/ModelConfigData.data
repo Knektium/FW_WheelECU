@@ -108,6 +108,12 @@
   <nodes xsi:type="ApplicationModel:AppNode">
     <resource xsi:type="ResourceModel:App" href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_5.app#/"/>
   </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/INTERRUPT/v4_0_8/INTERRUPT_3.app#/"/>
+  </nodes>
+  <nodes xsi:type="ApplicationModel:AppNode">
+    <resource xsi:type="ResourceModel:App" href="APPS/INTERRUPT/v4_0_8/INTERRUPT_4.app#/"/>
+  </nodes>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.0" target="//@nodes.1"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.2" target="//@nodes.0"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.8" target="//@nodes.7"/>
@@ -125,6 +131,8 @@
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.31" target="//@nodes.7"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.32" target="//@nodes.1"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.33" target="//@nodes.32"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.36" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.37" target="//@nodes.7"/>
   <hwConnections href="APPS/CLOCK_XMC1/v4_0_20/CLOCK_XMC1_0.app#//@connections.1"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.0"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.1"/>
@@ -173,7 +181,6 @@
   <hwConnections href="APPS/SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@connections.46"/>
   <hwConnections href="APPS/SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@connections.47"/>
   <hwConnections href="APPS/SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@connections.48"/>
-  <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.6"/>
   <hwConnections href="APPS/TIMER/v4_1_10/TIMER_0.app#//@connections.0"/>
   <hwConnections href="APPS/PIN_INTERRUPT/v4_0_2/PIN_INTERRUPT_0.app#//@connections.0"/>
   <hwConnections href="APPS/PIN_INTERRUPT/v4_0_2/PIN_INTERRUPT_0.app#//@connections.1"/>
@@ -240,4 +247,6 @@
   <hwConnections href="APPS/ADC_MEASUREMENT/v4_1_22/ADC_MEASUREMENT_0.app#//@connections.106"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_5.app#//@connections.0"/>
   <hwConnections href="APPS/DIGITAL_IO/v4_0_16/DIGITAL_IO_5.app#//@connections.1"/>
+  <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.6"/>
+  <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.7"/>
 </ApplicationModel:ApplicationData>

@@ -56,17 +56,25 @@
  * MACROS
  **********************************************************************************************************************/
 	
-#define EventHandler_CanNode_0 IRQ_Hdlr_3
+#define CAN_NODE_0_ErrorHandler IRQ_Hdlr_5
 		
 #define MotorManager_RotationSensorTimeoutHandler IRQ_Hdlr_21
+		
+#define CAN_NODE_0_ReceiveHandler IRQ_Hdlr_4
+		
+#define CAN_NODE_0_TransmitHandler IRQ_Hdlr_3
 		
 /***********************************************************************************************************************
  * EXTERN DECLARATIONS
 ***********************************************************************************************************************/
 	
-extern const INTERRUPT_t INTERRUPT_0; 
+extern const INTERRUPT_t INTERRUPT_CAN_NODE_0_Error; 
 	
 extern const INTERRUPT_t INTERRUPT_RotationSensorTimeout; 
+	
+extern const INTERRUPT_t INTERRUPT_CAN_NODE_0_Receive; 
+	
+extern const INTERRUPT_t INTERRUPT_CAN_NODE_0_Transmit; 
 	
 #endif  /* INTERRUPT_EXTERN_H */
 
