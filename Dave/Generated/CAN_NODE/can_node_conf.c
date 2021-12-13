@@ -198,7 +198,7 @@ const CAN_NODE_SR_t CAN_NODE_0_sr = {
 
 
 
-  .alert_event_sr      = 2U,
+  .alert_event_sr      = 1U,
 
   .lec_event_sr        = 0U,
 
@@ -222,7 +222,7 @@ XMC_CAN_MO_t  CAN_NODE_0_LMO_01 = {
 
   .can_ide_mask     = 1U,
 
-  .can_mo_ptr       = (CAN_MO_TypeDef*)CAN_MO17,
+  .can_mo_ptr       = (CAN_MO_TypeDef*)CAN_MO19,
 
   .can_data_length  = 8U,
 
@@ -238,11 +238,11 @@ const CAN_NODE_LMO_t CAN_NODE_0_LMO_01_Config = {
 
   .mo_ptr     = (XMC_CAN_MO_t*)&CAN_NODE_0_LMO_01,     
 
-  .number  = 17U,   
+  .number  = 19U,   
 
   .tx_sr   = 0U,
 
-  .rx_sr   = 1U,
+  .rx_sr   = 0U,
 
   .tx_event_enable = false,
 
@@ -266,7 +266,7 @@ XMC_CAN_MO_t  CAN_NODE_0_LMO_02 = {
 
   .can_ide_mask     = 1U,
 
-  .can_mo_ptr       = (CAN_MO_TypeDef*)CAN_MO19,
+  .can_mo_ptr       = (CAN_MO_TypeDef*)CAN_MO17,
 
   .can_data_length  = 8U,
 
@@ -282,9 +282,9 @@ const CAN_NODE_LMO_t CAN_NODE_0_LMO_02_Config = {
 
   .mo_ptr     = (XMC_CAN_MO_t*)&CAN_NODE_0_LMO_02,     
 
-  .number  = 19U,   
+  .number  = 17U,   
 
-  .tx_sr   = 0U,
+  .tx_sr   = 2U,
 
   .rx_sr   = 0U,
 

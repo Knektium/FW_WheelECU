@@ -67,13 +67,9 @@ void Task_Main(void *pvParameters)
 		wheel_status.Temperature = (uint8_t) temperature;
 
 		MessageManager_Send_WheelStatus(&wheel_status, 0x00);
+		DIGITAL_IO_ToggleOutput(&DIGITAL_IO_StatusLED);
 		vTaskDelay(500 / portTICK_PERIOD_MS);
 	}
-}
-
-void Time_Handler(void)
-{
-	DIGITAL_IO_ToggleOutput(&DIGITAL_IO_StatusLED);
 }
 
 /**

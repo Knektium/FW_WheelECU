@@ -3,7 +3,6 @@
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../GLOBAL_CAN/v4_0_16/GLOBAL_CAN_0.app#//@requiredApps.0"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../FREERTOS/v4_1_2/FREERTOS_0.app#//@requiredApps.0"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../GLOBAL_CCU4/v4_1_12/GLOBAL_CCU4_0.app#//@requiredApps.0"/>
-  <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../RTC/v4_1_14/RTC_0.app#//@requiredApps.0"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../SPI_MASTER/v4_3_24/SPI_MASTER_0.app#//@requiredApps.0"/>
   <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../GLOBAL_ADC/v4_0_18/GLOBAL_ADC_0.app#//@requiredApps.0"/>
   <properties singleton="true" provideInit="true" sharable="true"/>

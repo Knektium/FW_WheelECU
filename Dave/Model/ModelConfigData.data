@@ -64,9 +64,6 @@
     <resource xsi:type="ResourceModel:App" href="APPS/COUNTER/v4_1_10/COUNTER_0.app#/"/>
   </nodes>
   <nodes xsi:type="ApplicationModel:AppNode">
-    <resource xsi:type="ResourceModel:App" href="APPS/RTC/v4_1_14/RTC_0.app#/"/>
-  </nodes>
-  <nodes xsi:type="ApplicationModel:AppNode">
     <resource xsi:type="ResourceModel:App" href="APPS/GLOBAL_SCU_XMC1/v4_1_10/GLOBAL_SCU_XMC1_0.app#/"/>
   </nodes>
   <nodes xsi:type="ApplicationModel:AppNode">
@@ -122,17 +119,15 @@
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.13" target="//@nodes.1"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.15" target="//@nodes.13"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.20" target="//@nodes.13"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.21" target="//@nodes.1"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.21" target="//@nodes.22"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.22" target="//@nodes.7"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.26" target="//@nodes.1"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.27" target="//@nodes.13"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.28" target="//@nodes.7"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.31" target="//@nodes.7"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.32" target="//@nodes.1"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.33" target="//@nodes.32"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.21" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.25" target="//@nodes.1"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.26" target="//@nodes.13"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.27" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.30" target="//@nodes.7"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.31" target="//@nodes.1"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.32" target="//@nodes.31"/>
+  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.35" target="//@nodes.7"/>
   <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.36" target="//@nodes.7"/>
-  <connections xsi:type="ApplicationModel:NodeConnection" source="//@nodes.37" target="//@nodes.7"/>
   <hwConnections href="APPS/CLOCK_XMC1/v4_0_20/CLOCK_XMC1_0.app#//@connections.1"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.0"/>
   <hwConnections href="APPS/CAN_NODE/v4_1_14/CAN_NODE_0.app#//@connections.1"/>

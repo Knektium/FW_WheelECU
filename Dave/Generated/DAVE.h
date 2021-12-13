@@ -82,9 +82,6 @@
 #include "GLOBAL_SCU_XMC1/global_scu_xmc1.h"
   
 
-#include "RTC/rtc.h"
-  
-
 #include "SPI_MASTER/spi_master.h"
   
 

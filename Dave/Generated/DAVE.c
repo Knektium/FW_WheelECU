@@ -93,8 +93,8 @@ DAVE_STATUS_t DAVE_Init(void)
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {
-	 /**  Initialization of RTC APP instance RTC_0 */
-	 init_status = (DAVE_STATUS_t)RTC_Init(&RTC_0); 
+	 /**  Initialization of GLOBAL_SCU_XMC1 APP instance GLOBAL_SCU_XMC1_0 */
+	 init_status = (DAVE_STATUS_t)GLOBAL_SCU_XMC1_Init(&GLOBAL_SCU_XMC1_0); 
    } 
   if (init_status == DAVE_STATUS_SUCCESS)
   {

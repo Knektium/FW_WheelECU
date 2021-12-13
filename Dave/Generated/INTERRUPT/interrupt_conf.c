@@ -69,7 +69,7 @@ const INTERRUPT_t INTERRUPT_CAN_NODE_0_Error =
 #if(UC_SERIES == XMC14)
  .irqctrl = (XMC_SCU_IRQCTRL_t)2U,
 #endif
-  .node = (IRQn_Type)5,
+  .node = (IRQn_Type)4,
   .priority = 3,  
 #if(UC_FAMILY == XMC4)  
   .subpriority = 0,
@@ -97,7 +97,7 @@ const INTERRUPT_t INTERRUPT_CAN_NODE_0_Receive =
 #if(UC_SERIES == XMC14)
  .irqctrl = (XMC_SCU_IRQCTRL_t)2U,
 #endif
-  .node = (IRQn_Type)4,
+  .node = (IRQn_Type)3,
   .priority = 3,  
 #if(UC_FAMILY == XMC4)  
   .subpriority = 0,
@@ -109,14 +109,14 @@ const INTERRUPT_t INTERRUPT_CAN_NODE_0_Receive =
 const INTERRUPT_t INTERRUPT_CAN_NODE_0_Transmit =
 {
 #if(UC_SERIES == XMC14)
- .irqctrl = (XMC_SCU_IRQCTRL_t)2U,
+ .irqctrl = (XMC_SCU_IRQCTRL_t)0U,
 #endif
-  .node = (IRQn_Type)3,
+  .node = (IRQn_Type)5,
   .priority = 3,  
 #if(UC_FAMILY == XMC4)  
   .subpriority = 0,
 #endif  
 
-  .enable_at_init = true
-
+/* sr_irq signal is not connected to any peripheral */
+  .enable_at_init = false 
 };

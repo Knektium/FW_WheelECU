@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ASCII"?>
 <ResourceModel:App xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ResourceModel="http://www.infineon.com/Davex/Resource.ecore" name="GLOBAL_SCU_XMC1" URI="http://resources/4.1.10/app/GLOBAL_SCU_XMC1/0" description="GLOBAL_SCU_XMC1 APP allows to register callback functions and to handle the SR0/SR1/SR2 service request Events." version="4.1.10" minDaveVersion="4.0.0" instanceLabel="GLOBAL_SCU_XMC1_0" appLabel="">
-  <upwardMapList xsi:type="ResourceModel:RequiredApp" href="../../RTC/v4_1_14/RTC_0.app#//@requiredApps.1"/>
   <properties singleton="true" provideInit="true" sharable="true"/>
   <virtualSignals name="sr_irq0" URI="http://resources/4.1.10/app/GLOBAL_SCU_XMC1/0/vs_sr0_signal_in" hwSignal="signal_in" hwResource="//@hwResources.0"/>
   <virtualSignals name="sr_irq1" URI="http://resources/4.1.10/app/GLOBAL_SCU_XMC1/0/vs_sr1_signal_in" hwSignal="signal_in" hwResource="//@hwResources.1"/>

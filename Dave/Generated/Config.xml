@@ -212,16 +212,6 @@
                 <Type>C File</Type>
             </Source_File>
             <Source_File>
-                <File_Name>rtc.c</File_Name>
-                <Path>\Dave\Generated\RTC\rtc.c</Path>
-                <Type>C File</Type>
-            </Source_File>
-            <Source_File>
-                <File_Name>rtc_conf.c</File_Name>
-                <Path>\Dave\Generated\RTC\rtc_conf.c</Path>
-                <Type>C File</Type>
-            </Source_File>
-            <Source_File>
                 <File_Name>spi_master.c</File_Name>
                 <Path>\Dave\Generated\SPI_MASTER\spi_master.c</Path>
                 <Type>C File</Type>
@@ -576,21 +566,6 @@
             <Header_File>
                 <File_Name>pwm_extern.h</File_Name>
                 <Path>\Dave\Generated\PWM\pwm_extern.h</Path>
-                <Type>H File</Type>
-            </Header_File>
-            <Header_File>
-                <File_Name>rtc.h</File_Name>
-                <Path>\Dave\Generated\RTC\rtc.h</Path>
-                <Type>H File</Type>
-            </Header_File>
-            <Header_File>
-                <File_Name>rtc_conf.h</File_Name>
-                <Path>\Dave\Generated\RTC\rtc_conf.h</Path>
-                <Type>H File</Type>
-            </Header_File>
-            <Header_File>
-                <File_Name>rtc_extern.h</File_Name>
-                <Path>\Dave\Generated\RTC\rtc_extern.h</Path>
                 <Type>H File</Type>
             </Header_File>
             <Header_File>
