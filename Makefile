@@ -123,8 +123,6 @@ $(APP_NAME).hex: $(APP_NAME).elf
 
 $(MEDDELA_HEADER_FILES):
 	$(MEDDELA) \
-	--messages=$(MEDDELA_CONFIG_PATH)/messages.json \
-	--nodes=$(MEDDELA_CONFIG_PATH)/nodes.json \
 	--config=$(MEDDELA_CONFIG_PATH)/wolley.json \
 	--id=$(NODE_ID) \
 	--template=$(MEDDELA_TEMPLATE_PATH)/$@.template \
@@ -132,8 +130,6 @@ $(MEDDELA_HEADER_FILES):
 
 $(MEDDELA_SOURCE_FILES):
 	$(MEDDELA) \
-	--messages=$(MEDDELA_CONFIG_PATH)/messages.json \
-	--nodes=$(MEDDELA_CONFIG_PATH)/nodes.json \
 	--config=$(MEDDELA_CONFIG_PATH)/wolley.json \
 	--id=$(NODE_ID) \
 	--template=$(MEDDELA_TEMPLATE_PATH)/$@.template \
