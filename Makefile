@@ -122,14 +122,14 @@ $(APP_NAME).hex: $(APP_NAME).elf
 	@$(OBJCOPY) -O ihex $< $@
 
 $(MEDDELA_HEADER_FILES):
-	$(MEDDELA) \
+	$(MEDDELA) render \
 	--config=$(MEDDELA_CONFIG_PATH)/wolley.json \
 	--id=$(NODE_ID) \
 	--template=$(MEDDELA_TEMPLATE_PATH)/$@.template \
 	> $@
 
 $(MEDDELA_SOURCE_FILES):
-	$(MEDDELA) \
+	$(MEDDELA) render \
 	--config=$(MEDDELA_CONFIG_PATH)/wolley.json \
 	--id=$(NODE_ID) \
 	--template=$(MEDDELA_TEMPLATE_PATH)/$@.template \
