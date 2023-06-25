@@ -13,12 +13,13 @@
                 "name": "Direction",
                 "size": "0x2",
                 "offset": "0x10",
-                "displayType": "Direction"
+                "type": "Direction"
             },
             {
                 "name": "Revolutions",
                 "size": "0x10",
-                "offset": "0x18"
+                "offset": "0x18",
+                "type": "uint"
             }
         ]
     },
@@ -30,59 +31,62 @@
             {
                 "name": "RevolutionsPerMinute",
                 "size": "0x10",
-                "offset": "0x0"
+                "offset": "0x0",
+                "type": "uint"
             },
             {
                 "name": "OvertemperatureShutdown",
                 "size": "0x01",
                 "offset": "0x10",
-                "displayType": "YesNo"
+                "type": "bool"
             },
             {
                 "name": "CurrentLimitation",
                 "size": "0x01",
                 "offset": "0x11",
-                "displayType": "YesNo"
+                "type": "bool"
             },
             {
                 "name": "OpenLoad",
                 "size": "0x01",
                 "offset": "0x12",
-                "displayType": "YesNo"
+                "type": "bool"
             },
             {
                 "name": "Undervoltage",
                 "size": "0x01",
                 "offset": "0x13",
-                "displayType": "YesNo"
+                "type": "bool"
             },
             {
                 "name": "ShortCircuitCode",
                 "size": "0x04",
                 "offset": "0x14",
-                "displayType": "ShortCircuitCode"
+                "type": "ShortCircuitCode"
             },
             {
                 "name": "Status",
                 "size": "0x2",
                 "offset": "0x18",
-                "displayType": "WheelStatusCode"
+                "type": "WheelStatusCode"
             },
             {
                 "name": "Direction",
                 "size": "0x2",
                 "offset": "0x1A",
-                "displayType": "Direction"
+                "type": "Direction"
             },
             {
                 "name": "RequestedRevolutionsPerMinute",
                 "size": "0x10",
-                "offset": "0x20"
+                "offset": "0x20",
+                "type": "uint"
             },
             {
                 "name": "Temperature",
                 "size": "0x8",
-                "offset": "0x30"
+                "offset": "0x30",
+                "type": "uint"
             }
         ]
     }
